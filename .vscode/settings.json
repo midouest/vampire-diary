@@ -1,0 +1,7 @@
+{
+  "python.formatting.provider": "black",
+  "python.analysis.typeCheckingMode": "off",
+
+  "mypy.runUsingActiveInterpreter": true,
+  "mypy.configFile": "pyproject.toml"
+}
