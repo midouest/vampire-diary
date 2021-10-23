@@ -25,7 +25,7 @@ class PromptGroup(TimestampMixin):
 
     name = models.CharField(max_length=100)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -59,8 +59,8 @@ class Prompt(TimestampMixin):
             )
         ]
 
-    def __str__(self):
-        return self.description_a
+    def __str__(self) -> str:
+        return f"{self.order} {self.description_a}"
 
 
 class Vampire(TimestampMixin):
@@ -86,7 +86,7 @@ class Vampire(TimestampMixin):
     description = models.TextField()
     is_dead = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -120,6 +120,9 @@ class Event(TimestampMixin):
             )
         ]
 
+    def __str__(self) -> str:
+        return f"{self.order} {self.description}"
+
 
 class Memory(TimestampMixin):
     """
@@ -145,6 +148,9 @@ class Memory(TimestampMixin):
 
     is_forgotten = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = "memories"
+
 
 class Experience(TimestampMixin):
     """
@@ -161,7 +167,7 @@ class Experience(TimestampMixin):
 
     description = models.TextField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.description
 
 
@@ -179,7 +185,7 @@ class Skill(TimestampMixin):
     description = models.TextField()
     is_checked = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.description
 
 
@@ -198,7 +204,7 @@ class Resource(TimestampMixin):
     is_diary = models.BooleanField(default=False)
     is_lost = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.description
 
 
@@ -218,7 +224,7 @@ class Character(TimestampMixin):
     is_immortal = models.BooleanField(default=False)
     is_dead = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -235,5 +241,5 @@ class Mark(TimestampMixin):
 
     description = models.TextField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.description
