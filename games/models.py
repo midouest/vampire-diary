@@ -47,8 +47,8 @@ class Prompt(TimestampMixin):
 
     order = models.IntegerField()
     description_a = models.TextField()
-    description_b = models.TextField()
-    description_c = models.TextField()
+    description_b = models.TextField(blank=True, null=True)
+    description_c = models.TextField(blank=True, null=True)
 
     class Meta:
         constraints = [
@@ -60,7 +60,7 @@ class Prompt(TimestampMixin):
         ]
 
     def __str__(self):
-        return self.description1
+        return self.description_a
 
 
 class Vampire(TimestampMixin):
@@ -140,6 +140,7 @@ class Memory(TimestampMixin):
         on_delete=models.CASCADE,
         related_name="memories",
         blank=True,
+        null=True,
     )
 
     is_forgotten = models.BooleanField(default=False)

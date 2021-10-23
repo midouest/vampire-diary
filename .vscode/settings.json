@@ -1,6 +1,9 @@
 {
   "python.formatting.provider": "black",
   "python.analysis.typeCheckingMode": "off",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportUndefinedVariable": "none"
+  },
 
   "mypy.runUsingActiveInterpreter": true,
   "mypy.configFile": "pyproject.toml"
