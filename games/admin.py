@@ -12,4 +12,13 @@ from .models import (
     Mark,
 )
 
-# Register your models here.
+admin.site.register(PromptGroup)
+admin.site.register(Prompt)
+admin.site.register(Vampire)
+admin.site.register(Event)
+admin.site.register(Memory)
+admin.site.register(Experience)
+admin.site.register(Resource)
+admin.site.register(Skill)
+admin.site.register(Character)
+admin.site.register(Mark)
