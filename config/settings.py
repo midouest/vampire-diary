@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # Third-party
     "rest_framework",
+    "rest_framework.authtoken",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "django_filters",
     # Project
     "accounts",
     "games",
@@ -133,3 +141,27 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
+}
+
+REST_USE_JWT = True
+
+JWT_AUTH_COOKIE = "vampire-diary-auth"
+JWT_AUTH_REFRESH_COOKIE = "vampire-diary-auth-refresh"

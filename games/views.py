@@ -56,6 +56,14 @@ class PromptGroupViewSet(viewsets.ModelViewSet):
     serializer_class = PromptGroupSerializer
     permission_classes = [IsAdminOrReadOnly]
     queryset = PromptGroup.objects.all()
+    search_fields = [
+        "name",
+    ]
+    ordering_fields = [
+        "name",
+        "created_at",
+        "updated_at",
+    ]
 
 
 class PromptViewSet(viewsets.ModelViewSet):
@@ -64,12 +72,43 @@ class PromptViewSet(viewsets.ModelViewSet):
     serializer_class = PromptSerializer
     permission_classes = [IsAdminOrReadOnly]
     queryset = Prompt.objects.all()
+    filterset_fields = [
+        "group",
+        "order",
+        "is_game_over",
+    ]
+    search_fields = [
+        "description_a",
+        "description_b",
+        "description_c",
+    ]
+    ordering_fields = [
+        "order",
+        "description_a",
+        "description_b",
+        "description_c",
+        "created_at",
+        "updated_at",
+    ]
 
 
 class VampireViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
     lookup_url_kwarg = "pk"
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "is_dead",
+    ]
+    search_fields = [
+        "name",
+        "description",
+    ]
+    ordering_fields = [
+        "name",
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -89,6 +128,18 @@ class EventViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
     lookup_url_kwarg = "pk"
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "prompt",
+        "vampire",
+    ]
+    search_fields = [
+        "description",
+    ]
+    ordering_fields = [
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -108,6 +159,15 @@ class MemoryViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
     lookup_url_kwarg = "pk"
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "vampire",
+        "diary",
+        "is_forgotten",
+    ]
+    ordering_fields = [
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -142,6 +202,17 @@ class ExperienceViewSet(viewsets.ModelViewSet):
     lookup_field = "id"
     lookup_url_kwarg = "pk"
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "memory",
+    ]
+    search_fields = [
+        "description",
+    ]
+    ordering_fields = [
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -169,6 +240,18 @@ class SkillViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = "pk"
     serializer_class = CreateSkillSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "vampire",
+        "is_checked",
+    ]
+    search_fields = [
+        "description",
+    ]
+    ordering_fields = [
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -189,6 +272,19 @@ class ResourceViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = "pk"
     serializer_class = CreateResourceSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "vampire",
+        "is_diary",
+        "is_lost",
+    ]
+    search_fields = [
+        "description",
+    ]
+    ordering_fields = [
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -229,6 +325,21 @@ class CharacterViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = "pk"
     serializer_class = CreateCharacterSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "vampire",
+        "is_immortal",
+        "is_dead",
+    ]
+    search_fields = [
+        "name",
+        "description",
+    ]
+    ordering_fields = [
+        "name",
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
@@ -249,6 +360,17 @@ class MarkViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = "pk"
     serializer_class = CreateMarkSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = [
+        "vampire",
+    ]
+    search_fields = [
+        "description",
+    ]
+    ordering_fields = [
+        "description",
+        "created_at",
+        "updated_at",
+    ]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
