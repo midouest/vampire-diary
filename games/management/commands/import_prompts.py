@@ -50,9 +50,6 @@ class Command(BaseCommand):
         return None
 
 
-PROMPT_HEADER = re.compile("(\d+)([abc])")
-
-
 def is_valid_header(
     prev_index: Optional[int],
     prev_sub_index: Optional[str],
@@ -73,6 +70,11 @@ def is_valid_header(
     return False
 
 
+PROMPT_HEADER = re.compile("(\d+)([abc])")
+
+GAME_OVER_PHRASE = "the game is over"
+
+
 def parse_prompt_file(f: TextIO, group_id: int) -> list[Prompt]:
     prev_index = None
     prev_sub_index = None
@@ -88,7 +90,10 @@ def parse_prompt_file(f: TextIO, group_id: int) -> list[Prompt]:
             and prev_sub_index is not None
         ):
             prompt = prompts[prev_index - 1]
-            setattr(prompt, "description_" + prev_sub_index, " ".join(description))
+            full_description = " ".join(description)
+            setattr(prompt, "description_" + prev_sub_index, full_description)
+            if GAME_OVER_PHRASE in full_description.lower():
+                prompt.is_game_over = True
 
     while True:
         line = f.readline()

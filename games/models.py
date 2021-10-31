@@ -1,6 +1,6 @@
 from django.db import models
 
-from accounts.models import User
+from config import settings
 
 
 class TimestampMixin(models.Model):
@@ -49,6 +49,7 @@ class Prompt(TimestampMixin):
     description_a = models.TextField()
     description_b = models.TextField(blank=True, null=True)
     description_c = models.TextField(blank=True, null=True)
+    is_game_over = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
@@ -71,7 +72,7 @@ class Vampire(TimestampMixin):
     """
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="vampires",
     )
@@ -96,6 +97,11 @@ class Event(TimestampMixin):
     represented by their history of events.
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
@@ -108,20 +114,10 @@ class Event(TimestampMixin):
         related_name="+",
     )
 
-    order = models.IntegerField()
     description = models.TextField(blank=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["vampire", "order"],
-                name="unique_vampire_order",
-                deferrable=models.Deferrable.DEFERRED,
-            )
-        ]
-
     def __str__(self) -> str:
-        return f"{self.order} {self.description}"
+        return self.description
 
 
 class Memory(TimestampMixin):
@@ -133,6 +129,11 @@ class Memory(TimestampMixin):
     must be forgotten.
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
@@ -151,6 +152,9 @@ class Memory(TimestampMixin):
     class Meta:
         verbose_name_plural = "memories"
 
+    def __str__(self) -> str:
+        return f"{self.vampire} {self.id}"
+
 
 class Experience(TimestampMixin):
     """
@@ -159,6 +163,11 @@ class Experience(TimestampMixin):
     stored in memories.
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     memory = models.ForeignKey(
         Memory,
         on_delete=models.CASCADE,
@@ -176,6 +185,11 @@ class Skill(TimestampMixin):
     A Skill
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
@@ -194,6 +208,11 @@ class Resource(TimestampMixin):
     A Resource
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
@@ -213,6 +232,11 @@ class Character(TimestampMixin):
     A Character
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
@@ -233,6 +257,11 @@ class Mark(TimestampMixin):
     A Mark
     """
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="+",
+    )
     vampire = models.ForeignKey(
         Vampire,
         on_delete=models.CASCADE,
