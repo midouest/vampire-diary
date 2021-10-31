@@ -1,9 +1,14 @@
 from rest_framework.request import Request
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAdminUser, SAFE_METHODS
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
-class IsAdminOrReadOnly(IsAdminUser):
+class IsAdminOrReadOnly(BasePermission):
     def has_permission(self, request: Request, view: APIView) -> bool:
-        is_admin = super().has_permission(request, view)
-        return is_admin or request.method in SAFE_METHODS
+        return bool(
+            request.user
+            and (
+                request.user.is_staff
+                or (request.method in SAFE_METHODS and request.user.is_authenticated)
+            )
+        )
