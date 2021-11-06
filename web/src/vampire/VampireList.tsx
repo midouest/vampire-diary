@@ -2,10 +2,12 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
 import { queryVampires, vampireSelectors } from "./slice";
 import { Table } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 export function VampireList() {
   const dispatch = useAppDispatch();
   const allVampires = useAppSelector(vampireSelectors.selectAll);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(queryVampires());
@@ -23,7 +25,10 @@ export function VampireList() {
       </thead>
       <tbody>
         {allVampires.map((vampire) => (
-          <tr key={vampire.id}>
+          <tr
+            key={vampire.id}
+            onClick={() => navigate(`/vampires/${vampire.id}`)}
+          >
             <td>{vampire.id}</td>
             <td>{vampire.name}</td>
             <td>{vampire.description}</td>
