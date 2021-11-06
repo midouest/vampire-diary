@@ -12,6 +12,7 @@ from .helpers import (
     assert_memory_is_mutable,
     assert_vampire_has_diary_capacity,
     assert_vampire_has_memory_capacity,
+    find_next_prompt,
 )
 
 from .models import (
@@ -147,12 +148,18 @@ class EventViewSet(viewsets.ModelViewSet):
         return Event.objects.filter(user=user)
 
     def get_serializer_class(self) -> Type[BaseSerializer]:
-        if self.request.method in UPDATE_METHODS:
-            return UpdateEventSerializer
-        return CreateEventSerializer
+        if self.request.method == "POST":
+            return CreateEventSerializer
+        return UpdateEventSerializer
 
     def perform_create(self, serializer: BaseSerializer) -> None:
-        serializer.save(user=self.request.user)
+        validated_data = serializer.validated_data
+
+        vampire = validated_data["vampire"]
+        assert isinstance(vampire, Vampire)
+        prompt = find_next_prompt(vampire)
+
+        serializer.save(user=self.request.user, prompt=prompt)
 
 
 class MemoryViewSet(viewsets.ModelViewSet):
