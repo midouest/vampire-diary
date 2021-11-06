@@ -1,10 +1,9 @@
-import { selectIsLoggedIn } from "auth/selector";
-import { logout } from "auth/thunk";
+import { logout, selectIsLoggedIn } from "auth/slice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function NavHeader() {
+export function NavHeader() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
 
@@ -48,5 +47,3 @@ function NavHeader() {
     </Navbar>
   );
 }
-
-export default NavHeader;

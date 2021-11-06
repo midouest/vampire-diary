@@ -1,9 +1,8 @@
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useState } from "react";
 import { Form, FormGroup, Button, Container } from "react-bootstrap";
-import { selectIsLoggedIn } from "./selector";
-import { login } from "./thunk";
 import { useNavigate } from "react-router-dom";
+import { login, selectIsLoggedIn } from "./slice";
 
 export function Login() {
   const navigate = useNavigate();

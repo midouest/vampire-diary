@@ -1,29 +1,19 @@
-import { HeaderRecord } from "core";
-
-import { LoginFormData } from "./login-form-data";
-import { TokenResponse } from "./token-response";
+import { FetchApi } from "core/fetch";
+import { LoginFormData, TokenResponse } from "./model";
 
 export async function loginApi(
+  fetchApi: FetchApi,
   formData: LoginFormData
 ): Promise<TokenResponse> {
-  const res = await fetch("/api/v1/auth/login/", {
+  const res = await fetchApi("/api/v1/auth/login/", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
     body: JSON.stringify(formData),
   });
   return res.json();
 }
 
-export async function logoutApi(baseHeaders: HeaderRecord): Promise<void> {
-  await fetch("/api/v1/auth/logout/", {
+export async function logoutApi(fetchApi: FetchApi): Promise<void> {
+  await fetchApi("/api/v1/auth/logout/", {
     method: "POST",
-    headers: {
-      ...baseHeaders,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
   });
 }
