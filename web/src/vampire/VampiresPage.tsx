@@ -1,4 +1,4 @@
-import { useAppDispatch } from "hooks";
+import { useAppDispatch } from "app/hooks";
 import { useState } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
 import { CreateVampireForm } from "./CreateVampireForm";

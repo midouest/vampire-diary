@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { buildAuthFetch, buildBaseFetch, FetchApi } from "core/fetch";
-import { ThunkApi } from "core/thunk";
-import { RootState } from "store";
+import { buildAuthFetch, buildBaseFetch, FetchApi } from "common/fetch";
+import { ThunkApi } from "common/thunk";
+import { RootState } from "app/store";
 import { loginApi, logoutApi } from "./api";
 import { LoginFormData } from "./model";
 

@@ -1,5 +1,5 @@
-import { FetchApi } from "core/fetch";
-import { QueryResponse } from "core/query";
+import { FetchApi } from "common/fetch";
+import { QueryResponse } from "common/query";
 import { CreateVampireFormData, UpdateVampireFormData, Vampire } from "./model";
 
 export const VAMPIRES_URL = "/api/v1/game/vampires/";

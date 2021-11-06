@@ -4,7 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { authFetchApi } from "auth/slice";
-import { RootState } from "store";
+import { RootState } from "app/store";
 import { createVampireApi, queryVampiresApi } from "./api";
 import { CreateVampireFormData, Vampire } from "./model";
 

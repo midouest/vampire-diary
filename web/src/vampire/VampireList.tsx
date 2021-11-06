@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
 import { queryVampires, vampireSelectors } from "./slice";
 import { Table } from "react-bootstrap";

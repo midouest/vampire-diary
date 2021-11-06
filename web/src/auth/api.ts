@@ -1,4 +1,4 @@
-import { FetchApi } from "core/fetch";
+import { FetchApi } from "common/fetch";
 import { LoginFormData, TokenResponse } from "./model";
 
 export async function loginApi(

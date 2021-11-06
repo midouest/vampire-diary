@@ -1,5 +1,5 @@
 import { logout, selectIsLoggedIn } from "auth/slice";
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
