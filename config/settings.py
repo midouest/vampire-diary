@@ -163,8 +163,8 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
     "DEFAULT_FILTER_BACKENDS": [
         "rest_framework.filters.SearchFilter",
@@ -173,9 +173,24 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_RENDERER_CLASSES": [
+        "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
+        "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "djangorestframework_camel_case.parser.CamelCaseFormParser",
+        "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+    ],
+    "JSON_UNDERSCOREIZE": {
+        "no_underscore_before_number": True,
+    },
 }
 
-REST_USE_JWT = True
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "accounts.serializers.UserDetailsSerializer",
+}
 
-JWT_AUTH_COOKIE = "vampire-diary-auth"
-JWT_AUTH_REFRESH_COOKIE = "vampire-diary-auth-refresh"
+REST_SESSION_LOGIN = False
+
+OLD_PASSWORD_FIELD_ENABLED = True

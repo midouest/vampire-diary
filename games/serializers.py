@@ -14,22 +14,22 @@ from .models import (
 )
 
 
-class PromptGroupSerializer(serializers.HyperlinkedModelSerializer):
+class PromptGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = PromptGroup
         fields = [
-            "url",
+            "id",
             "name",
             "created_at",
             "updated_at",
         ]
 
 
-class PromptSerializer(serializers.HyperlinkedModelSerializer):
+class PromptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prompt
         fields = [
-            "url",
+            "id",
             "group",
             "order",
             "description_a",
@@ -40,11 +40,11 @@ class PromptSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateVampireSerializer(serializers.HyperlinkedModelSerializer):
+class CreateVampireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vampire
         fields = [
-            "url",
+            "id",
             "prompt_group",
             "name",
             "description",
@@ -53,11 +53,11 @@ class CreateVampireSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateVampireSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateVampireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vampire
         fields = [
-            "url",
+            "id",
             "prompt_group",
             "name",
             "description",
@@ -70,11 +70,11 @@ class UpdateVampireSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateEventSerializer(serializers.HyperlinkedModelSerializer):
+class CreateEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = [
-            "url",
+            "id",
             "vampire",
             "prompt",
             "description",
@@ -83,11 +83,11 @@ class CreateEventSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateEventSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = [
-            "url",
+            "id",
             "vampire",
             "prompt",
             "description",
@@ -100,11 +100,11 @@ class UpdateEventSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateMemorySerializer(serializers.HyperlinkedModelSerializer):
+class CreateMemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
         fields = [
-            "url",
+            "id",
             "vampire",
             "diary",
             "is_forgotten",
@@ -117,11 +117,11 @@ class CreateMemorySerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateMemorySerializer(serializers.HyperlinkedModelSerializer):
+class UpdateMemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
         fields = [
-            "url",
+            "id",
             "vampire",
             "diary",
             "is_forgotten",
@@ -133,11 +133,11 @@ class UpdateMemorySerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateExperienceSerializer(serializers.HyperlinkedModelSerializer):
+class CreateExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = [
-            "url",
+            "id",
             "memory",
             "description",
             "created_at",
@@ -145,11 +145,11 @@ class CreateExperienceSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateExperienceSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = [
-            "url",
+            "id",
             "memory",
             "description",
             "created_at",
@@ -160,11 +160,11 @@ class UpdateExperienceSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateSkillSerializer(serializers.HyperlinkedModelSerializer):
+class CreateSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "is_checked",
@@ -176,11 +176,11 @@ class CreateSkillSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateSkillSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "is_checked",
@@ -192,11 +192,11 @@ class UpdateSkillSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateResourceSerializer(serializers.HyperlinkedModelSerializer):
+class CreateResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "is_diary",
@@ -209,11 +209,11 @@ class CreateResourceSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateResourceSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "is_diary",
@@ -227,11 +227,11 @@ class UpdateResourceSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateCharacterSerializer(serializers.HyperlinkedModelSerializer):
+class CreateCharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = [
-            "url",
+            "id",
             "vampire",
             "name",
             "description",
@@ -245,11 +245,11 @@ class CreateCharacterSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateCharacterSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateCharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = [
-            "url",
+            "id",
             "vampire",
             "name",
             "description",
@@ -263,11 +263,11 @@ class UpdateCharacterSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CreateMarkSerializer(serializers.HyperlinkedModelSerializer):
+class CreateMarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mark
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "created_at",
@@ -275,11 +275,11 @@ class CreateMarkSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class UpdateMarkSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateMarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mark
         fields = [
-            "url",
+            "id",
             "vampire",
             "description",
             "created_at",
