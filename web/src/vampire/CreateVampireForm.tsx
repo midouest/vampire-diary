@@ -37,15 +37,21 @@ export function CreateVampireForm({
   return (
     <Container className="py-3">
       <Form>
+        <h2>Create Vampire</h2>
+
         <FormGroup>
           <FormLabel>Name</FormLabel>
-          <FormControl onChange={(event) => setName(event.target.value)} />
+          <FormControl
+            placeholder="Enter a name..."
+            onChange={(event) => setName(event.target.value)}
+          />
         </FormGroup>
 
         <FormGroup className="mt-3">
           <FormLabel>Description</FormLabel>
           <FormControl
             as="textarea"
+            placeholder="Enter a description..."
             onChange={(event) => setDescription(event.target.value)}
           />
         </FormGroup>
