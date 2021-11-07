@@ -2,7 +2,7 @@ import { Login } from "auth/Login";
 import { PrivateRoute } from "auth/PrivateRoute";
 import { DiaryPage } from "diary/DiaryPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { VampiresPage } from "vampire/VampiresPage";
+import { VampirePage } from "vampire/VampirePage";
 import { NavHeader } from "./NavHeader";
 
 export function App() {
@@ -23,7 +23,7 @@ export function App() {
             path="/vampires"
             element={
               <PrivateRoute>
-                <VampiresPage />
+                <VampirePage />
               </PrivateRoute>
             }
           />

@@ -6,7 +6,7 @@ import { CreateVampireFormData } from "./model";
 import { createVampire } from "./slice";
 import { VampireList } from "./VampireList";
 
-export function VampiresPage() {
+export function VampirePage() {
   const dispatch = useAppDispatch();
 
   const [show, setShow] = useState(false);
