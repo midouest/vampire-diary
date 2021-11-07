@@ -47,7 +47,11 @@ export function createCrudApi<
   ): Promise<QueryResponse<Entity>> {
     const queryUrl = prepareUrl(baseUrl, params);
     const res = await fetchApi(queryUrl);
-    return res.json();
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.detail);
+    }
+    return json;
   }
 
   async function createApi(
@@ -58,7 +62,11 @@ export function createCrudApi<
       method: "POST",
       body: JSON.stringify(formData),
     });
-    return res.json();
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.detail);
+    }
+    return json;
   }
 
   function entityUrl(id: number): string {
@@ -67,7 +75,11 @@ export function createCrudApi<
 
   async function retrieveApi(fetchApi: FetchApi, id: number): Promise<Entity> {
     const res = await fetchApi(entityUrl(id));
-    return res.json();
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.detail);
+    }
+    return json;
   }
 
   async function updateApi(
@@ -78,11 +90,19 @@ export function createCrudApi<
       method: "PATCH",
       body: JSON.stringify(formData),
     });
-    return res.json();
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.detail);
+    }
+    return json;
   }
 
   async function removeApi(fetchApi: FetchApi, id: number): Promise<void> {
-    await fetchApi(entityUrl(id), { method: "DELETE" });
+    const res = await fetchApi(entityUrl(id), { method: "DELETE" });
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.detail);
+    }
   }
 
   return {
