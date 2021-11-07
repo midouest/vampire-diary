@@ -20,8 +20,6 @@ class PromptGroupSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "created_at",
-            "updated_at",
         ]
 
 
@@ -35,8 +33,6 @@ class PromptSerializer(serializers.ModelSerializer):
             "description_a",
             "description_b",
             "description_c",
-            "created_at",
-            "updated_at",
         ]
 
 
@@ -48,8 +44,6 @@ class CreateVampireSerializer(serializers.ModelSerializer):
             "prompt_group",
             "name",
             "description",
-            "created_at",
-            "updated_at",
         ]
 
 
@@ -62,8 +56,6 @@ class UpdateVampireSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "is_dead",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "prompt_group",
@@ -79,8 +71,6 @@ class CreateEventSerializer(serializers.ModelSerializer):
             "prompt",
             "visit",
             "description",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "prompt",
@@ -98,8 +88,6 @@ class UpdateEventSerializer(serializers.ModelSerializer):
             "prompt",
             "visit",
             "description",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
@@ -116,8 +104,6 @@ class CreateMemorySerializer(serializers.ModelSerializer):
             "vampire",
             "diary",
             "is_forgotten",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "diary",
@@ -133,8 +119,6 @@ class UpdateMemorySerializer(serializers.ModelSerializer):
             "vampire",
             "diary",
             "is_forgotten",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
@@ -148,8 +132,6 @@ class CreateExperienceSerializer(serializers.ModelSerializer):
             "id",
             "memory",
             "description",
-            "created_at",
-            "updated_at",
         ]
 
 
@@ -160,8 +142,6 @@ class UpdateExperienceSerializer(serializers.ModelSerializer):
             "id",
             "memory",
             "description",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "memory",
@@ -176,8 +156,6 @@ class CreateSkillSerializer(serializers.ModelSerializer):
             "vampire",
             "description",
             "is_checked",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "is_checked",
@@ -192,8 +170,6 @@ class UpdateSkillSerializer(serializers.ModelSerializer):
             "vampire",
             "description",
             "is_checked",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
@@ -209,8 +185,6 @@ class CreateResourceSerializer(serializers.ModelSerializer):
             "description",
             "is_diary",
             "is_lost",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "is_lost",
@@ -226,8 +200,6 @@ class UpdateResourceSerializer(serializers.ModelSerializer):
             "description",
             "is_diary",
             "is_lost",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
@@ -245,8 +217,6 @@ class CreateCharacterSerializer(serializers.ModelSerializer):
             "description",
             "is_immortal",
             "is_dead",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "is_dead",
@@ -263,8 +233,6 @@ class UpdateCharacterSerializer(serializers.ModelSerializer):
             "description",
             "is_immortal",
             "is_dead",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
@@ -278,8 +246,6 @@ class CreateMarkSerializer(serializers.ModelSerializer):
             "id",
             "vampire",
             "description",
-            "created_at",
-            "updated_at",
         ]
 
 
@@ -290,8 +256,6 @@ class UpdateMarkSerializer(serializers.ModelSerializer):
             "id",
             "vampire",
             "description",
-            "created_at",
-            "updated_at",
         ]
         read_only_fields = [
             "vampire",
