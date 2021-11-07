@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { authFetchApi } from "auth/slice";
 import { FetchApi } from "./fetch";
-import { QueryResponse } from "./query";
+import { createSearchParams, QueryParams, QueryResponse } from "./query";
 
 export interface BaseEntity {
   id: number;
@@ -18,9 +18,20 @@ export interface CreateCrudApiSliceOptions {
 
 async function queryApi<Entity extends BaseEntity>(
   fetchApi: FetchApi,
-  url: string
+  url: string,
+  params?: QueryParams<Entity>
 ): Promise<QueryResponse<Entity>> {
-  const res = await fetchApi(url);
+  let search = null;
+  if (params) {
+    search = createSearchParams(params);
+  }
+
+  let queryUrl = url;
+  if (search !== null) {
+    queryUrl = `${queryUrl}?${search}`;
+  }
+
+  const res = await fetchApi(queryUrl);
   return res.json();
 }
 
@@ -70,10 +81,13 @@ export function createCrudApiSlice<
     sortComparer: (a, b) => a.id - b.id,
   });
 
-  const query = createAsyncThunk(`${name}/query`, (_arg, thunkApi) => {
-    const fetchApi = authFetchApi(thunkApi);
-    return queryApi(fetchApi, baseUrl);
-  });
+  const query = createAsyncThunk(
+    `${name}/query`,
+    (params: QueryParams<Entity> | undefined, thunkApi) => {
+      const fetchApi = authFetchApi(thunkApi);
+      return queryApi(fetchApi, baseUrl, params);
+    }
+  );
 
   const create = createAsyncThunk(
     `${name}/create`,
