@@ -58,3 +58,16 @@ export function createSearchParams(
 
   return new URLSearchParams(record);
 }
+
+export function prepareUrl(url: string, queryParams?: QueryParams): string {
+  let searchParams = null;
+  if (queryParams !== undefined) {
+    searchParams = createSearchParams(queryParams);
+  }
+
+  if (searchParams !== null) {
+    return `${url}?${searchParams}`;
+  }
+
+  return url;
+}

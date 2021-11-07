@@ -4,75 +4,13 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { authFetchApi } from "auth/slice";
-import { FetchApi } from "./fetch";
-import { createSearchParams, QueryParams, QueryResponse } from "./query";
-
-export interface BaseEntity {
-  id: number;
-}
+import { createCrudApi } from "./api";
+import { BaseEntity } from "./entity";
+import { QueryParams } from "./query";
 
 export interface CreateCrudApiSliceOptions {
   name: string;
   baseUrl: string;
-}
-
-export function prepareUrl(url: string, queryParams?: QueryParams): string {
-  let searchParams = null;
-  if (queryParams !== undefined) {
-    searchParams = createSearchParams(queryParams);
-  }
-
-  if (searchParams !== null) {
-    return `${url}?${searchParams}`;
-  }
-
-  return url;
-}
-
-async function queryApi<Entity extends BaseEntity>(
-  fetchApi: FetchApi,
-  url: string,
-  params?: QueryParams
-): Promise<QueryResponse<Entity>> {
-  const queryUrl = prepareUrl(url, params);
-  const res = await fetchApi(queryUrl);
-  return res.json();
-}
-
-async function createApi<Entity extends BaseEntity, CreateEntity>(
-  fetchApi: FetchApi,
-  url: string,
-  formData: CreateEntity
-): Promise<Entity> {
-  const res = await fetchApi(url, {
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
-  return res.json();
-}
-
-async function retrieveApi<Entity extends BaseEntity>(
-  fetchApi: FetchApi,
-  url: string
-): Promise<Entity> {
-  const res = await fetchApi(url);
-  return res.json();
-}
-
-async function updateApi<Entity extends BaseEntity, UpdateEntity>(
-  fetchApi: FetchApi,
-  url: string,
-  formData: UpdateEntity
-): Promise<Entity> {
-  const res = await fetchApi(url, {
-    method: "PATCH",
-    body: JSON.stringify(formData),
-  });
-  return res.json();
-}
-
-async function removeApi(fetchApi: FetchApi, url: string): Promise<void> {
-  await fetchApi(url, { method: "DELETE" });
 }
 
 export function createCrudApiSlice<
@@ -84,11 +22,14 @@ export function createCrudApiSlice<
     selectId: (entity) => entity.id,
   });
 
+  const { queryApi, createApi, retrieveApi, updateApi, removeApi } =
+    createCrudApi<Entity, CreateEntity, UpdateEntity>(baseUrl);
+
   const query = createAsyncThunk(
     `${name}/query`,
     (params: QueryParams | undefined, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return queryApi<Entity>(fetchApi, baseUrl, params);
+      return queryApi(fetchApi, params);
     }
   );
 
@@ -96,7 +37,7 @@ export function createCrudApiSlice<
     `${name}/create`,
     (formData: CreateEntity, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return createApi<Entity, CreateEntity>(fetchApi, baseUrl, formData);
+      return createApi(fetchApi, formData);
     }
   );
 
@@ -104,19 +45,15 @@ export function createCrudApiSlice<
     `${name}/retrieve`,
     (id: number, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return retrieveApi<Entity>(fetchApi, `${baseUrl}${id}/`);
+      return retrieveApi(fetchApi, id);
     }
   );
 
   const update = createAsyncThunk(
     `${name}/update`,
-    ({ id, ...formData }: UpdateEntity, thunkApi) => {
+    (formData: UpdateEntity, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return updateApi<Entity, Omit<UpdateEntity, "id">>(
-        fetchApi,
-        `${baseUrl}${id}/`,
-        formData
-      );
+      return updateApi(fetchApi, formData);
     }
   );
 
@@ -124,7 +61,7 @@ export function createCrudApiSlice<
     `${name}/remove`,
     async (id: number, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      await removeApi(fetchApi, `${baseUrl}${id}/`);
+      await removeApi(fetchApi, id);
       return id;
     }
   );

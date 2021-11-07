@@ -1,6 +1,6 @@
 import { FetchApi } from "common/fetch";
 import { QueryParams, QueryResponse } from "common/query";
-import { prepareUrl } from "common/slice";
+import { prepareUrl } from "common/query";
 import { PromptGroup } from "./prompt-group-model";
 
 export const PROMPT_GROUPS_URL = "/api/v1/game/prompt-groups/";
