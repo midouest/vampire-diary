@@ -1,6 +1,7 @@
 from typing import Type
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models.query import Prefetch
 from rest_framework import generics, viewsets, permissions
 from rest_framework.serializers import BaseSerializer
 
@@ -101,7 +102,12 @@ class FullVampireView(generics.RetrieveAPIView):
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
         assert isinstance(user, get_user_model())
-        return Vampire.objects.filter(user=user)
+        return Vampire.objects.filter(user=user).prefetch_related(
+            Prefetch(
+                "memories",
+                queryset=Memory.objects.filter(diary=None),
+            ),
+        )
 
 
 class VampireViewSet(viewsets.ModelViewSet):
