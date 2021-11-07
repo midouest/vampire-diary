@@ -166,6 +166,7 @@ class UpdateExperienceSerializer(serializers.ModelSerializer):
             "vampire",
             "memory",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class CreateSkillSerializer(serializers.ModelSerializer):
@@ -195,6 +196,7 @@ class UpdateSkillSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class CreateResourceSerializer(serializers.ModelSerializer):
@@ -227,6 +229,7 @@ class UpdateResourceSerializer(serializers.ModelSerializer):
             "vampire",
             "is_diary",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class CreateCharacterSerializer(serializers.ModelSerializer):
@@ -263,6 +266,10 @@ class UpdateCharacterSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
         ]
+        extra_kwargs = {
+            "name": {"allow_blank": True},
+            "description": {"allow_blank": True},
+        }
 
 
 class CreateMarkSerializer(serializers.ModelSerializer):
@@ -287,6 +294,7 @@ class UpdateMarkSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class EventSerializer(BaseEventSerializer):
