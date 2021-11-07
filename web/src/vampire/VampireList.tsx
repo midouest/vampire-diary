@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
-import { queryVampires, vampireSelectors } from "./slice";
+import { queryVampires, vampireSelectors } from "./vampire-slice";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 

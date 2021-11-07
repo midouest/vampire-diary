@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { CreateVampireForm } from "./CreateVampireForm";
-import { CreateVampireFormData } from "./model";
-import { createVampire } from "./slice";
+import { CreateVampireFormData } from "./vampire-model";
+import { createVampire } from "./vampire-slice";
 import { VampireList } from "./VampireList";
 
 export function VampirePage() {

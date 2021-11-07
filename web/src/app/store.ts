@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "auth/slice";
-import { promptGroupSlice } from "prompt-group/slice";
-import { vampireSlice } from "vampire/slice";
+import { promptGroupSlice } from "vampire/prompt-group-slice";
+import { vampireSlice } from "vampire/vampire-slice";
 
 export const store = configureStore({
   reducer: {

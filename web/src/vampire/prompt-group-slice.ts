@@ -5,8 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { authFetchApi } from "auth/slice";
 import { RootState } from "app/store";
-import { queryPromptGroupsApi } from "./api";
-import { PromptGroup } from "./model";
+import { queryPromptGroupsApi } from "./prompt-group-api";
+import { PromptGroup } from "./prompt-group-model";
 import { QueryParams } from "common/query";
 
 export const promptGroupAdapter = createEntityAdapter<PromptGroup>({

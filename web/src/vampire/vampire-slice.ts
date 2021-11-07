@@ -1,6 +1,10 @@
 import { RootState } from "app/store";
 import { createCrudApiSlice } from "common/slice";
-import { CreateVampireFormData, UpdateVampireFormData, Vampire } from "./model";
+import {
+  CreateVampireFormData,
+  UpdateVampireFormData,
+  Vampire,
+} from "./vampire-model";
 
 export const {
   adapter: vampireAdapter,

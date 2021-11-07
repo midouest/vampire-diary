@@ -1,5 +1,5 @@
 import { Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
-import { Vampire } from "./model";
+import { Vampire } from "./vampire-model";
 
 export interface VampireDetailsFormProps {
   vampire: Vampire;

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { promptGroupSelectors, queryPromptGroups } from "prompt-group/slice";
+import { promptGroupSelectors, queryPromptGroups } from "./prompt-group-slice";
 import { useEffect, useState } from "react";
 import {
   Form,
@@ -10,7 +10,7 @@ import {
   Container,
   FormSelect,
 } from "react-bootstrap";
-import { CreateVampireFormData } from "./model";
+import { CreateVampireFormData } from "./vampire-model";
 
 export interface CreateVampireFormProps {
   onCancel?: () => void;
