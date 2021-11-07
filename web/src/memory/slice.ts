@@ -12,7 +12,7 @@ export const {
   slice: memorySlice,
 } = createCrudApiSlice<Memory, CreateMemoryFormData, UpdateMemoryFormData>({
   name: "memory",
-  baseUrl: "/api/v1/game/memorys/",
+  baseUrl: "/api/v1/game/memories/",
 });
 
 export const memorySelectors = memoryAdapter.getSelectors<RootState>(
