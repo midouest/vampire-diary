@@ -88,7 +88,7 @@ export function createCrudApiSlice<
     `${name}/query`,
     (params: QueryParams | undefined, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return queryApi(fetchApi, baseUrl, params);
+      return queryApi<Entity>(fetchApi, baseUrl, params);
     }
   );
 
@@ -96,7 +96,7 @@ export function createCrudApiSlice<
     `${name}/create`,
     (formData: CreateEntity, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return createApi(fetchApi, baseUrl, formData);
+      return createApi<Entity, CreateEntity>(fetchApi, baseUrl, formData);
     }
   );
 
@@ -104,7 +104,7 @@ export function createCrudApiSlice<
     `${name}/retrieve`,
     (id: number, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return retrieveApi(fetchApi, `${baseUrl}${id}`);
+      return retrieveApi<Entity>(fetchApi, `${baseUrl}${id}/`);
     }
   );
 
@@ -112,7 +112,11 @@ export function createCrudApiSlice<
     `${name}/update`,
     ({ id, ...formData }: UpdateEntity, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      return updateApi(fetchApi, `${baseUrl}${id}`, formData);
+      return updateApi<Entity, Omit<UpdateEntity, "id">>(
+        fetchApi,
+        `${baseUrl}${id}/`,
+        formData
+      );
     }
   );
 
@@ -120,7 +124,7 @@ export function createCrudApiSlice<
     `${name}/remove`,
     async (id: number, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
-      await removeApi(fetchApi, `${baseUrl}${id}`);
+      await removeApi(fetchApi, `${baseUrl}${id}/`);
       return id;
     }
   );
