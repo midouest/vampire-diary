@@ -17,7 +17,6 @@ export function VampireList() {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
           <th>Description</th>
           <th>Created At</th>
@@ -29,7 +28,6 @@ export function VampireList() {
             key={vampire.id}
             onClick={() => navigate(`/vampires/${vampire.id}`)}
           >
-            <td>{vampire.id}</td>
             <td>{vampire.name}</td>
             <td>{vampire.description}</td>
             <td>{vampire.createdAt}</td>
