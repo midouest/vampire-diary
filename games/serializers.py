@@ -292,3 +292,102 @@ class UpdateMarkSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
         ]
+
+
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience
+        fields = [
+            "id",
+            "description",
+        ]
+
+
+class MemorySerializer(serializers.ModelSerializer):
+    experiences = ExperienceSerializer(many=True)
+
+    class Meta:
+        model = Memory
+        fields = [
+            "id",
+            "diary",
+            "is_forgotten",
+            "experiences",
+        ]
+
+
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = [
+            "id",
+            "description",
+            "is_checked",
+        ]
+
+
+class ResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resource
+        fields = [
+            "id",
+            "description",
+            "is_diary",
+            "is_lost",
+        ]
+
+
+class CharacterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Character
+        fields = [
+            "id",
+            "name",
+            "description",
+            "is_immortal",
+            "is_dead",
+        ]
+
+
+class MarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mark
+        fields = [
+            "id",
+            "description",
+        ]
+
+
+class VampireSerializer(serializers.ModelSerializer):
+    memories = MemorySerializer(many=True)
+    skills = SkillSerializer(many=True)
+    resources = ResourceSerializer(many=True)
+    characters = CharacterSerializer(many=True)
+    marks = MarkSerializer(many=True)
+
+    class Meta:
+        model = Vampire
+        fields = [
+            "id",
+            "name",
+            "description",
+            "is_dead",
+            "memories",
+            "skills",
+            "resources",
+            "characters",
+            "marks",
+        ]
+
+
+class EventSerializer(serializers.ModelSerializer):
+    prompt = PromptSerializer()
+
+    class Meta:
+        model = Event
+        fields = [
+            "id",
+            "vampire",
+            "description",
+            "prompt",
+        ]

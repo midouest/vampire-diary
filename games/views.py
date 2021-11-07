@@ -1,7 +1,7 @@
 from typing import Type
 from django.db import models
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, permissions
+from rest_framework import generics, viewsets, permissions
 from rest_framework.serializers import BaseSerializer
 
 from .permissions import IsAdminOrReadOnly
@@ -34,6 +34,8 @@ from .serializers import (
     CreateMarkSerializer,
     CreateMemorySerializer,
     CreateVampireSerializer,
+    EventSerializer,
+    VampireSerializer,
     PromptGroupSerializer,
     PromptSerializer,
     CreateResourceSerializer,
@@ -91,6 +93,26 @@ class PromptViewSet(viewsets.ModelViewSet):
         "created_at",
         "updated_at",
     ]
+
+
+class FullVampireView(generics.RetrieveAPIView):
+    serializer_class = VampireSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> models.QuerySet:
+        user = self.request.user
+        assert isinstance(user, get_user_model())
+        return Vampire.objects.filter(user=user)
+
+
+class FullEventView(generics.RetrieveAPIView):
+    serializer_class = EventSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> models.QuerySet:
+        user = self.request.user
+        assert isinstance(user, get_user_model())
+        return Event.objects.filter(user=user)
 
 
 class VampireViewSet(viewsets.ModelViewSet):

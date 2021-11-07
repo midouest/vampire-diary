@@ -5,6 +5,8 @@ from .views import (
     CharacterViewSet,
     EventViewSet,
     ExperienceViewSet,
+    FullEventView,
+    FullVampireView,
     MarkViewSet,
     MemoryViewSet,
     PromptGroupViewSet,
@@ -27,5 +29,7 @@ router.register(r"characters", CharacterViewSet, basename="character")
 router.register(r"marks", MarkViewSet, basename="mark")
 
 urlpatterns = [
+    path("vampires/<int:pk>/full/", FullVampireView.as_view()),
+    path("events/<int:pk>/full/", FullEventView.as_view()),
     path("", include(router.urls)),
 ]
