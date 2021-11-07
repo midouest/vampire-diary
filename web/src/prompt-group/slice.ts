@@ -10,7 +10,7 @@ import { PromptGroup } from "./model";
 
 export const promptGroupAdapter = createEntityAdapter<PromptGroup>({
   selectId: (promptGroup) => promptGroup.id,
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
+  sortComparer: (a, b) => a.id - b.id,
 });
 
 export const queryPromptGroups = createAsyncThunk(

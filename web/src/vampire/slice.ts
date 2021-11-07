@@ -1,46 +1,18 @@
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { authFetchApi } from "auth/slice";
 import { RootState } from "app/store";
-import { createVampireApi, queryVampiresApi } from "./api";
-import { CreateVampireFormData, Vampire } from "./model";
+import { createCrudApiSlice } from "common/slice";
+import { CreateVampireFormData, UpdateVampireFormData, Vampire } from "./model";
 
-export const vampireAdapter = createEntityAdapter<Vampire>({
-  selectId: (vampire) => vampire.id,
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
-
-export const queryVampires = createAsyncThunk(
-  "vampire/queryVampires",
-  (_arg, thunkApi) => {
-    const fetchApi = authFetchApi(thunkApi);
-    return queryVampiresApi(fetchApi);
-  }
-);
-
-export const createVampire = createAsyncThunk(
-  "vampire/createVampire",
-  (arg: CreateVampireFormData, thunkApi) => {
-    const fetchApi = authFetchApi(thunkApi);
-    return createVampireApi(fetchApi, arg);
-  }
-);
-
-export const vampireSlice = createSlice({
+export const {
+  adapter: vampireAdapter,
+  query: queryVampires,
+  create: createVampire,
+  retrieve: retrieveVampire,
+  update: updateVampire,
+  remove: removeVampire,
+  slice: vampireSlice,
+} = createCrudApiSlice<Vampire, CreateVampireFormData, UpdateVampireFormData>({
   name: "vampire",
-  initialState: vampireAdapter.getInitialState(),
-  reducers: {},
-  extraReducers: (builder) =>
-    builder
-      .addCase(queryVampires.fulfilled, (state, action) => {
-        vampireAdapter.setAll(state, action.payload.results);
-      })
-      .addCase(createVampire.fulfilled, (state, action) => {
-        vampireAdapter.addOne(state, action.payload);
-      }),
+  baseUrl: "/api/v1/game/vampires/",
 });
 
 export const vampireSelectors = vampireAdapter.getSelectors<RootState>(
