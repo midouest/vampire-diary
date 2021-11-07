@@ -13,6 +13,8 @@ export interface QueryParams<Entity> {
   search?: string;
   filter?: Record<keyof Entity, FilterValue>;
   sort?: [keyof Entity, SortDir];
+  limit?: number;
+  offset?: number;
 }
 
 export function createSearchParams<Entity>(
@@ -38,6 +40,16 @@ export function createSearchParams<Entity>(
   if (queryParams.sort) {
     modified = true;
     record["ordering"] = `${queryParams.sort[1]}${queryParams.sort[0]}`;
+  }
+
+  if (queryParams.limit !== undefined) {
+    modified = true;
+    record["limit"] = queryParams.limit.toString();
+  }
+
+  if (queryParams.offset !== undefined) {
+    modified = true;
+    record["offset"] = queryParams.offset.toString();
   }
 
   if (!modified) {
