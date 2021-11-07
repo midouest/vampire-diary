@@ -150,6 +150,7 @@ class CreateExperienceSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class UpdateExperienceSerializer(serializers.ModelSerializer):
@@ -179,6 +180,7 @@ class CreateSkillSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "is_checked",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class UpdateSkillSerializer(serializers.ModelSerializer):
@@ -208,6 +210,7 @@ class CreateResourceSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "is_lost",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class UpdateResourceSerializer(serializers.ModelSerializer):
@@ -240,6 +243,10 @@ class CreateCharacterSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "is_dead",
         ]
+        extra_kwargs = {
+            "name": {"allow_blank": True},
+            "description": {"allow_blank": True},
+        }
 
 
 class UpdateCharacterSerializer(serializers.ModelSerializer):
@@ -266,6 +273,7 @@ class CreateMarkSerializer(serializers.ModelSerializer):
             "vampire",
             "description",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class UpdateMarkSerializer(serializers.ModelSerializer):

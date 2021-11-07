@@ -5,9 +5,11 @@ import {
   EntityAdapter,
   EntityState,
 } from "@reduxjs/toolkit";
+import { RootState } from "app/store";
 import { BaseEntity } from "common/entity";
 import { CrudThunk } from "common/thunk";
 import { Vampire } from "vampire/vampire-model";
+import { updateVampire } from "vampire/vampire-slice";
 import {
   Character,
   Event,
@@ -127,6 +129,13 @@ export const diarySlice = createSlice({
       }
     );
 
+    diaryBuilder = diaryBuilder.addCase(
+      updateVampire.fulfilled,
+      (state, action) => {
+        state.vampire = action.payload;
+      }
+    );
+
     diaryBuilder = registerCrudThunk(
       diaryBuilder,
       (state) => state.event,
@@ -179,3 +188,13 @@ export const diarySlice = createSlice({
     return diaryBuilder;
   },
 });
+
+export const selectVampire = (state: RootState) => state.diary.vampire;
+
+export const memorySelectors = memoryAdapter.getSelectors(
+  (state: RootState) => state.diary.memory
+);
+
+export const experienceSelectors = experienceAdapter.getSelectors(
+  (state: RootState) => state.diary.experience
+);

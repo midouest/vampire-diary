@@ -17,10 +17,10 @@ export type RetrieveApi<Entity extends BaseEntity> = (
   id: number
 ) => Promise<Entity>;
 
-export type UpdateApi<
-  Entity extends BaseEntity,
-  UpdateEntity extends BaseEntity
-> = (fetchApi: FetchApi, formData: UpdateEntity) => Promise<Entity>;
+export type UpdateApi<Entity extends BaseEntity, UpdateEntity> = (
+  fetchApi: FetchApi,
+  formData: BaseEntity & Partial<UpdateEntity>
+) => Promise<Entity>;
 
 export type RemoveApi = (fetchApi: FetchApi, id: number) => Promise<void>;
 
@@ -72,7 +72,7 @@ export function createCrudApi<
 
   async function updateApi(
     fetchApi: FetchApi,
-    { id, ...formData }: UpdateEntity
+    { id, ...formData }: BaseEntity & Partial<UpdateEntity>
   ): Promise<Entity> {
     const res = await fetchApi(entityUrl(id), {
       method: "PATCH",

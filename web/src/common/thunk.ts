@@ -26,10 +26,11 @@ export type RetrieveThunk<Entity extends BaseEntity> = AsyncThunk<
   {}
 >;
 
-export type UpdateThunk<
-  Entity extends BaseEntity,
-  UpdateEntity extends BaseEntity
-> = AsyncThunk<Entity, UpdateEntity, {}>;
+export type UpdateThunk<Entity extends BaseEntity, UpdateEntity> = AsyncThunk<
+  Entity,
+  BaseEntity & Partial<UpdateEntity>,
+  {}
+>;
 
 export type RemoveThunk = AsyncThunk<number, number, {}>;
 
@@ -81,7 +82,7 @@ export function createCrudThunk<
 
   const update = createAsyncThunk(
     `${name}/update`,
-    (formData: UpdateEntity, thunkApi) => {
+    (formData: BaseEntity & Partial<UpdateEntity>, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
       return updateApi(fetchApi, formData);
     }
