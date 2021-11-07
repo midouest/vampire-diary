@@ -198,3 +198,19 @@ export const memorySelectors = memoryAdapter.getSelectors(
 export const experienceSelectors = experienceAdapter.getSelectors(
   (state: RootState) => state.diary.experience
 );
+
+export const skillSelectors = skillAdapter.getSelectors(
+  (state: RootState) => state.diary.skill
+);
+
+export const resourceSelectors = resourceAdapter.getSelectors(
+  (state: RootState) => state.diary.resource
+);
+
+export const characterSelectors = characterAdapter.getSelectors(
+  (state: RootState) => state.diary.character
+);
+
+export const markSelectors = markAdapter.getSelectors(
+  (state: RootState) => state.diary.mark
+);

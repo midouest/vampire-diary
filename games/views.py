@@ -210,9 +210,10 @@ class MemoryViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer: BaseSerializer) -> None:
         validated_data = serializer.validated_data
 
-        diary = validated_data["diary"]
-        assert isinstance(diary, Resource)
-        assert_diary_has_memory_capacity(diary)
+        diary = validated_data.get("diary", None)
+        if diary is not None:
+            assert isinstance(diary, Resource)
+            assert_diary_has_memory_capacity(diary)
 
         return super().perform_update(serializer)
 
@@ -329,11 +330,14 @@ class ResourceViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer: BaseSerializer) -> None:
         validated_data = serializer.validated_data
 
-        vampire = validated_data["vampire"]
-        assert isinstance(vampire, Vampire)
+        is_diary = validated_data.get("is_diary", None)
+        if is_diary is not None:
+            resource = serializer.instance
+            assert isinstance(resource, Resource)
 
-        is_diary = validated_data["is_diary"]
-        if is_diary:
+            vampire = resource.vampire
+            assert isinstance(vampire, Vampire)
+
             assert_vampire_has_diary_capacity(vampire)
 
         return super().perform_update(serializer)

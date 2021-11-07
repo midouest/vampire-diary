@@ -10,7 +10,7 @@ export function ExperienceList({ experiences }: ExperienceListProps) {
   return (
     <Form>
       {experiences.map((experience) => (
-        <ExperienceForm experience={experience} />
+        <ExperienceForm key={experience.id} experience={experience} />
       ))}
     </Form>
   );
