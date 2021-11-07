@@ -16,21 +16,28 @@ export interface CreateCrudApiSliceOptions {
   baseUrl: string;
 }
 
+export function prepareUrl<Entity>(
+  url: string,
+  queryParams?: QueryParams<Entity>
+): string {
+  let searchParams = null;
+  if (queryParams !== undefined) {
+    searchParams = createSearchParams(queryParams);
+  }
+
+  if (searchParams !== null) {
+    return `${url}?${searchParams}`;
+  }
+
+  return url;
+}
+
 async function queryApi<Entity extends BaseEntity>(
   fetchApi: FetchApi,
   url: string,
   params?: QueryParams<Entity>
 ): Promise<QueryResponse<Entity>> {
-  let search = null;
-  if (params) {
-    search = createSearchParams(params);
-  }
-
-  let queryUrl = url;
-  if (search !== null) {
-    queryUrl = `${queryUrl}?${search}`;
-  }
-
+  const queryUrl = prepareUrl(url, params);
   const res = await fetchApi(queryUrl);
   return res.json();
 }

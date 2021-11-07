@@ -1,12 +1,15 @@
 import { FetchApi } from "common/fetch";
-import { QueryResponse } from "common/query";
+import { QueryParams, QueryResponse } from "common/query";
+import { prepareUrl } from "common/slice";
 import { Prompt } from "./model";
 
 export const PROMPTS_URL = "/api/v1/game/prompts/";
 
 export async function queryPromptsApi(
-  fetchApi: FetchApi
+  fetchApi: FetchApi,
+  queryParams?: QueryParams<Prompt>
 ): Promise<QueryResponse<Prompt>> {
-  const res = await fetchApi(PROMPTS_URL);
+  const url = prepareUrl(PROMPTS_URL, queryParams);
+  const res = await fetchApi(url);
   return res.json();
 }

@@ -7,6 +7,7 @@ import { authFetchApi } from "auth/slice";
 import { RootState } from "app/store";
 import { queryPromptGroupsApi } from "./api";
 import { PromptGroup } from "./model";
+import { QueryParams } from "common/query";
 
 export const promptGroupAdapter = createEntityAdapter<PromptGroup>({
   selectId: (promptGroup) => promptGroup.id,
@@ -15,9 +16,9 @@ export const promptGroupAdapter = createEntityAdapter<PromptGroup>({
 
 export const queryPromptGroups = createAsyncThunk(
   "promptGroup/queryPromptGroups",
-  (_arg, thunkApi) => {
+  (params: QueryParams<PromptGroup> | undefined, thunkApi) => {
     const fetchApi = authFetchApi(thunkApi);
-    return queryPromptGroupsApi(fetchApi);
+    return queryPromptGroupsApi(fetchApi, params);
   }
 );
 
