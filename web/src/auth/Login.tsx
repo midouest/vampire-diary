@@ -1,11 +1,10 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useState } from "react";
 import { Form, FormGroup, Button, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import { login, selectIsLoggedIn } from "./slice";
 
 export function Login() {
-  const navigate = useNavigate();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
 
@@ -15,7 +14,7 @@ export function Login() {
   const onSubmit = () => dispatch(login({ username, password }));
 
   if (isLoggedIn) {
-    navigate("/vampires");
+    return <Navigate to="/vampires" />;
   }
 
   return (
