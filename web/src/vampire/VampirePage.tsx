@@ -1,6 +1,7 @@
 import { useAppDispatch } from "app/hooks";
 import { useState } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router";
 import { CreateVampireForm } from "./CreateVampireForm";
 import { CreateVampireFormData } from "./model";
 import { createVampire } from "./slice";
@@ -8,15 +9,17 @@ import { VampireList } from "./VampireList";
 
 export function VampirePage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
   const showModal = () => setShow(true);
   const hideModal = () => setShow(false);
 
-  const onCreate = (formData: CreateVampireFormData) => {
-    dispatch(createVampire(formData));
+  const onCreate = async (formData: CreateVampireFormData) => {
+    const vampire = await dispatch(createVampire(formData)).unwrap();
     hideModal();
+    navigate(`/vampires/${vampire.id}`);
   };
 
   return (
