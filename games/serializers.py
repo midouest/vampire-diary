@@ -280,6 +280,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = [
             "id",
+            "memory",
             "description",
         ]
 
@@ -291,6 +292,7 @@ class MemorySerializer(serializers.ModelSerializer):
         model = Memory
         fields = [
             "id",
+            "vampire",
             "diary",
             "is_forgotten",
             "experiences",
@@ -302,19 +304,24 @@ class SkillSerializer(serializers.ModelSerializer):
         model = Skill
         fields = [
             "id",
+            "vampire",
             "description",
             "is_checked",
         ]
 
 
 class ResourceSerializer(serializers.ModelSerializer):
+    memories = MemorySerializer(many=True)
+
     class Meta:
         model = Resource
         fields = [
             "id",
+            "vampire",
             "description",
             "is_diary",
             "is_lost",
+            "memories",
         ]
 
 
@@ -323,6 +330,7 @@ class CharacterSerializer(serializers.ModelSerializer):
         model = Character
         fields = [
             "id",
+            "vampire",
             "name",
             "description",
             "is_immortal",
@@ -335,6 +343,7 @@ class MarkSerializer(serializers.ModelSerializer):
         model = Mark
         fields = [
             "id",
+            "vampire",
             "description",
         ]
 
