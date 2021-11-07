@@ -17,12 +17,7 @@ def assert_vampire_has_memory_capacity(vampire: Vampire) -> None:
     ).count()
 
     if num_active_memories >= MAX_VAMPIRE_MEMORIES:
-        raise ValidationError(
-            f"Cannot create new memories for vampire {vampire}. "
-            + f"Found {num_active_memories} active memories. "
-            + f"Cannot have more than {MAX_VAMPIRE_MEMORIES} active memories. "
-            + f"Forget a memory or move it to a diary first."
-        )
+        raise ValidationError({"detail": "Vampire contains maximum number of memories"})
 
 
 MAX_MEMORY_EXPERIENCES = 3
@@ -35,10 +30,7 @@ def assert_memory_has_experience_capacity(memory: Memory) -> None:
 
     if num_experiences >= MAX_MEMORY_EXPERIENCES:
         raise ValidationError(
-            f"Cannot create new experiences for memory {memory}. "
-            + f"Found {num_experiences} experiences. "
-            + f"Cannot have more than {MAX_MEMORY_EXPERIENCES} experiences in a memory. "
-            + f"Create a new memory."
+            {"detail": "Memory contains maximum number of experiences"}
         )
 
 
@@ -51,7 +43,7 @@ def assert_diary_has_memory_capacity(diary: Resource) -> None:
     ).count()
 
     if num_memories >= MAX_DIARY_MEMORIES:
-        raise ValidationError("Cannot add memory to diary")
+        raise ValidationError({"detail": "Diary contains maximum number of memories"})
 
 
 MAX_VAMPIRE_DIARIES = 1
@@ -65,12 +57,14 @@ def assert_vampire_has_diary_capacity(vampire: Vampire) -> None:
     ).count()
 
     if num_diaries >= MAX_VAMPIRE_DIARIES:
-        raise ValidationError("Cannot create vampire diary")
+        raise ValidationError({"detail": "Vampire already has a diary"})
 
 
 def assert_memory_is_mutable(memory: Memory) -> None:
     if memory.diary is not None:
-        raise ValidationError("Cannot add experience to memory")
+        raise ValidationError(
+            {"detail": "Cannot add experiences to memories in diaries"}
+        )
 
 
 MAX_PROMPT_EVENTS = 3
@@ -79,7 +73,7 @@ MAX_PROMPT_EVENTS = 3
 def find_next_prompt(vampire: Vampire) -> tuple[Prompt, int]:
     prompt_group: Optional[PromptGroup] = vampire.prompt_group
     if prompt_group is None:
-        raise BadRequest("Vampire has no associated prompt group")
+        raise BadRequest({"detail": "Vampire has no associated prompt group"})
 
     try:
         prev_event: Event = vampire.events.latest("created_at")
@@ -88,10 +82,12 @@ def find_next_prompt(vampire: Vampire) -> tuple[Prompt, int]:
 
     prev_prompt: Optional[Prompt] = prev_event.prompt
     if prev_prompt is None:
-        raise BadRequest("Most recent event does not have an associated prompt")
+        raise BadRequest(
+            {"detail": "Most recent event does not have an associated prompt"}
+        )
 
     if prev_prompt.is_game_over:
-        raise BadRequest("Game is over")
+        raise BadRequest({"detail": "Game is over"})
 
     d10 = random.randint(1, 10)
     d6 = random.randint(1, 6)
