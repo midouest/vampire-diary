@@ -23,6 +23,6 @@ export const {
   baseUrl: "/api/v1/game/characters/",
 });
 
-export const vampireSelectors = characterAdapter.getSelectors<RootState>(
+export const characterSelectors = characterAdapter.getSelectors<RootState>(
   (state) => state.character
 );
