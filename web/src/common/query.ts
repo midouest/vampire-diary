@@ -9,16 +9,16 @@ export type FilterValue = number | boolean | string;
 
 export type SortDir = "+" | "-";
 
-export interface QueryParams<Entity> {
+export interface QueryParams {
   search?: string;
-  filter?: Record<keyof Entity, FilterValue>;
-  sort?: [keyof Entity, SortDir];
+  filter?: Record<string, FilterValue>;
+  sort?: [string, SortDir];
   limit?: number;
   offset?: number;
 }
 
-export function createSearchParams<Entity>(
-  queryParams: QueryParams<Entity>
+export function createSearchParams(
+  queryParams: QueryParams
 ): URLSearchParams | null {
   const record: Record<string, string> = {};
   let modified = false;

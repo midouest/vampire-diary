@@ -16,10 +16,7 @@ export interface CreateCrudApiSliceOptions {
   baseUrl: string;
 }
 
-export function prepareUrl<Entity>(
-  url: string,
-  queryParams?: QueryParams<Entity>
-): string {
+export function prepareUrl(url: string, queryParams?: QueryParams): string {
   let searchParams = null;
   if (queryParams !== undefined) {
     searchParams = createSearchParams(queryParams);
@@ -35,7 +32,7 @@ export function prepareUrl<Entity>(
 async function queryApi<Entity extends BaseEntity>(
   fetchApi: FetchApi,
   url: string,
-  params?: QueryParams<Entity>
+  params?: QueryParams
 ): Promise<QueryResponse<Entity>> {
   const queryUrl = prepareUrl(url, params);
   const res = await fetchApi(queryUrl);
@@ -85,12 +82,11 @@ export function createCrudApiSlice<
 >({ name, baseUrl }: CreateCrudApiSliceOptions) {
   const adapter = createEntityAdapter<Entity>({
     selectId: (entity) => entity.id,
-    sortComparer: (a, b) => a.id - b.id,
   });
 
   const query = createAsyncThunk(
     `${name}/query`,
-    (params: QueryParams<Entity> | undefined, thunkApi) => {
+    (params: QueryParams | undefined, thunkApi) => {
       const fetchApi = authFetchApi(thunkApi);
       return queryApi(fetchApi, baseUrl, params);
     }

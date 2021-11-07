@@ -7,7 +7,7 @@ export const PROMPT_GROUPS_URL = "/api/v1/game/prompt-groups/";
 
 export async function queryPromptGroupsApi(
   fetchApi: FetchApi,
-  queryParams?: QueryParams<PromptGroup>
+  queryParams?: QueryParams
 ): Promise<QueryResponse<PromptGroup>> {
   const url = prepareUrl(PROMPT_GROUPS_URL, queryParams);
   const res = await fetchApi(url);

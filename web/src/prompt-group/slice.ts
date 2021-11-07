@@ -16,7 +16,7 @@ export const promptGroupAdapter = createEntityAdapter<PromptGroup>({
 
 export const queryPromptGroups = createAsyncThunk(
   "promptGroup/queryPromptGroups",
-  (params: QueryParams<PromptGroup> | undefined, thunkApi) => {
+  (params: QueryParams | undefined, thunkApi) => {
     const fetchApi = authFetchApi(thunkApi);
     return queryPromptGroupsApi(fetchApi, params);
   }

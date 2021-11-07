@@ -10,7 +10,11 @@ export function VampireList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(queryVampires());
+    dispatch(
+      queryVampires({
+        sort: ["created_at", "-"],
+      })
+    );
   }, [dispatch]);
 
   return (
