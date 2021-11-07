@@ -62,37 +62,50 @@ class UpdateVampireSerializer(serializers.ModelSerializer):
         ]
 
 
-class CreateEventSerializer(serializers.ModelSerializer):
+class BaseEventSerializer(serializers.ModelSerializer):
+    prompt = serializers.SerializerMethodField()
+
+    def get_prompt(self, event):
+        visit = event.visit
+        prompt = event.prompt
+
+        if visit == 0:
+            return prompt.description_a
+        elif visit == 1:
+            return prompt.description_b
+        elif visit == 2:
+            return prompt.description_c
+
+        raise RuntimeError(f"Unexpected visit {visit} for prompt ID {prompt.id}")
+
+
+class CreateEventSerializer(BaseEventSerializer):
     class Meta:
         model = Event
         fields = [
             "id",
             "vampire",
             "prompt",
-            "visit",
             "description",
         ]
         read_only_fields = [
             "prompt",
-            "visit",
             "description",
         ]
 
 
-class UpdateEventSerializer(serializers.ModelSerializer):
+class UpdateEventSerializer(BaseEventSerializer):
     class Meta:
         model = Event
         fields = [
             "id",
             "vampire",
             "prompt",
-            "visit",
             "description",
         ]
         read_only_fields = [
             "vampire",
             "prompt",
-            "visit",
         ]
 
 
@@ -345,18 +358,4 @@ class VampireSerializer(serializers.ModelSerializer):
             "resources",
             "characters",
             "marks",
-        ]
-
-
-class EventSerializer(serializers.ModelSerializer):
-    prompt = PromptSerializer()
-
-    class Meta:
-        model = Event
-        fields = [
-            "id",
-            "vampire",
-            "prompt",
-            "visit",
-            "description",
         ]

@@ -34,7 +34,6 @@ from .serializers import (
     CreateMarkSerializer,
     CreateMemorySerializer,
     CreateVampireSerializer,
-    EventSerializer,
     VampireSerializer,
     PromptGroupSerializer,
     PromptSerializer,
@@ -103,16 +102,6 @@ class FullVampireView(generics.RetrieveAPIView):
         user = self.request.user
         assert isinstance(user, get_user_model())
         return Vampire.objects.filter(user=user)
-
-
-class FullEventView(generics.RetrieveAPIView):
-    serializer_class = EventSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self) -> models.QuerySet:
-        user = self.request.user
-        assert isinstance(user, get_user_model())
-        return Event.objects.filter(user=user)
 
 
 class VampireViewSet(viewsets.ModelViewSet):
