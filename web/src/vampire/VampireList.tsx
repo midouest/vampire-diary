@@ -23,7 +23,6 @@ export function VampireList() {
         <tr>
           <th>Name</th>
           <th>Description</th>
-          <th>Created At</th>
         </tr>
       </thead>
       <tbody>
@@ -34,7 +33,6 @@ export function VampireList() {
           >
             <td>{vampire.name}</td>
             <td>{vampire.description}</td>
-            <td>{vampire.createdAt}</td>
           </tr>
         ))}
       </tbody>

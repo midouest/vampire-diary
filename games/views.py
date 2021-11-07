@@ -35,7 +35,7 @@ from .serializers import (
     CreateMarkSerializer,
     CreateMemorySerializer,
     CreateVampireSerializer,
-    VampireSerializer,
+    DeepVampireSerializer,
     PromptGroupSerializer,
     PromptSerializer,
     CreateResourceSerializer,
@@ -95,19 +95,14 @@ class PromptViewSet(viewsets.ModelViewSet):
     ]
 
 
-class FullVampireView(generics.RetrieveAPIView):
-    serializer_class = VampireSerializer
+class DeepVampireView(generics.RetrieveAPIView):
+    serializer_class = DeepVampireSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self) -> models.QuerySet:
         user = self.request.user
         assert isinstance(user, get_user_model())
-        return Vampire.objects.filter(user=user).prefetch_related(
-            Prefetch(
-                "memories",
-                queryset=Memory.objects.filter(diary=None),
-            ),
-        )
+        return Vampire.objects.filter(user=user)
 
 
 class VampireViewSet(viewsets.ModelViewSet):
@@ -256,7 +251,7 @@ class ExperienceViewSet(viewsets.ModelViewSet):
         assert_memory_has_experience_capacity(memory)
         assert_memory_is_mutable(memory)
 
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, vampire=memory.vampire)
 
 
 class SkillViewSet(viewsets.ModelViewSet):

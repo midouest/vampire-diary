@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "auth/slice";
 import { eventSlice } from "diary/event-slice";
-import { fullVampireSlice } from "diary/full-vampire-slice";
+import { diarySlice } from "diary/diary-slice";
 import { promptGroupSlice } from "vampire/prompt-group-slice";
 import { vampireSlice } from "vampire/vampire-slice";
 
@@ -10,7 +10,7 @@ export const store = configureStore({
     auth: authSlice.reducer,
     promptGroup: promptGroupSlice.reducer,
     vampire: vampireSlice.reducer,
-    fullVampire: fullVampireSlice.reducer,
+    diary: diarySlice.reducer,
     event: eventSlice.reducer,
   },
 });

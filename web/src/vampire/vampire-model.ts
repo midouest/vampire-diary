@@ -2,8 +2,6 @@ export interface Vampire {
   id: number;
   name: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface CreateVampireFormData {

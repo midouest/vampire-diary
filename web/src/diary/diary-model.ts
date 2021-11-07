@@ -1,18 +1,36 @@
-export interface FullVampire {
+export interface DeepVampire {
   id: number;
   name: string;
   description: string;
+
+  events: Event[];
   memories: Memory[];
+  experiences: Experience[];
   skills: Skill[];
   resources: Resource[];
   characters: Character[];
   marks: Mark[];
 }
 
+export interface Event {
+  id: number;
+  vampire: number;
+  prompt: string;
+  description: string;
+}
+
+export interface CreateEventFormData {
+  vampire: number;
+}
+
+export interface UpdateEventFormData {
+  id: number;
+  description: string;
+}
+
 export interface Memory {
   id: number;
   vampire: number;
-  experiences: Experience[];
   diary: number | null;
   isForgotten: boolean;
 }

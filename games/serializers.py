@@ -143,8 +143,12 @@ class CreateExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = [
             "id",
+            "vampire",
             "memory",
             "description",
+        ]
+        read_only_fields = [
+            "vampire",
         ]
 
 
@@ -153,10 +157,12 @@ class UpdateExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = [
             "id",
+            "vampire",
             "memory",
             "description",
         ]
         read_only_fields = [
+            "vampire",
             "memory",
         ]
 
@@ -275,19 +281,18 @@ class UpdateMarkSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExperienceSerializer(serializers.ModelSerializer):
+class EventSerializer(BaseEventSerializer):
     class Meta:
-        model = Experience
+        model = Event
         fields = [
             "id",
-            "memory",
+            "vampire",
+            "prompt",
             "description",
         ]
 
 
 class MemorySerializer(serializers.ModelSerializer):
-    experiences = ExperienceSerializer(many=True)
-
     class Meta:
         model = Memory
         fields = [
@@ -295,7 +300,16 @@ class MemorySerializer(serializers.ModelSerializer):
             "vampire",
             "diary",
             "is_forgotten",
-            "experiences",
+        ]
+
+
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience
+        fields = [
+            "id",
+            "memory",
+            "description",
         ]
 
 
@@ -311,8 +325,6 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class ResourceSerializer(serializers.ModelSerializer):
-    memories = MemorySerializer(many=True)
-
     class Meta:
         model = Resource
         fields = [
@@ -321,7 +333,6 @@ class ResourceSerializer(serializers.ModelSerializer):
             "description",
             "is_diary",
             "is_lost",
-            "memories",
         ]
 
 
@@ -348,8 +359,10 @@ class MarkSerializer(serializers.ModelSerializer):
         ]
 
 
-class VampireSerializer(serializers.ModelSerializer):
+class DeepVampireSerializer(serializers.ModelSerializer):
+    events = EventSerializer(many=True)
     memories = MemorySerializer(many=True)
+    experiences = ExperienceSerializer(many=True)
     skills = SkillSerializer(many=True)
     resources = ResourceSerializer(many=True)
     characters = CharacterSerializer(many=True)
@@ -361,8 +374,9 @@ class VampireSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "description",
-            "is_dead",
+            "events",
             "memories",
+            "experiences",
             "skills",
             "resources",
             "characters",

@@ -154,6 +154,9 @@ class Memory(TimestampMixin):
         verbose_name_plural = "memories"
 
     def __str__(self) -> str:
+        if self.diary is not None:
+            return f"{self.vampire} {self.id} ({self.diary})"
+
         return f"{self.vampire} {self.id}"
 
 
@@ -168,6 +171,11 @@ class Experience(TimestampMixin):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="+",
+    )
+    vampire = models.ForeignKey(
+        Vampire,
+        on_delete=models.CASCADE,
+        related_name="experiences",
     )
     memory = models.ForeignKey(
         Memory,

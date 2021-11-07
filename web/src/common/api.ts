@@ -2,23 +2,38 @@ import { BaseEntity } from "./entity";
 import { FetchApi } from "./fetch";
 import { prepareUrl, QueryParams, QueryResponse } from "./query";
 
+export type QueryApi<Entity extends BaseEntity> = (
+  fetchApi: FetchApi,
+  params?: QueryParams
+) => Promise<QueryResponse<Entity>>;
+
+export type CreateApi<Entity extends BaseEntity, CreateEntity> = (
+  fetchApi: FetchApi,
+  formData: CreateEntity
+) => Promise<Entity>;
+
+export type RetrieveApi<Entity extends BaseEntity> = (
+  fetchApi: FetchApi,
+  id: number
+) => Promise<Entity>;
+
+export type UpdateApi<
+  Entity extends BaseEntity,
+  UpdateEntity extends BaseEntity
+> = (fetchApi: FetchApi, formData: UpdateEntity) => Promise<Entity>;
+
+export type RemoveApi = (fetchApi: FetchApi, id: number) => Promise<void>;
+
 export interface CrudApi<
   Entity extends BaseEntity,
   CreateEntity,
   UpdateEntity extends BaseEntity
 > {
-  queryApi(
-    fetchApi: FetchApi,
-    params?: QueryParams
-  ): Promise<QueryResponse<Entity>>;
-
-  createApi(fetchApi: FetchApi, formData: CreateEntity): Promise<Entity>;
-
-  retrieveApi(fetchApi: FetchApi, id: number): Promise<Entity>;
-
-  updateApi(fetchApi: FetchApi, formData: UpdateEntity): Promise<Entity>;
-
-  removeApi(fetchApi: FetchApi, id: number): Promise<void>;
+  queryApi: QueryApi<Entity>;
+  createApi: CreateApi<Entity, CreateEntity>;
+  retrieveApi: RetrieveApi<Entity>;
+  updateApi: UpdateApi<Entity, UpdateEntity>;
+  removeApi: RemoveApi;
 }
 
 export function createCrudApi<
