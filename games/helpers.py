@@ -3,7 +3,6 @@ import random
 from collections import defaultdict
 from typing import DefaultDict, Iterable, Optional
 from django.core.exceptions import BadRequest
-from rest_framework.exceptions import server_error
 from rest_framework.serializers import ValidationError
 from .models import Experience, Memory, Prompt, PromptGroup, Resource, Vampire, Event
 
@@ -77,7 +76,7 @@ def assert_memory_is_mutable(memory: Memory) -> None:
 MAX_PROMPT_EVENTS = 3
 
 
-def find_next_prompt(vampire: Vampire) -> Prompt:
+def find_next_prompt(vampire: Vampire) -> tuple[Prompt, int]:
     prompt_group: Optional[PromptGroup] = vampire.prompt_group
     if prompt_group is None:
         raise BadRequest("Vampire has no associated prompt group")
@@ -85,7 +84,7 @@ def find_next_prompt(vampire: Vampire) -> Prompt:
     try:
         prev_event: Event = vampire.events.latest("created_at")
     except Event.DoesNotExist:
-        return prompt_group.prompts.get(order=0)
+        return prompt_group.prompts.get(order=0), 0
 
     prev_prompt: Optional[Prompt] = prev_event.prompt
     if prev_prompt is None:
@@ -108,7 +107,9 @@ def find_next_prompt(vampire: Vampire) -> Prompt:
     if next_order == num_prompts:
         raise RuntimeError(f"All prompts have been visited by vampire {vampire.id}")
 
-    return Prompt.objects.get(group=prompt_group, order=next_order)
+    visit = visited[next_order]
+    prompt = Prompt.objects.get(group=prompt_group, order=next_order)
+    return prompt, visit
 
 
 def get_visited_prompt_ids(vampire: Vampire) -> Iterable[int]:

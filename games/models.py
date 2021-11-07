@@ -114,6 +114,7 @@ class Event(TimestampMixin):
         related_name="+",
     )
 
+    visit = models.IntegerField()
     description = models.TextField(blank=True)
 
     def __str__(self) -> str:

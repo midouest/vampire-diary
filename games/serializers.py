@@ -77,12 +77,14 @@ class CreateEventSerializer(serializers.ModelSerializer):
             "id",
             "vampire",
             "prompt",
+            "visit",
             "description",
             "created_at",
             "updated_at",
         ]
         read_only_fields = [
             "prompt",
+            "visit",
             "description",
         ]
 
@@ -94,6 +96,7 @@ class UpdateEventSerializer(serializers.ModelSerializer):
             "id",
             "vampire",
             "prompt",
+            "visit",
             "description",
             "created_at",
             "updated_at",
@@ -101,6 +104,7 @@ class UpdateEventSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "vampire",
             "prompt",
+            "visit",
         ]
 
 
@@ -388,6 +392,7 @@ class EventSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "vampire",
-            "description",
             "prompt",
+            "visit",
+            "description",
         ]

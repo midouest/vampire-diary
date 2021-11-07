@@ -179,9 +179,9 @@ class EventViewSet(viewsets.ModelViewSet):
 
         vampire = validated_data["vampire"]
         assert isinstance(vampire, Vampire)
-        prompt = find_next_prompt(vampire)
+        prompt, visit = find_next_prompt(vampire)
 
-        serializer.save(user=self.request.user, prompt=prompt)
+        serializer.save(user=self.request.user, prompt=prompt, visit=visit)
 
 
 class MemoryViewSet(viewsets.ModelViewSet):
