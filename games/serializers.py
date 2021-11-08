@@ -44,6 +44,10 @@ class CreateVampireSerializer(serializers.ModelSerializer):
             "prompt_group",
             "name",
             "description",
+            "is_dead",
+        ]
+        read_only_fields = [
+            "is_dead",
         ]
 
 

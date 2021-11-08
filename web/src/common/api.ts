@@ -99,8 +99,8 @@ export function createCrudApi<
 
   async function removeApi(fetchApi: FetchApi, id: number): Promise<void> {
     const res = await fetchApi(entityUrl(id), { method: "DELETE" });
-    const json = await res.json();
     if (!res.ok) {
+      const json = await res.json();
       throw new Error(json.detail);
     }
   }

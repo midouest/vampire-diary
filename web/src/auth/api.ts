@@ -9,7 +9,11 @@ export async function loginApi(
     method: "POST",
     body: JSON.stringify(formData),
   });
-  return res.json();
+  const json = await res.json();
+  if (!res.ok) {
+    throw new Error(json);
+  }
+  return json;
 }
 
 export async function logoutApi(fetchApi: FetchApi): Promise<void> {
