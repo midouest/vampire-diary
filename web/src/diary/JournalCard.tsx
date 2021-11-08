@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
-import TextareaAutosize from "react-autosize-textarea";
+import TextareaAutosize from "react-textarea-autosize";
 import { updateVampire } from "vampire/vampire-slice";
 import { Event } from "./diary-model";
 import {

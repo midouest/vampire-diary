@@ -2,13 +2,13 @@ import { useAppDispatch } from "app/hooks";
 import { useEffect, useState } from "react";
 import {
   Button,
-  Col,
+  Card,
   FormControl,
   FormGroup,
-  Row,
   ToggleButton,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-textarea-autosize";
 import { Resource } from "./diary-model";
 import { resourceThunk } from "./diary-thunk";
 
@@ -43,8 +43,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   };
 
   return (
-    <Row className="mt-3">
-      <Col xs="auto">
+    <Card className="mt-3">
+      <Card.Body>
         <ToggleButton
           type="checkbox"
           size="sm"
@@ -55,12 +55,22 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         >
           Diary
         </ToggleButton>
-      </Col>
-      <Col>
+
+        <Button
+          size="sm"
+          variant="outline-danger"
+          className="ms-3"
+          onClick={handleLost}
+        >
+          Lost
+        </Button>
+
         <FormGroup>
           <FormControl
             size="sm"
+            className="mt-3"
             as={DebounceInput}
+            element={TextareaAutosize as any}
             forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe the resource..."
@@ -68,12 +78,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             onChange={handleDescriptionChange}
           />
         </FormGroup>
-      </Col>
-      <Col xs="auto">
-        <Button size="sm" variant="outline-danger" onClick={handleLost}>
-          Lost
-        </Button>
-      </Col>
-    </Row>
+      </Card.Body>
+    </Card>
   );
 }

@@ -2,7 +2,7 @@ import { useAppDispatch } from "app/hooks";
 import React, { useState } from "react";
 import { FormControl, FormGroup } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
-import TextareaAutosize from "react-autosize-textarea";
+import TextareaAutosize from "react-textarea-autosize";
 import { Experience } from "./diary-model";
 import { experienceThunk } from "./diary-thunk";
 

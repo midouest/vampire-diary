@@ -2,6 +2,7 @@ import { useAppDispatch } from "app/hooks";
 import { useState } from "react";
 import { Button, Col, FormControl, FormGroup, Row } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-textarea-autosize";
 import { Skill } from "./diary-model";
 import { skillThunk } from "./diary-thunk";
 
@@ -31,6 +32,7 @@ export function SkillCard({ skill }: SkillCardProps) {
           <FormControl
             size="sm"
             as={DebounceInput}
+            element={TextareaAutosize as any}
             forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe the skill..."

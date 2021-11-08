@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
-import TextareaAutosize from "react-autosize-textarea";
+import TextareaAutosize from "react-textarea-autosize";
 import { Character } from "./diary-model";
 import { characterThunk } from "./diary-thunk";
 

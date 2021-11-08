@@ -2,7 +2,7 @@ import { useAppDispatch } from "app/hooks";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
-import TextareaAutosize from "react-autosize-textarea";
+import TextareaAutosize from "react-textarea-autosize";
 import { updateVampire } from "vampire/vampire-slice";
 import { Vampire } from "../vampire/vampire-model";
 
