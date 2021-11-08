@@ -1,5 +1,5 @@
 import { useAppDispatch } from "app/hooks";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-autosize-textarea";
@@ -15,6 +15,11 @@ export function VampireForm({ vampire }: VampireFormProps) {
 
   const [name, setName] = useState(vampire.name);
   const [description, setDescription] = useState(vampire.description);
+
+  useEffect(() => {
+    setName(vampire.name);
+    setDescription(vampire.description);
+  }, [vampire]);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
