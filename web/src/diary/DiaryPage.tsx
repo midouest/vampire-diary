@@ -16,6 +16,7 @@ import AccordionItem from "react-bootstrap/esm/AccordionItem";
 import { useParams } from "react-router";
 import { CharacterList } from "./CharacterList";
 import { CreationCard } from "./CreationCard";
+import { VAMPIRE_MEMORY_CAPACITY } from "./diary-constants";
 import {
   experienceSelectors,
   markSelectors,
@@ -53,6 +54,8 @@ export function DiaryPage() {
   const currentEvent = useAppSelector(selectCurrentEvent);
 
   const memories = useAppSelector(selectMemories);
+  const hasMaxMemories = memories.length >= VAMPIRE_MEMORY_CAPACITY;
+
   const experiences = useAppSelector(experienceSelectors.selectAll);
   const skills = useAppSelector(selectSkills);
   const characters = useAppSelector(selectCharacters);
@@ -111,15 +114,24 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
-                  overlay={<Tooltip>Add a new Memory</Tooltip>}
+                  overlay={
+                    <Tooltip>
+                      {hasMaxMemories
+                        ? "A Vampire can only remember five Memories"
+                        : "Add a new Memory"}
+                    </Tooltip>
+                  }
                 >
-                  <Button
-                    variant="outline-success"
-                    onClick={handleCreateMemory}
-                    size="sm"
-                  >
-                    Create
-                  </Button>
+                  <span className="d-inline-block">
+                    <Button
+                      disabled={hasMaxMemories}
+                      variant="outline-success"
+                      onClick={handleCreateMemory}
+                      size="sm"
+                    >
+                      Create
+                    </Button>
+                  </span>
                 </OverlayTrigger>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>

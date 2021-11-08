@@ -1,0 +1,5 @@
+export const VAMPIRE_MEMORY_CAPACITY = 5;
+
+export const DIARY_MEMORY_CAPACITY = 4;
+
+export const MEMORY_EXPERIENCE_CAPACITY = 3;

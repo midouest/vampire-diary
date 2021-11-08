@@ -49,7 +49,11 @@ export function CharacterCard({ character }: CharacterCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
-          overlay={<Tooltip>Immortal Characters cannot be removed</Tooltip>}
+          overlay={
+            <Tooltip>
+              Mortal Characters die, but immortal Characters do not
+            </Tooltip>
+          }
         >
           <ToggleButton
             type="checkbox"
@@ -65,18 +69,26 @@ export function CharacterCard({ character }: CharacterCardProps) {
 
         <OverlayTrigger
           placement="bottom"
-          overlay={<Tooltip>Remove this Character</Tooltip>}
+          overlay={
+            <Tooltip>
+              {isImmortal
+                ? "Immortal Characters cannot be removed"
+                : "Remove this Character"}
+            </Tooltip>
+          }
         >
-          <Button
-            size="sm"
-            variant="outline-danger"
-            value="2"
-            className="ms-3"
-            disabled={isImmortal}
-            onClick={handleDead}
-          >
-            Dead
-          </Button>
+          <span className="d-inline-block">
+            <Button
+              size="sm"
+              variant="outline-danger"
+              value="2"
+              className="ms-3"
+              disabled={isImmortal}
+              onClick={handleDead}
+            >
+              Dead
+            </Button>
+          </span>
         </OverlayTrigger>
         <FormGroup className="mt-3">
           <FormControl

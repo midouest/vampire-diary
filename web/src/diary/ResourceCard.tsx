@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect, useState } from "react";
 import {
   Button,
@@ -12,6 +12,7 @@ import {
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-textarea-autosize";
 import { Resource } from "./diary-model";
+import { selectDiary } from "./diary-slice";
 import { resourceThunk } from "./diary-thunk";
 
 export interface ResourceCardProps {
@@ -23,6 +24,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
   const [description, setDescription] = useState(resource.description);
   const [isDiary, setIsDiary] = useState(resource.isDiary);
+
+  const diary = useAppSelector(selectDiary);
+  const hasOtherDiary = diary !== null && !isDiary;
 
   useEffect(() => {
     setIsDiary(resource.isDiary);
@@ -49,18 +53,27 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
-          overlay={<Tooltip>A Diary can hold up to four Memories</Tooltip>}
+          overlay={
+            <Tooltip>
+              {hasOtherDiary
+                ? "A Vampire can only hold one Diary"
+                : "A Diary can hold up to four Memories"}
+            </Tooltip>
+          }
         >
-          <ToggleButton
-            type="checkbox"
-            size="sm"
-            variant="outline-secondary"
-            value="1"
-            checked={isDiary}
-            onClick={toggleIsDiary}
-          >
-            Diary
-          </ToggleButton>
+          <span className="d-inline-block">
+            <ToggleButton
+              type="checkbox"
+              size="sm"
+              variant="outline-secondary"
+              value="1"
+              disabled={hasOtherDiary}
+              checked={isDiary}
+              onClick={toggleIsDiary}
+            >
+              Diary
+            </ToggleButton>
+          </span>
         </OverlayTrigger>
 
         <OverlayTrigger

@@ -10,6 +10,7 @@ import { BaseEntity } from "common/entity";
 import { CrudThunk } from "common/thunk";
 import { Vampire } from "vampire/vampire-model";
 import { updateVampire } from "vampire/vampire-slice";
+import { DIARY_MEMORY_CAPACITY } from "./diary-constants";
 import {
   Character,
   Event,
@@ -331,9 +332,22 @@ export const selectResources = (state: RootState) => {
 };
 
 export const selectDiary = (state: RootState) => {
-  return resourceSelectors
-    .selectAll(state)
-    .find((resource) => resource.isDiary && !resource.isLost);
+  return (
+    resourceSelectors
+      .selectAll(state)
+      .find((resource) => resource.isDiary && !resource.isLost) ?? null
+  );
+};
+
+export const selectIsDiaryFull = (state: RootState) => {
+  const diary = selectDiary(state);
+  return (
+    diary !== null &&
+    memorySelectors
+      .selectAll(state)
+      .filter((memory) => memory.diary === diary.id).length >=
+      DIARY_MEMORY_CAPACITY
+  );
 };
 
 export const characterSelectors = characterAdapter.getSelectors(

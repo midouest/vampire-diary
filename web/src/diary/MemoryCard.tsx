@@ -1,16 +1,11 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { experienceThunk, memoryThunk } from "./diary-thunk";
 import { ExperienceList } from "./ExperienceList";
 import { Experience, Memory } from "./diary-model";
-import { selectDiary } from "./diary-slice";
+import { selectDiary, selectIsDiaryFull } from "./diary-slice";
+import { MEMORY_EXPERIENCE_CAPACITY } from "./diary-constants";
 
 export interface MemoryCardProps {
   memory: Memory;
@@ -20,6 +15,9 @@ export interface MemoryCardProps {
 export function MemoryCard({ memory, experiences }: MemoryCardProps) {
   const dispatch = useAppDispatch();
   const diary = useAppSelector(selectDiary);
+  const isDiaryFull = useAppSelector(selectIsDiaryFull);
+
+  const hasMaxExperiences = experiences.length >= MEMORY_EXPERIENCE_CAPACITY;
 
   const handleCreate = () =>
     dispatch(experienceThunk.create({ memory: memory.id, description: "" }));
@@ -36,33 +34,63 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
-          overlay={<Tooltip>Add a new Experience</Tooltip>}
+          overlay={
+            <Tooltip>
+              {hasMaxExperiences
+                ? "A Memory can only hold three Experiences"
+                : "Add a new Experience"}
+            </Tooltip>
+          }
         >
-          <Button size="sm" variant="outline-success" onClick={handleCreate}>
-            Create
+          <span className="d-inline-block">
+            <Button
+              disabled={hasMaxExperiences}
+              size="sm"
+              variant="outline-success"
+              onClick={handleCreate}
+            >
+              Create
+            </Button>
+          </span>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Remove this Memory</Tooltip>}
+        >
+          <Button
+            size="sm"
+            className="ms-3"
+            variant="outline-danger"
+            onClick={handleForget}
+          >
+            Forget
           </Button>
         </OverlayTrigger>
-        <ButtonGroup size="sm" className="ms-3">
-          <OverlayTrigger
-            placement="bottom"
-            overlay={<Tooltip>Remove this Memory</Tooltip>}
-          >
-            <Button variant="outline-danger" onClick={handleForget}>
-              Forget
-            </Button>
-          </OverlayTrigger>
 
-          {diary ? (
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip>Move this Memory to your Diary</Tooltip>}
+        <OverlayTrigger
+          placement="bottom"
+          overlay={
+            <Tooltip>
+              {diary === null
+                ? "Your Vampire does not have a Diary"
+                : isDiaryFull
+                ? "A Diary can only hold four Memories"
+                : "Move this Memory to your Diary"}
+            </Tooltip>
+          }
+        >
+          <span className="d-inline-block">
+            <Button
+              disabled={diary === null || isDiaryFull}
+              variant="outline-secondary"
+              size="sm"
+              className="ms-3"
+              onClick={handleDiary}
             >
-              <Button variant="outline-secondary" onClick={handleDiary}>
-                Diary
-              </Button>
-            </OverlayTrigger>
-          ) : null}
-        </ButtonGroup>
+              Diary
+            </Button>
+          </span>
+        </OverlayTrigger>
 
         <ExperienceList experiences={experiences} />
       </Card.Body>
