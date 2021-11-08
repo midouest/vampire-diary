@@ -95,6 +95,23 @@ export function JournalCard({
         <ButtonGroup size="sm" className="mt-3">
           <Button
             variant="outline-secondary"
+            disabled={isFirstEvent}
+            onClick={handleFirst}
+          >
+            First
+          </Button>
+          <Button
+            variant="outline-secondary"
+            disabled={isLastEvent}
+            onClick={handleLast}
+          >
+            Last
+          </Button>
+        </ButtonGroup>
+
+        <ButtonGroup size="sm" className="ms-3 mt-3">
+          <Button
+            variant="outline-secondary"
             disabled={!previousEvent}
             onClick={handlePrev}
           >
@@ -107,23 +124,6 @@ export function JournalCard({
             onClick={handleNext}
           >
             Next
-          </Button>
-        </ButtonGroup>
-
-        <ButtonGroup size="sm" className="ms-3 mt-3">
-          <Button
-            variant="outline-secondary"
-            disabled={isFirstEvent}
-            onClick={handleFirst}
-          >
-            First
-          </Button>
-          <Button
-            variant="outline-secondary"
-            disabled={isLastEvent}
-            onClick={handleLast}
-          >
-            Last
           </Button>
         </ButtonGroup>
 
