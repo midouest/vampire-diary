@@ -2,6 +2,7 @@ import { useAppDispatch } from "app/hooks";
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-autosize-textarea";
 import { updateVampire } from "vampire/vampire-slice";
 import { Vampire } from "../vampire/vampire-model";
 
@@ -36,7 +37,9 @@ export function VampireForm({ vampire }: VampireFormProps) {
         <FormControl
           size="sm"
           as={DebounceInput}
+          forceNotifyByEnter={false}
           debounceTimeout={1000}
+          placeholder="Name your vampire..."
           value={name}
           onChange={handleNameChange}
         />
@@ -47,8 +50,10 @@ export function VampireForm({ vampire }: VampireFormProps) {
         <FormControl
           size="sm"
           as={DebounceInput}
-          element="textarea"
+          forceNotifyByEnter={false}
+          element={TextareaAutosize as any}
           debounceTimeout={1000}
+          placeholder="Describe your vampire..."
           value={description}
           onChange={handleDescriptionChange}
         />

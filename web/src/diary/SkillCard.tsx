@@ -31,6 +31,7 @@ export function SkillCard({ skill }: SkillCardProps) {
           <FormControl
             size="sm"
             as={DebounceInput}
+            forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe the skill..."
             value={description}

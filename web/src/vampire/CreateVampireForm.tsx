@@ -24,10 +24,9 @@ export function CreateVampireForm({
   const allPromptGroups = useAppSelector(promptGroupSelectors.selectAll);
 
   const [name, setName] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
   const [promptGroup, setPromptGroup] = useState<number | null>(null);
 
-  const isFormComplete = () => name && description && promptGroup !== null;
+  const isFormComplete = () => name && promptGroup !== null;
 
   useEffect(() => {
     dispatch(queryPromptGroups());
@@ -42,15 +41,6 @@ export function CreateVampireForm({
         <FormControl
           placeholder="Enter a name..."
           onChange={(event) => setName(event.target.value)}
-        />
-      </FormGroup>
-
-      <FormGroup className="mt-3">
-        <FormLabel>Description</FormLabel>
-        <FormControl
-          as="textarea"
-          placeholder="Enter a description..."
-          onChange={(event) => setDescription(event.target.value)}
         />
       </FormGroup>
 
@@ -85,7 +75,7 @@ export function CreateVampireForm({
           onSubmit &&
             onSubmit({
               name: name as string,
-              description: description as string,
+              description: "",
               promptGroup: promptGroup as number,
             });
         }}

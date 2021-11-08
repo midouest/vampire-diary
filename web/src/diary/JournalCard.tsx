@@ -6,9 +6,9 @@ import {
   Card,
   FormControl,
   FormGroup,
-  FormLabel,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-autosize-textarea";
 import { updateVampire } from "vampire/vampire-slice";
 import { Event } from "./diary-model";
 import {
@@ -75,22 +75,20 @@ export function JournalCard({
 
   return (
     <Card>
+      <Card.Header>Prompt {currentIndex + 1}</Card.Header>
       <Card.Body>
-        <Card.Title>Prompt {currentIndex + 1}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">
-          {currentEvent?.prompt}
-        </Card.Subtitle>
+        <Card.Text>{currentEvent?.prompt}</Card.Text>
 
         <FormGroup>
-          <FormLabel>Entry</FormLabel>
           <FormControl
             size="sm"
             as={DebounceInput}
+            forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe what happens..."
             value={description}
             onChange={handleDescriptionChange}
-            element="textarea"
+            element={TextareaAutosize as any}
           />
         </FormGroup>
 

@@ -61,6 +61,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           <FormControl
             size="sm"
             as={DebounceInput}
+            forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe the resource..."
             value={description}

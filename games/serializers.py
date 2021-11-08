@@ -49,6 +49,7 @@ class CreateVampireSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "is_dead",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class UpdateVampireSerializer(serializers.ModelSerializer):
@@ -64,6 +65,7 @@ class UpdateVampireSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "prompt_group",
         ]
+        extra_kwargs = {"description": {"allow_blank": True}}
 
 
 class BaseEventSerializer(serializers.ModelSerializer):

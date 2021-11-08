@@ -26,6 +26,7 @@ export function MarkCard({ mark }: MarkFormProps) {
       <FormControl
         size="sm"
         as={DebounceInput}
+        forceNotifyByEnter={false}
         debounceTimeout={1000}
         placeholder="Describe the mark..."
         value={description}

@@ -8,6 +8,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-autosize-textarea";
 import { Character } from "./diary-model";
 import { characterThunk } from "./diary-thunk";
 
@@ -68,11 +69,12 @@ export function CharacterCard({ character }: CharacterCardProps) {
           <FormControl
             size="sm"
             as={DebounceInput}
+            forceNotifyByEnter={false}
             debounceTimeout={1000}
             placeholder="Describe the character..."
             value={description}
             onChange={handleDescriptionChange}
-            element="textarea"
+            element={TextareaAutosize as any}
           />
         </FormGroup>
       </Card.Body>

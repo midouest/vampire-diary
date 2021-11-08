@@ -2,6 +2,7 @@ import { useAppDispatch } from "app/hooks";
 import React, { useState } from "react";
 import { FormControl, FormGroup } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import TextareaAutosize from "react-autosize-textarea";
 import { Experience } from "./diary-model";
 import { experienceThunk } from "./diary-thunk";
 
@@ -26,11 +27,12 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
       <FormControl
         size="sm"
         as={DebounceInput}
+        forceNotifyByEnter={false}
         debounceTimeout={1000}
         placeholder="Describe the experience..."
         value={description}
         onChange={handleDescriptionChange}
-        element="textarea"
+        element={TextareaAutosize as any}
       />
     </FormGroup>
   );

@@ -96,7 +96,7 @@ export function DiaryPage() {
   return (
     <Container className="my-3">
       <Row>
-        <Col>
+        <Col md className="mb-3">
           <Accordion defaultActiveKey="vampire">
             <AccordionItem eventKey="vampire">
               <AccordionHeader>Vampire</AccordionHeader>
@@ -171,7 +171,7 @@ export function DiaryPage() {
             </AccordionItem>
           </Accordion>
         </Col>
-        <Col>
+        <Col md>
           {currentEvent && currentIndex !== undefined ? (
             <JournalCard
               vampireId={vampireId}
