@@ -15,25 +15,41 @@ export function CreationCard({ vampireId }: CreationCardProps) {
     <Card>
       <Card.Header>Creation</Card.Header>
       <Card.Body>
+        <Card.Text>To create your vampire:</Card.Text>
+
         <Card.Text>
           <ol>
-            <li>Name and description</li>
-            <li>First memory experience about your history</li>
-            <li>Create at least three mortals</li>
-            <li>Give your vampire three appropriate skills</li>
+            <li>Give your vampire a name and description</li>
             <li>
-              Give your vampire three resources that they acquired in life
+              Create a single memory and experience that describes your
+              vampire's history as a mortal
+            </li>
+            <li>Create at least three mortal characters</li>
+            <li>
+              Give your vampire three skills that they practiced as a mortal
             </li>
             <li>
-              Create three memories, each with one experience combining two
-              traits
+              Give your vampire three resources that they acquired as a mortal
             </li>
-            <li>Create an immortal creature who turned you into a vampire</li>
             <li>
-              Create a mark, a memory and experience relating to how you were
-              turned
+              Create three memories, each with one experience relating to any
+              two characters, skills and/or resources that you have created
+            </li>
+            <li>
+              Create an immortal character who gifted or cursed your vampire
+              with undeath
+            </li>
+            <li>
+              Create a mark, memory and experience relating to how your vampire
+              was gifted or cursed with undeath
             </li>
           </ol>
+        </Card.Text>
+
+        <Card.Text>
+          Your vampire should now have three skills, three resources, one mark,
+          at least three mortals, one immortal, and five memories each with one
+          experience.
         </Card.Text>
 
         <Button variant="outline-success" size="sm" onClick={handleStart}>
