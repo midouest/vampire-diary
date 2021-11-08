@@ -76,11 +76,11 @@ export function CreateVampireForm({
           </FormSelect>
         </FormGroup>
 
-        <Button variant="danger" className="mt-3" onClick={onCancel}>
+        <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
           Cancel
         </Button>
         <Button
-          variant="success"
+          variant="outline-success"
           className="mt-3 ms-3"
           disabled={!isFormComplete()}
           onClick={() => {

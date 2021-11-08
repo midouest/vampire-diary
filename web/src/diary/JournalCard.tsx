@@ -10,6 +10,7 @@ import {
   FormLabel,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import { updateVampire } from "vampire/vampire-slice";
 import { Event } from "./diary-model";
 import {
   eventBack,
@@ -17,6 +18,7 @@ import {
   eventForward,
   eventStart,
   selectIsDead,
+  selectIsExhausted,
   selectIsFirstEvent,
   selectIsLastEvent,
   selectPreviousEvent,
@@ -38,6 +40,7 @@ export function JournalCard({
   const isFirstEvent = useAppSelector(selectIsFirstEvent);
   const isLastEvent = useAppSelector(selectIsLastEvent);
   const isGameOver = useAppSelector(selectIsDead);
+  const isExhausted = useAppSelector(selectIsExhausted);
   const previousEvent = useAppSelector(selectPreviousEvent);
 
   const [description, setDescription] = useState(currentEvent.description);
@@ -68,6 +71,9 @@ export function JournalCard({
     }
   };
 
+  const handleDead = () =>
+    dispatch(updateVampire({ id: vampireId, isDead: true }));
+
   return (
     <Card>
       <Card.Body>
@@ -80,6 +86,7 @@ export function JournalCard({
           <FormGroup>
             <FormLabel>Entry</FormLabel>
             <FormControl
+              size="sm"
               as={DebounceInput}
               debounceTimeout={1000}
               placeholder="Describe what happens..."
@@ -124,6 +131,17 @@ export function JournalCard({
             Last
           </Button>
         </ButtonGroup>
+
+        {isExhausted && !isGameOver ? (
+          <Button
+            size="sm"
+            variant="outline-danger"
+            className="ms-3 mt-3"
+            onClick={handleDead}
+          >
+            Dead
+          </Button>
+        ) : null}
       </Card.Body>
     </Card>
   );

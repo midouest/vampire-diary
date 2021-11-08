@@ -24,7 +24,7 @@ export function VampirePage() {
 
   return (
     <Container className="mt-3">
-      <Button variant="success" className="mb-3" onClick={showModal}>
+      <Button variant="outline-success" className="mb-3" onClick={showModal}>
         Create
       </Button>
       <VampireList />

@@ -34,17 +34,18 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
     <Card className="mt-3">
       <Card.Header>Experiences</Card.Header>
       <Card.Body>
-        <ButtonGroup size="sm">
-          <Button variant="outline-success" onClick={handleCreate}>
-            Create
-          </Button>
+        <Button size="sm" variant="outline-success" onClick={handleCreate}>
+          Create
+        </Button>
+        <ButtonGroup size="sm" className="ms-3">
           <Button variant="outline-danger" onClick={handleForget}>
             Forget
           </Button>
+
           {diary ? (
             <OverlayTrigger
               placement="right"
-              overlay={<Tooltip>{diary.description}</Tooltip>}
+              overlay={<Tooltip>{diary.description || "Untitled"}</Tooltip>}
             >
               <Button variant="outline-secondary" onClick={handleDiary}>
                 Diary
@@ -52,6 +53,7 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
             </OverlayTrigger>
           ) : null}
         </ButtonGroup>
+
         <ExperienceList experiences={experiences} />
       </Card.Body>
     </Card>

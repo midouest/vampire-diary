@@ -1,6 +1,5 @@
-import { Form } from "react-bootstrap";
 import { Resource } from "./diary-model";
-import { ResourceForm } from "./ResourceForm";
+import { ResourceCard } from "./ResourceCard";
 
 export interface ResourceListProps {
   resources: Resource[];
@@ -8,10 +7,10 @@ export interface ResourceListProps {
 
 export function ResourceList({ resources }: ResourceListProps) {
   return (
-    <Form className="mt-3">
+    <>
       {resources.map((resource) => (
-        <ResourceForm key={resource.id} resource={resource} />
+        <ResourceCard key={resource.id} resource={resource} />
       ))}
-    </Form>
+    </>
   );
 }

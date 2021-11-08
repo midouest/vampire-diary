@@ -1,6 +1,6 @@
 import { useAppDispatch } from "app/hooks";
 import React, { useState } from "react";
-import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { FormControl, FormGroup } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import { Experience } from "./diary-model";
 import { experienceThunk } from "./diary-thunk";
@@ -23,10 +23,11 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
 
   return (
     <FormGroup className="mt-3">
-      <FormLabel>Description</FormLabel>
       <FormControl
+        size="sm"
         as={DebounceInput}
         debounceTimeout={1000}
+        placeholder="Describe the experience..."
         value={description}
         onChange={handleDescriptionChange}
         element="textarea"

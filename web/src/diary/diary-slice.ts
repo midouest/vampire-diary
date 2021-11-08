@@ -253,6 +253,12 @@ export const selectVampire = (state: RootState) => state.diary.vampire;
 export const selectIsDead = (state: RootState) =>
   state.diary.vampire?.isDead ?? false;
 
+export const selectIsExhausted = (state: RootState) => {
+  return (
+    selectSkills(state).length === 0 && selectResources(state).length === 0
+  );
+};
+
 export const selectIsFirstEvent = (state: RootState) => {
   return state.diary.currentEventIndex === 0;
 };
@@ -296,7 +302,7 @@ export const memorySelectors = memoryAdapter.getSelectors(
   (state: RootState) => state.diary.memory
 );
 
-export const selectVampireMemories = (state: RootState) => {
+export const selectMemories = (state: RootState) => {
   return memorySelectors
     .selectAll(state)
     .filter((memory) => !memory.isForgotten && memory.diary === null);
@@ -310,9 +316,19 @@ export const skillSelectors = skillAdapter.getSelectors(
   (state: RootState) => state.diary.skill
 );
 
+export const selectSkills = (state: RootState) => {
+  return skillSelectors.selectAll(state).filter((skill) => !skill.isChecked);
+};
+
 export const resourceSelectors = resourceAdapter.getSelectors(
   (state: RootState) => state.diary.resource
 );
+
+export const selectResources = (state: RootState) => {
+  return resourceSelectors
+    .selectAll(state)
+    .filter((resource) => !resource.isLost);
+};
 
 export const selectDiary = (state: RootState) => {
   return resourceSelectors
@@ -323,6 +339,12 @@ export const selectDiary = (state: RootState) => {
 export const characterSelectors = characterAdapter.getSelectors(
   (state: RootState) => state.diary.character
 );
+
+export const selectCharacters = (state: RootState) => {
+  return characterSelectors
+    .selectAll(state)
+    .filter((character) => !character.isDead);
+};
 
 export const markSelectors = markAdapter.getSelectors(
   (state: RootState) => state.diary.mark

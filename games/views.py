@@ -335,7 +335,7 @@ class ResourceViewSet(viewsets.ModelViewSet):
         validated_data = serializer.validated_data
 
         is_diary = validated_data.get("is_diary", None)
-        if is_diary is not None:
+        if is_diary:
             resource = serializer.instance
             assert isinstance(resource, Resource)
 

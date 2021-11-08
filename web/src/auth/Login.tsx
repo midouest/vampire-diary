@@ -37,7 +37,7 @@ export function Login() {
           />
         </FormGroup>
 
-        <Button className="mt-3" onClick={onSubmit}>
+        <Button variant="outline-primary" className="mt-3" onClick={onSubmit}>
           Log In
         </Button>
       </Form>

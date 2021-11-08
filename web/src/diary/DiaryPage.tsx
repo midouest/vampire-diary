@@ -15,15 +15,15 @@ import { useParams } from "react-router";
 import { CharacterList } from "./CharacterList";
 import { CreationCard } from "./CreationCard";
 import {
-  characterSelectors,
   experienceSelectors,
   markSelectors,
-  resourceSelectors,
   selectCurrentEvent,
   selectCurrentEventIndex,
+  selectSkills,
   selectVampire,
-  selectVampireMemories,
-  skillSelectors,
+  selectMemories,
+  selectResources,
+  selectCharacters,
 } from "./diary-slice";
 import {
   characterThunk,
@@ -50,11 +50,11 @@ export function DiaryPage() {
   const currentIndex = useAppSelector(selectCurrentEventIndex);
   const currentEvent = useAppSelector(selectCurrentEvent);
 
-  const memories = useAppSelector(selectVampireMemories);
+  const memories = useAppSelector(selectMemories);
   const experiences = useAppSelector(experienceSelectors.selectAll);
-  const skills = useAppSelector(skillSelectors.selectAll);
-  const characters = useAppSelector(characterSelectors.selectAll);
-  const resources = useAppSelector(resourceSelectors.selectAll);
+  const skills = useAppSelector(selectSkills);
+  const characters = useAppSelector(selectCharacters);
+  const resources = useAppSelector(selectResources);
   const marks = useAppSelector(markSelectors.selectAll);
 
   useEffect(() => {

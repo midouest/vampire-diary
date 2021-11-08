@@ -59,7 +59,6 @@ class UpdateVampireSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "prompt_group",
-            "is_dead",
         ]
 
 
@@ -228,7 +227,6 @@ class UpdateResourceSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "vampire",
-            "is_diary",
         ]
         extra_kwargs = {"description": {"allow_blank": True}}
 

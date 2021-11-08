@@ -34,6 +34,7 @@ export function VampireForm({ vampire }: VampireFormProps) {
       <FormGroup>
         <FormLabel>Name</FormLabel>
         <FormControl
+          size="sm"
           as={DebounceInput}
           debounceTimeout={1000}
           value={name}
@@ -44,6 +45,7 @@ export function VampireForm({ vampire }: VampireFormProps) {
       <FormGroup className="mt-3">
         <FormLabel>Description</FormLabel>
         <FormControl
+          size="sm"
           as={DebounceInput}
           element="textarea"
           debounceTimeout={1000}
