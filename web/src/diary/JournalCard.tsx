@@ -78,6 +78,7 @@ export function JournalCard({
       <Card.Header>Prompt {currentIndex + 1}</Card.Header>
       <Card.Body>
         <Card.Text>{currentEvent?.prompt}</Card.Text>
+        <Card.Text>Create a new Experience.</Card.Text>
 
         <FormGroup>
           <FormControl
