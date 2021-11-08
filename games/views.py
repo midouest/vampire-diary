@@ -171,6 +171,10 @@ class EventViewSet(viewsets.ModelViewSet):
         assert isinstance(vampire, Vampire)
         prompt, visit = find_next_prompt(vampire)
 
+        if prompt.is_game_over:
+            vampire.is_dead = True
+            vampire.save()
+
         serializer.save(user=self.request.user, prompt=prompt, visit=visit)
 
 

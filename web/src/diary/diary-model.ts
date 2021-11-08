@@ -2,6 +2,7 @@ export interface DeepVampire {
   id: number;
   name: string;
   description: string;
+  isDead: boolean;
 
   events: Event[];
   memories: Memory[];

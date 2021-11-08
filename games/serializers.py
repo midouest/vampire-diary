@@ -59,6 +59,7 @@ class UpdateVampireSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "prompt_group",
+            "is_dead",
         ]
 
 
@@ -390,6 +391,7 @@ class DeepVampireSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "description",
+            "is_dead",
             "events",
             "memories",
             "experiences",
