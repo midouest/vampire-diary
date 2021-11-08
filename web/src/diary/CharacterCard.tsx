@@ -6,6 +6,8 @@ import {
   FormGroup,
   ToggleButton,
   Button,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-textarea-autosize";
@@ -45,26 +47,37 @@ export function CharacterCard({ character }: CharacterCardProps) {
   return (
     <Card className="mt-3">
       <Card.Body>
-        <ToggleButton
-          type="checkbox"
-          size="sm"
-          variant="outline-secondary"
-          value="1"
-          checked={isImmortal}
-          onClick={toggleIsImmortal}
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Immortal Characters cannot be removed</Tooltip>}
         >
-          Immortal
-        </ToggleButton>
-        <Button
-          size="sm"
-          variant="outline-danger"
-          value="2"
-          className="ms-3"
-          disabled={isImmortal}
-          onClick={handleDead}
+          <ToggleButton
+            type="checkbox"
+            size="sm"
+            variant="outline-secondary"
+            value="1"
+            checked={isImmortal}
+            onClick={toggleIsImmortal}
+          >
+            Immortal
+          </ToggleButton>
+        </OverlayTrigger>
+
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Remove this Character</Tooltip>}
         >
-          Dead
-        </Button>
+          <Button
+            size="sm"
+            variant="outline-danger"
+            value="2"
+            className="ms-3"
+            disabled={isImmortal}
+            onClick={handleDead}
+          >
+            Dead
+          </Button>
+        </OverlayTrigger>
         <FormGroup className="mt-3">
           <FormControl
             size="sm"

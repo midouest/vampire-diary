@@ -8,6 +8,8 @@ import {
   Button,
   Container,
   FormSelect,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import { CreateVampireFormData } from "./vampire-model";
 
@@ -64,24 +66,35 @@ export function CreateVampireForm({
         </FormSelect>
       </FormGroup>
 
-      <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
-        Cancel
-      </Button>
-      <Button
-        variant="outline-success"
-        className="mt-3 ms-3"
-        disabled={!isFormComplete()}
-        onClick={() => {
-          onSubmit &&
-            onSubmit({
-              name: name as string,
-              description: "",
-              promptGroup: promptGroup as number,
-            });
-        }}
+      <OverlayTrigger
+        placement="bottom"
+        overlay={<Tooltip>Discard changes</Tooltip>}
       >
-        Create
-      </Button>
+        <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
+          Cancel
+        </Button>
+      </OverlayTrigger>
+
+      <OverlayTrigger
+        placement="bottom"
+        overlay={<Tooltip>Go to the Diary page</Tooltip>}
+      >
+        <Button
+          variant="outline-success"
+          className="mt-3 ms-3"
+          disabled={!isFormComplete()}
+          onClick={() => {
+            onSubmit &&
+              onSubmit({
+                name: name as string,
+                description: "",
+                promptGroup: promptGroup as number,
+              });
+          }}
+        >
+          Create
+        </Button>
+      </OverlayTrigger>
     </Container>
   );
 }

@@ -1,3 +1,5 @@
+import "./VampireList.css";
+
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
 import { queryVampires, vampireSelectors } from "./vampire-slice";
@@ -29,6 +31,7 @@ export function VampireList() {
       <tbody>
         {allVampires.map((vampire) => (
           <tr
+            className="vampire-list-item"
             key={vampire.id}
             onClick={() => navigate(`/vampires/${vampire.id}`)}
           >

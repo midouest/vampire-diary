@@ -7,6 +7,8 @@ import {
   Dropdown,
   DropdownButton,
   ButtonGroup,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { CreateVampireForm } from "./CreateVampireForm";
@@ -40,25 +42,35 @@ export function VampirePage() {
 
   return (
     <Container className="mt-3">
-      <Button variant="outline-success" className="mb-3" onClick={showModal}>
-        Create
-      </Button>
-      <DropdownButton
-        as={ButtonGroup}
-        disabled={allVampires.length === 0}
-        title="Delete"
-        variant="outline-danger"
-        className="ms-3 mb-3"
+      <OverlayTrigger
+        placement="bottom"
+        overlay={<Tooltip>Create a new Vampire</Tooltip>}
       >
-        {allVampires.map((vampire) => (
-          <Dropdown.Item
-            key={vampire.id}
-            onClick={() => handleDelete(vampire.id)}
-          >
-            {vampire.name}
-          </Dropdown.Item>
-        ))}
-      </DropdownButton>
+        <Button variant="outline-success" className="mb-3" onClick={showModal}>
+          Create
+        </Button>
+      </OverlayTrigger>
+      <OverlayTrigger
+        placement="bottom"
+        overlay={<Tooltip>Select a Vampire to be removed</Tooltip>}
+      >
+        <DropdownButton
+          as={ButtonGroup}
+          disabled={allVampires.length === 0}
+          title="Delete"
+          variant="outline-danger"
+          className="ms-3 mb-3"
+        >
+          {allVampires.map((vampire) => (
+            <Dropdown.Item
+              key={vampire.id}
+              onClick={() => handleDelete(vampire.id)}
+            >
+              {vampire.name}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      </OverlayTrigger>
       <VampireList />
 
       <Modal show={show} onHide={hideModal}>

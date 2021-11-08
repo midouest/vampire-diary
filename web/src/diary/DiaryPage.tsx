@@ -7,6 +7,8 @@ import {
   Col,
   Spinner,
   Container,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
 import AccordionHeader from "react-bootstrap/esm/AccordionHeader";
@@ -107,65 +109,90 @@ export function DiaryPage() {
             <AccordionItem eventKey="memories">
               <AccordionHeader>Memories</AccordionHeader>
               <AccordionBody>
-                <Button
-                  variant="outline-success"
-                  onClick={handleCreateMemory}
-                  size="sm"
+                <OverlayTrigger
+                  placement="right"
+                  overlay={<Tooltip>Add a new Memory</Tooltip>}
                 >
-                  Create
-                </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={handleCreateMemory}
+                    size="sm"
+                  >
+                    Create
+                  </Button>
+                </OverlayTrigger>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="skills">
               <AccordionHeader>Skills</AccordionHeader>
               <AccordionBody>
-                <Button
-                  variant="outline-success"
-                  onClick={handleCreateSkill}
-                  size="sm"
+                <OverlayTrigger
+                  placement="right"
+                  overlay={<Tooltip>Add a new Skill</Tooltip>}
                 >
-                  Create
-                </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={handleCreateSkill}
+                    size="sm"
+                  >
+                    Create
+                  </Button>
+                </OverlayTrigger>
                 <SkillList skills={skills} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="resources">
               <AccordionHeader>Resources</AccordionHeader>
               <AccordionBody>
-                <Button
-                  variant="outline-success"
-                  onClick={handleCreateResource}
-                  size="sm"
+                <OverlayTrigger
+                  placement="right"
+                  overlay={<Tooltip>Add a new Resource</Tooltip>}
                 >
-                  Create
-                </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={handleCreateResource}
+                    size="sm"
+                  >
+                    Create
+                  </Button>
+                </OverlayTrigger>
                 <ResourceList resources={resources} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="characters">
               <AccordionHeader>Characters</AccordionHeader>
               <AccordionBody>
-                <Button
-                  variant="outline-success"
-                  onClick={handleCreateCharacter}
-                  size="sm"
+                <OverlayTrigger
+                  placement="right"
+                  overlay={<Tooltip>Add a new Character</Tooltip>}
                 >
-                  Create
-                </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={handleCreateCharacter}
+                    size="sm"
+                  >
+                    Create
+                  </Button>
+                </OverlayTrigger>
                 <CharacterList characters={characters} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="marks">
               <AccordionHeader>Marks</AccordionHeader>
               <AccordionBody>
-                <Button
-                  variant="outline-success"
-                  onClick={handleCreateMark}
-                  size="sm"
+                <OverlayTrigger
+                  placement="right"
+                  overlay={<Tooltip>Add a new Mark</Tooltip>}
                 >
-                  Create
-                </Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={handleCreateMark}
+                    size="sm"
+                  >
+                    Create
+                  </Button>
+                </OverlayTrigger>
                 <MarkList marks={marks} />
               </AccordionBody>
             </AccordionItem>

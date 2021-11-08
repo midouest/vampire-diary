@@ -34,18 +34,28 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
     <Card className="mt-3">
       <Card.Header>Experiences</Card.Header>
       <Card.Body>
-        <Button size="sm" variant="outline-success" onClick={handleCreate}>
-          Create
-        </Button>
-        <ButtonGroup size="sm" className="ms-3">
-          <Button variant="outline-danger" onClick={handleForget}>
-            Forget
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Add a new Experience</Tooltip>}
+        >
+          <Button size="sm" variant="outline-success" onClick={handleCreate}>
+            Create
           </Button>
+        </OverlayTrigger>
+        <ButtonGroup size="sm" className="ms-3">
+          <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip>Remove this Memory</Tooltip>}
+          >
+            <Button variant="outline-danger" onClick={handleForget}>
+              Forget
+            </Button>
+          </OverlayTrigger>
 
           {diary ? (
             <OverlayTrigger
-              placement="right"
-              overlay={<Tooltip>{diary.description || "Untitled"}</Tooltip>}
+              placement="bottom"
+              overlay={<Tooltip>Move this Memory to your Diary</Tooltip>}
             >
               <Button variant="outline-secondary" onClick={handleDiary}>
                 Diary

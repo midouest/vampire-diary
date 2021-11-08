@@ -5,7 +5,9 @@ import {
   Card,
   FormControl,
   FormGroup,
+  OverlayTrigger,
   ToggleButton,
+  Tooltip,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-textarea-autosize";
@@ -45,25 +47,35 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   return (
     <Card className="mt-3">
       <Card.Body>
-        <ToggleButton
-          type="checkbox"
-          size="sm"
-          variant="outline-secondary"
-          value="1"
-          checked={isDiary}
-          onClick={toggleIsDiary}
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>A Diary can hold up to four Memories</Tooltip>}
         >
-          Diary
-        </ToggleButton>
+          <ToggleButton
+            type="checkbox"
+            size="sm"
+            variant="outline-secondary"
+            value="1"
+            checked={isDiary}
+            onClick={toggleIsDiary}
+          >
+            Diary
+          </ToggleButton>
+        </OverlayTrigger>
 
-        <Button
-          size="sm"
-          variant="outline-danger"
-          className="ms-3"
-          onClick={handleLost}
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Remove this Resource</Tooltip>}
         >
-          Lost
-        </Button>
+          <Button
+            size="sm"
+            variant="outline-danger"
+            className="ms-3"
+            onClick={handleLost}
+          >
+            Lost
+          </Button>
+        </OverlayTrigger>
 
         <FormGroup>
           <FormControl

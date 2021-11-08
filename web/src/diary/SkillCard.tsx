@@ -1,6 +1,14 @@
 import { useAppDispatch } from "app/hooks";
 import { useState } from "react";
-import { Button, Col, FormControl, FormGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  FormControl,
+  FormGroup,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-textarea-autosize";
 import { Skill } from "./diary-model";
@@ -42,9 +50,14 @@ export function SkillCard({ skill }: SkillCardProps) {
         </FormGroup>
       </Col>
       <Col xs="auto">
-        <Button size="sm" variant="outline-danger" onClick={handleCheck}>
-          Check
-        </Button>
+        <OverlayTrigger
+          placement="right"
+          overlay={<Tooltip>Remove this Skill</Tooltip>}
+        >
+          <Button size="sm" variant="outline-danger" onClick={handleCheck}>
+            Check
+          </Button>
+        </OverlayTrigger>
       </Col>
     </Row>
   );

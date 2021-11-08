@@ -96,38 +96,65 @@ export function JournalCard({
         </FormGroup>
 
         <ButtonGroup size="sm" className="mt-3">
-          <Button
-            variant="outline-secondary"
-            disabled={isFirstEvent}
-            onClick={handleFirst}
+          <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip>Go to the first Prompt</Tooltip>}
           >
-            First
-          </Button>
-          <Button
-            variant="outline-secondary"
-            disabled={isLastEvent}
-            onClick={handleLast}
+            <Button
+              variant="outline-secondary"
+              disabled={isFirstEvent}
+              onClick={handleFirst}
+            >
+              First
+            </Button>
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip>Go to the last Prompt</Tooltip>}
           >
-            Last
-          </Button>
+            <Button
+              variant="outline-secondary"
+              disabled={isLastEvent}
+              onClick={handleLast}
+            >
+              Last
+            </Button>
+          </OverlayTrigger>
         </ButtonGroup>
 
         <ButtonGroup size="sm" className="ms-3 mt-3">
-          <Button
-            variant="outline-secondary"
-            disabled={!previousEvent}
-            onClick={handlePrev}
+          <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip>Go to the previous Prompt</Tooltip>}
           >
-            Previous
-          </Button>
+            <Button
+              variant="outline-secondary"
+              disabled={!previousEvent}
+              onClick={handlePrev}
+            >
+              Previous
+            </Button>
+          </OverlayTrigger>
 
-          <Button
-            variant={isLastEvent ? "outline-success" : "outline-secondary"}
-            disabled={isGameOver}
-            onClick={handleNext}
+          <OverlayTrigger
+            placement="bottom"
+            overlay={
+              <Tooltip>
+                {isLastEvent
+                  ? "Generate the next Prompt"
+                  : "Go to the next Prompt"}
+              </Tooltip>
+            }
           >
-            Next
-          </Button>
+            <Button
+              variant={isLastEvent ? "outline-success" : "outline-secondary"}
+              disabled={isGameOver}
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+          </OverlayTrigger>
         </ButtonGroup>
 
         {isExhausted && !isGameOver ? (
