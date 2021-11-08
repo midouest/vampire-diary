@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import React, { useEffect, useState } from "react";
 import {
   ButtonGroup,
@@ -98,6 +99,7 @@ export function JournalCard({
         <ButtonGroup size="sm" className="mt-3">
           <OverlayTrigger
             placement="bottom"
+            delay={OVERLAY_DELAY}
             overlay={<Tooltip>Go to the first Prompt</Tooltip>}
           >
             <Button
@@ -111,6 +113,7 @@ export function JournalCard({
 
           <OverlayTrigger
             placement="bottom"
+            delay={OVERLAY_DELAY}
             overlay={<Tooltip>Go to the last Prompt</Tooltip>}
           >
             <Button
@@ -126,6 +129,7 @@ export function JournalCard({
         <ButtonGroup size="sm" className="ms-3 mt-3">
           <OverlayTrigger
             placement="bottom"
+            delay={OVERLAY_DELAY}
             overlay={<Tooltip>Go to the previous Prompt</Tooltip>}
           >
             <Button
@@ -139,6 +143,7 @@ export function JournalCard({
 
           <OverlayTrigger
             placement="bottom"
+            delay={OVERLAY_DELAY}
             overlay={
               <Tooltip>
                 {isLastEvent
@@ -160,6 +165,7 @@ export function JournalCard({
         {isExhausted && !isGameOver ? (
           <OverlayTrigger
             placement="bottom"
+            delay={OVERLAY_DELAY}
             overlay={
               <Tooltip>
                 <p>

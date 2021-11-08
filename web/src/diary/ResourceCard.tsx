@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import { useEffect, useState } from "react";
 import {
   Button,
@@ -53,6 +54,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
               {hasOtherDiary
@@ -78,6 +80,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={<Tooltip>Remove this Resource</Tooltip>}
         >
           <Button

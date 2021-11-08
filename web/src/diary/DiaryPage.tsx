@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import { useEffect } from "react";
 import {
   Button,
@@ -114,6 +115,7 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
+                  delay={OVERLAY_DELAY}
                   overlay={
                     <Tooltip>
                       {hasMaxMemories
@@ -141,6 +143,7 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
+                  delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Skill</Tooltip>}
                 >
                   <Button
@@ -159,6 +162,7 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
+                  delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Resource</Tooltip>}
                 >
                   <Button
@@ -177,6 +181,7 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
+                  delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Character</Tooltip>}
                 >
                   <Button
@@ -195,6 +200,7 @@ export function DiaryPage() {
               <AccordionBody>
                 <OverlayTrigger
                   placement="right"
+                  delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Mark</Tooltip>}
                 >
                   <Button

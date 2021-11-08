@@ -6,6 +6,7 @@ import { ExperienceList } from "./ExperienceList";
 import { Experience, Memory } from "./diary-model";
 import { selectDiary, selectIsDiaryFull } from "./diary-slice";
 import { MEMORY_EXPERIENCE_CAPACITY } from "./diary-constants";
+import { OVERLAY_DELAY } from "common/constants";
 
 export interface MemoryCardProps {
   memory: Memory;
@@ -34,6 +35,7 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
               {hasMaxExperiences
@@ -55,6 +57,7 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
         </OverlayTrigger>
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={<Tooltip>Remove this Memory</Tooltip>}
         >
           <Button
@@ -69,6 +72,7 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
 
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
               {diary === null

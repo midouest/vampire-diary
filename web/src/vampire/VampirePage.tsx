@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import { useState } from "react";
 import {
   Container,
@@ -44,6 +45,7 @@ export function VampirePage() {
     <Container className="mt-3">
       <OverlayTrigger
         placement="bottom"
+        delay={OVERLAY_DELAY}
         overlay={<Tooltip>Create a new Vampire</Tooltip>}
       >
         <Button variant="outline-success" className="mb-3" onClick={showModal}>
@@ -52,6 +54,7 @@ export function VampirePage() {
       </OverlayTrigger>
       <OverlayTrigger
         placement="right"
+        delay={OVERLAY_DELAY}
         overlay={<Tooltip>Select a Vampire to be removed</Tooltip>}
       >
         <DropdownButton

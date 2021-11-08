@@ -1,5 +1,6 @@
 import { useAppDispatch } from "app/hooks";
-import { Card, Button } from "react-bootstrap";
+import { OVERLAY_DELAY } from "common/constants";
+import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { eventThunk } from "./diary-thunk";
 
 export interface CreationCardProps {
@@ -50,9 +51,15 @@ export function CreationCard({ vampireId }: CreationCardProps) {
           Memories each with one Experience.
         </Card.Text>
 
-        <Button variant="outline-success" size="sm" onClick={handleStart}>
-          Start
-        </Button>
+        <OverlayTrigger
+          placement="bottom"
+          delay={OVERLAY_DELAY}
+          overlay={<Tooltip>Generate the first Prompt</Tooltip>}
+        >
+          <Button variant="outline-success" size="sm" onClick={handleStart}>
+            Start
+          </Button>
+        </OverlayTrigger>
       </Card.Body>
     </Card>
   );

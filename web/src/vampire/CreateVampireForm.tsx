@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { CreateVampireFormData } from "./vampire-model";
+import { OVERLAY_DELAY } from "common/constants";
 
 export interface CreateVampireFormProps {
   onCancel?: () => void;
@@ -68,6 +69,7 @@ export function CreateVampireForm({
 
       <OverlayTrigger
         placement="bottom"
+        delay={OVERLAY_DELAY}
         overlay={<Tooltip>Discard changes</Tooltip>}
       >
         <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
@@ -77,6 +79,7 @@ export function CreateVampireForm({
 
       <OverlayTrigger
         placement="bottom"
+        delay={OVERLAY_DELAY}
         overlay={<Tooltip>Go to the Diary page</Tooltip>}
       >
         <Button

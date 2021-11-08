@@ -1,4 +1,5 @@
 import { useAppDispatch } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -49,6 +50,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
       <Card.Body>
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
               Mortal Characters die, but immortal Characters do not
@@ -69,6 +71,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
 
         <OverlayTrigger
           placement="bottom"
+          delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
               {isImmortal

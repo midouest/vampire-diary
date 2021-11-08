@@ -1,4 +1,5 @@
 import { useAppDispatch } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import { useState } from "react";
 import {
   Button,
@@ -52,6 +53,7 @@ export function SkillCard({ skill }: SkillCardProps) {
       <Col xs="auto">
         <OverlayTrigger
           placement="right"
+          delay={OVERLAY_DELAY}
           overlay={<Tooltip>Remove this Skill</Tooltip>}
         >
           <Button size="sm" variant="outline-danger" onClick={handleCheck}>
