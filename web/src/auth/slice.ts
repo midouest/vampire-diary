@@ -9,15 +9,21 @@ export interface AuthState {
   token: string | null;
 }
 
-export const INITIAL_AUTH_STATE: AuthState = {
-  token: null,
-};
+export const AUTH_TOKEN_KEY = "vampire-diary-auth-token";
+
+export function getInitialAuthState(): AuthState {
+  return {
+    token: localStorage.getItem(AUTH_TOKEN_KEY),
+  };
+}
 
 export const login = createAsyncThunk(
   "auth/login",
-  (arg: LoginFormData, _thunkApi) => {
+  async (arg: LoginFormData, _thunkApi) => {
     const fetchApi = buildBaseFetch();
-    return loginApi(fetchApi, arg);
+    const res = await loginApi(fetchApi, arg);
+    localStorage.setItem(AUTH_TOKEN_KEY, res.key);
+    return res;
   }
 );
 
@@ -32,15 +38,16 @@ export function authFetchApi(thunkApi: ThunkApi): FetchApi {
 
 export const logout = createAsyncThunk<void, void, {}>(
   "auth/logout",
-  (_arg, thunkApi) => {
+  async (_arg, thunkApi) => {
     const fetchApi = authFetchApi(thunkApi);
-    return logoutApi(fetchApi);
+    await logoutApi(fetchApi);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
   }
 );
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: INITIAL_AUTH_STATE,
+  initialState: getInitialAuthState(),
   reducers: {},
   extraReducers: (builder) =>
     builder

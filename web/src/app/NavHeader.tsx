@@ -1,6 +1,6 @@
 import { logout, selectIsLoggedIn } from "auth/slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export function NavHeader() {
@@ -12,7 +12,7 @@ export function NavHeader() {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container>
-        <Navbar.Brand href="/">Vampire Diary</Navbar.Brand>
+        <Navbar.Brand>Vampire Diary</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
@@ -24,13 +24,14 @@ export function NavHeader() {
           </Nav>
           <Nav className="ms-auto">
             {isLoggedIn ? (
-              <NavDropdown title="Account">
-                <NavDropdown.Item as={Link} to="/settings">
-                  Settings
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
-              </NavDropdown>
+              <>
+                <Nav.Link as={Link} to="/settings">
+                  Account
+                </Nav.Link>
+                <Nav.Link href="#" onClick={onLogout}>
+                  Logout
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/register">
