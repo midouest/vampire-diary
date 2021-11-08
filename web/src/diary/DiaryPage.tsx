@@ -94,7 +94,7 @@ export function DiaryPage() {
   }
 
   return (
-    <Container className="mt-3">
+    <Container className="my-3">
       <Row>
         <Col>
           <Accordion defaultActiveKey="vampire">
