@@ -8,7 +8,7 @@ export interface SkillListProps {
 
 export function SkillList({ skills }: SkillListProps) {
   return (
-    <Form>
+    <Form className="mt-3">
       {skills.map((skill) => (
         <SkillForm key={skill.id} skill={skill} />
       ))}

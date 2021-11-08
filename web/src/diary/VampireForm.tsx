@@ -41,7 +41,7 @@ export function VampireForm({ vampire }: VampireFormProps) {
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup className="mt-3">
         <FormLabel>Description</FormLabel>
         <FormControl
           as={DebounceInput}

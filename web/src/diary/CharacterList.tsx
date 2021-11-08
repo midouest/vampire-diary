@@ -8,7 +8,7 @@ export interface CharacterListProps {
 
 export function CharacterList({ characters }: CharacterListProps) {
   return (
-    <Form>
+    <Form className="mt-3">
       {characters.map((character) => (
         <CharacterForm key={character.id} character={character} />
       ))}

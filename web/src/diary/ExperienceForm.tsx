@@ -23,7 +23,7 @@ export function ExperienceForm({ index, experience }: ExperienceFormProps) {
   };
 
   return (
-    <FormGroup>
+    <FormGroup className="mt-3">
       <FormLabel>Experience {index + 1}</FormLabel>
       <FormControl
         as={DebounceInput}

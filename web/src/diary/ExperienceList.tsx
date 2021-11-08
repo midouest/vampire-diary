@@ -8,7 +8,7 @@ export interface ExperienceListProps {
 
 export function ExperienceList({ experiences }: ExperienceListProps) {
   return (
-    <Form>
+    <Form className="mt-3">
       {experiences.map((experience, index) => (
         <ExperienceForm
           key={experience.id}

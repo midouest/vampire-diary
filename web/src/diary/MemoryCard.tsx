@@ -1,5 +1,11 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { Button, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 
 import { experienceThunk, memoryThunk } from "./diary-thunk";
 import { ExperienceList } from "./ExperienceList";
@@ -26,25 +32,30 @@ export function MemoryCard({ index, memory, experiences }: MemoryCardProps) {
     dispatch(memoryThunk.update({ id: memory.id, diary: diary!.id }));
 
   return (
-    <Card>
+    <Card className="mt-3">
       <Card.Header>Memory {index + 1}</Card.Header>
       <Card.Body>
-        <Button onClick={() => createExperience(memory)}>
-          Create Experience
-        </Button>
-        <Button variant="danger" onClick={handleForget}>
-          Forget Memory
-        </Button>
-        {diary ? (
-          <OverlayTrigger
-            placement="right"
-            overlay={<Tooltip>{diary.description}</Tooltip>}
+        <ButtonGroup size="sm">
+          <Button
+            variant="outline-primary"
+            onClick={() => createExperience(memory)}
           >
-            <Button variant="secondary" onClick={handleAddToDiary}>
-              Add to Diary
-            </Button>
-          </OverlayTrigger>
-        ) : null}
+            Create Experience
+          </Button>
+          <Button variant="outline-danger" onClick={handleForget}>
+            Forget Memory
+          </Button>
+          {diary ? (
+            <OverlayTrigger
+              placement="right"
+              overlay={<Tooltip>{diary.description}</Tooltip>}
+            >
+              <Button variant="outline-secondary" onClick={handleAddToDiary}>
+                Add to Diary
+              </Button>
+            </OverlayTrigger>
+          ) : null}
+        </ButtonGroup>
         <ExperienceList experiences={experiences} />
       </Card.Body>
     </Card>

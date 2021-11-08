@@ -22,7 +22,7 @@ export function SkillForm({ skill }: SkillFormProps) {
   };
 
   return (
-    <FormGroup>
+    <FormGroup className="mt-3">
       <FormLabel>Description</FormLabel>
       <FormControl
         as={DebounceInput}

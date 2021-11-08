@@ -22,7 +22,7 @@ export function CharacterForm({ character }: CharacterFormProps) {
   };
 
   return (
-    <FormGroup>
+    <FormGroup className="mt-3">
       <FormLabel>Description</FormLabel>
       <FormControl
         as={DebounceInput}

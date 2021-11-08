@@ -8,7 +8,7 @@ export interface ResourceListProps {
 
 export function ResourceList({ resources }: ResourceListProps) {
   return (
-    <Form>
+    <Form className="mt-3">
       {resources.map((resource) => (
         <ResourceForm key={resource.id} resource={resource} />
       ))}

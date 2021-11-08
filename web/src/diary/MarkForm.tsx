@@ -22,7 +22,7 @@ export function MarkForm({ mark }: MarkFormProps) {
   };
 
   return (
-    <FormGroup>
+    <FormGroup className="mt-3">
       <FormLabel>Description</FormLabel>
       <FormControl
         as={DebounceInput}

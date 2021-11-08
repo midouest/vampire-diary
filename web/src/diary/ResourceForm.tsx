@@ -22,7 +22,7 @@ export function ResourceForm({ resource }: ResourceFormProps) {
   };
 
   return (
-    <FormGroup>
+    <FormGroup className="mt-3">
       <FormLabel>Description</FormLabel>
       <FormControl
         as={DebounceInput}

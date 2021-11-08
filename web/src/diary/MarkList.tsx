@@ -8,7 +8,7 @@ export interface MarkListProps {
 
 export function MarkList({ marks }: MarkListProps) {
   return (
-    <Form>
+    <Form className="mt-3">
       {marks.map((mark) => (
         <MarkForm key={mark.id} mark={mark} />
       ))}

@@ -107,28 +107,50 @@ export function DiaryPage() {
             <AccordionItem eventKey="memories">
               <AccordionHeader>Memories</AccordionHeader>
               <AccordionBody>
-                <Button onClick={handleCreateMemory}>Create Memory</Button>
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCreateMemory}
+                  size="sm"
+                >
+                  Create Memory
+                </Button>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="skills">
               <AccordionHeader>Skills</AccordionHeader>
               <AccordionBody>
-                <Button onClick={handleCreateSkill}>Create Skill</Button>
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCreateSkill}
+                  size="sm"
+                >
+                  Create Skill
+                </Button>
                 <SkillList skills={skills} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="resources">
               <AccordionHeader>Resources</AccordionHeader>
               <AccordionBody>
-                <Button onClick={handleCreateResource}>Create Resource</Button>
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCreateResource}
+                  size="sm"
+                >
+                  Create Resource
+                </Button>
                 <ResourceList resources={resources} />
               </AccordionBody>
             </AccordionItem>
             <AccordionItem eventKey="characters">
               <AccordionHeader>Characters</AccordionHeader>
               <AccordionBody>
-                <Button onClick={handleCreateCharacter}>
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCreateCharacter}
+                  size="sm"
+                >
                   Create Character
                 </Button>
                 <CharacterList characters={characters} />
@@ -137,7 +159,13 @@ export function DiaryPage() {
             <AccordionItem eventKey="marks">
               <AccordionHeader>Marks</AccordionHeader>
               <AccordionBody>
-                <Button onClick={handleCreateMark}>Create Mark</Button>
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCreateMark}
+                  size="sm"
+                >
+                  Create Mark
+                </Button>
                 <MarkList marks={marks} />
               </AccordionBody>
             </AccordionItem>
