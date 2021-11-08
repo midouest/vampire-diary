@@ -339,15 +339,19 @@ export const selectDiary = (state: RootState) => {
   );
 };
 
-export const selectIsDiaryFull = (state: RootState) => {
+export const selectDiaryMemories = (state: RootState) => {
   const diary = selectDiary(state);
-  return (
-    diary !== null &&
-    memorySelectors
-      .selectAll(state)
-      .filter((memory) => memory.diary === diary.id).length >=
-      DIARY_MEMORY_CAPACITY
-  );
+  if (diary === null) {
+    return [];
+  }
+
+  return memorySelectors
+    .selectAll(state)
+    .filter((memory) => memory.diary === diary.id);
+};
+
+export const selectIsDiaryFull = (state: RootState) => {
+  return selectDiaryMemories(state).length >= DIARY_MEMORY_CAPACITY;
 };
 
 export const characterSelectors = characterAdapter.getSelectors(
