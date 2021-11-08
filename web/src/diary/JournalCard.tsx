@@ -6,6 +6,8 @@ import {
   Card,
   FormControl,
   FormGroup,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-autosize-textarea";
@@ -129,14 +131,30 @@ export function JournalCard({
         </ButtonGroup>
 
         {isExhausted && !isGameOver ? (
-          <Button
-            size="sm"
-            variant="outline-danger"
-            className="ms-3 mt-3"
-            onClick={handleDead}
+          <OverlayTrigger
+            placement="bottom"
+            overlay={
+              <Tooltip>
+                <p>
+                  You die if Prompt forces you to check a Skill or lose a
+                  Resource but you have none.
+                </p>
+                <p>
+                  Describe how your Vampire dies and then click this button to
+                  end the game.
+                </p>
+              </Tooltip>
+            }
           >
-            Dead
-          </Button>
+            <Button
+              size="sm"
+              variant="outline-danger"
+              className="ms-3 mt-3"
+              onClick={handleDead}
+            >
+              Dead
+            </Button>
+          </OverlayTrigger>
         ) : null}
       </Card.Body>
     </Card>
