@@ -80,6 +80,7 @@ export function CreateVampireForm({
           Cancel
         </Button>
         <Button
+          variant="success"
           className="mt-3 ms-3"
           disabled={!isFormComplete()}
           onClick={() => {

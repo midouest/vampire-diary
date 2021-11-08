@@ -35,7 +35,7 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
       <Card.Header>Experiences</Card.Header>
       <Card.Body>
         <ButtonGroup size="sm">
-          <Button variant="outline-primary" onClick={handleCreate}>
+          <Button variant="outline-success" onClick={handleCreate}>
             Create
           </Button>
           <Button variant="outline-danger" onClick={handleForget}>

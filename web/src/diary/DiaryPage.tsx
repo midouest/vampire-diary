@@ -108,7 +108,7 @@ export function DiaryPage() {
               <AccordionHeader>Memories</AccordionHeader>
               <AccordionBody>
                 <Button
-                  variant="outline-primary"
+                  variant="outline-success"
                   onClick={handleCreateMemory}
                   size="sm"
                 >
@@ -121,7 +121,7 @@ export function DiaryPage() {
               <AccordionHeader>Skills</AccordionHeader>
               <AccordionBody>
                 <Button
-                  variant="outline-primary"
+                  variant="outline-success"
                   onClick={handleCreateSkill}
                   size="sm"
                 >
@@ -134,7 +134,7 @@ export function DiaryPage() {
               <AccordionHeader>Resources</AccordionHeader>
               <AccordionBody>
                 <Button
-                  variant="outline-primary"
+                  variant="outline-success"
                   onClick={handleCreateResource}
                   size="sm"
                 >
@@ -147,7 +147,7 @@ export function DiaryPage() {
               <AccordionHeader>Characters</AccordionHeader>
               <AccordionBody>
                 <Button
-                  variant="outline-primary"
+                  variant="outline-success"
                   onClick={handleCreateCharacter}
                   size="sm"
                 >
@@ -160,7 +160,7 @@ export function DiaryPage() {
               <AccordionHeader>Marks</AccordionHeader>
               <AccordionBody>
                 <Button
-                  variant="outline-primary"
+                  variant="outline-success"
                   onClick={handleCreateMark}
                   size="sm"
                 >

@@ -23,8 +23,8 @@ export function VampirePage() {
   };
 
   return (
-    <Container>
-      <Button className="mb-3" onClick={showModal}>
+    <Container className="mt-3">
+      <Button variant="success" className="mb-3" onClick={showModal}>
         Create
       </Button>
       <VampireList />
