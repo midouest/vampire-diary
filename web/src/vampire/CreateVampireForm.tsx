@@ -2,7 +2,6 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { promptGroupSelectors, queryPromptGroups } from "./prompt-group-slice";
 import { useEffect, useState } from "react";
 import {
-  Form,
   FormControl,
   FormGroup,
   FormLabel,
@@ -36,65 +35,63 @@ export function CreateVampireForm({
 
   return (
     <Container className="py-3">
-      <Form>
-        <h2>Create Vampire</h2>
+      <h2>Create Vampire</h2>
 
-        <FormGroup>
-          <FormLabel>Name</FormLabel>
-          <FormControl
-            placeholder="Enter a name..."
-            onChange={(event) => setName(event.target.value)}
-          />
-        </FormGroup>
+      <FormGroup>
+        <FormLabel>Name</FormLabel>
+        <FormControl
+          placeholder="Enter a name..."
+          onChange={(event) => setName(event.target.value)}
+        />
+      </FormGroup>
 
-        <FormGroup className="mt-3">
-          <FormLabel>Description</FormLabel>
-          <FormControl
-            as="textarea"
-            placeholder="Enter a description..."
-            onChange={(event) => setDescription(event.target.value)}
-          />
-        </FormGroup>
+      <FormGroup className="mt-3">
+        <FormLabel>Description</FormLabel>
+        <FormControl
+          as="textarea"
+          placeholder="Enter a description..."
+          onChange={(event) => setDescription(event.target.value)}
+        />
+      </FormGroup>
 
-        <FormGroup className="mt-3">
-          <FormLabel>Prompt Group</FormLabel>
-          <FormSelect
-            onChange={(event) => {
-              let promptGroup = null;
-              if (event.target.value !== "") {
-                promptGroup = parseInt(event.target.value);
-              }
-              setPromptGroup(promptGroup);
-            }}
-          >
-            <option value="">Select a prompt group...</option>
-            {allPromptGroups.map((promptGroup) => (
-              <option key={promptGroup.id} value={promptGroup.id}>
-                {promptGroup.name}
-              </option>
-            ))}
-          </FormSelect>
-        </FormGroup>
-
-        <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button
-          variant="outline-success"
-          className="mt-3 ms-3"
-          disabled={!isFormComplete()}
-          onClick={() => {
-            onSubmit &&
-              onSubmit({
-                name: name as string,
-                description: description as string,
-                promptGroup: promptGroup as number,
-              });
+      <FormGroup className="mt-3">
+        <FormLabel>Prompt Group</FormLabel>
+        <FormSelect
+          onChange={(event) => {
+            let promptGroup = null;
+            if (event.target.value !== "") {
+              promptGroup = parseInt(event.target.value);
+            }
+            setPromptGroup(promptGroup);
           }}
         >
-          Create
-        </Button>
-      </Form>
+          <option value="">Select a prompt group...</option>
+          {allPromptGroups.map((promptGroup) => (
+            <option key={promptGroup.id} value={promptGroup.id}>
+              {promptGroup.name}
+            </option>
+          ))}
+        </FormSelect>
+      </FormGroup>
+
+      <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
+        Cancel
+      </Button>
+      <Button
+        variant="outline-success"
+        className="mt-3 ms-3"
+        disabled={!isFormComplete()}
+        onClick={() => {
+          onSubmit &&
+            onSubmit({
+              name: name as string,
+              description: description as string,
+              promptGroup: promptGroup as number,
+            });
+        }}
+      >
+        Create
+      </Button>
     </Container>
   );
 }

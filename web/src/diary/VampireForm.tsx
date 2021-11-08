@@ -1,6 +1,6 @@
 import { useAppDispatch } from "app/hooks";
 import React, { useState } from "react";
-import { Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import { updateVampire } from "vampire/vampire-slice";
 import { Vampire } from "../vampire/vampire-model";
@@ -30,7 +30,7 @@ export function VampireForm({ vampire }: VampireFormProps) {
   };
 
   return (
-    <Form>
+    <>
       <FormGroup>
         <FormLabel>Name</FormLabel>
         <FormControl
@@ -53,6 +53,6 @@ export function VampireForm({ vampire }: VampireFormProps) {
           onChange={handleDescriptionChange}
         />
       </FormGroup>
-    </Form>
+    </>
   );
 }

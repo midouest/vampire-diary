@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   Button,
   Card,
-  Form,
   FormControl,
   FormGroup,
   FormLabel,
@@ -82,20 +81,18 @@ export function JournalCard({
           {currentEvent?.prompt}
         </Card.Subtitle>
 
-        <Form>
-          <FormGroup>
-            <FormLabel>Entry</FormLabel>
-            <FormControl
-              size="sm"
-              as={DebounceInput}
-              debounceTimeout={1000}
-              placeholder="Describe what happens..."
-              value={description}
-              onChange={handleDescriptionChange}
-              element="textarea"
-            />
-          </FormGroup>
-        </Form>
+        <FormGroup>
+          <FormLabel>Entry</FormLabel>
+          <FormControl
+            size="sm"
+            as={DebounceInput}
+            debounceTimeout={1000}
+            placeholder="Describe what happens..."
+            value={description}
+            onChange={handleDescriptionChange}
+            element="textarea"
+          />
+        </FormGroup>
 
         <ButtonGroup size="sm" className="mt-3">
           <Button
