@@ -10,7 +10,7 @@ export function NavHeader() {
   const onLogout = () => dispatch(logout());
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand href="/">Vampire Diary</Navbar.Brand>
         <Navbar.Toggle />

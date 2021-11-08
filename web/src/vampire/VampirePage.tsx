@@ -23,7 +23,7 @@ export function VampirePage() {
   };
 
   return (
-    <Container className="mt-3">
+    <Container>
       <Button className="mb-3" onClick={showModal}>
         Create
       </Button>
