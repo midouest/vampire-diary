@@ -56,7 +56,7 @@ export function CreationCard({ vampireId }: CreationCardProps) {
           delay={OVERLAY_DELAY}
           overlay={<Tooltip>Generate the first Prompt</Tooltip>}
         >
-          <Button variant="outline-success" size="sm" onClick={handleStart}>
+          <Button variant="outline-success" onClick={handleStart}>
             Start
           </Button>
         </OverlayTrigger>

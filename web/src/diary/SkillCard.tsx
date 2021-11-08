@@ -39,7 +39,6 @@ export function SkillCard({ skill }: SkillCardProps) {
       <Col>
         <FormGroup>
           <FormControl
-            size="sm"
             as={DebounceInput}
             element={TextareaAutosize as any}
             forceNotifyByEnter={false}
@@ -56,7 +55,7 @@ export function SkillCard({ skill }: SkillCardProps) {
           delay={OVERLAY_DELAY}
           overlay={<Tooltip>Remove this Skill</Tooltip>}
         >
-          <Button size="sm" variant="outline-danger" onClick={handleCheck}>
+          <Button variant="outline-danger" onClick={handleCheck}>
             Check
           </Button>
         </OverlayTrigger>

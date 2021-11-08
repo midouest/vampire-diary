@@ -66,7 +66,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           <span className="d-inline-block">
             <ToggleButton
               type="checkbox"
-              size="sm"
               variant="outline-secondary"
               value="1"
               disabled={hasOtherDiary}
@@ -84,7 +83,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           overlay={<Tooltip>Remove this Resource</Tooltip>}
         >
           <Button
-            size="sm"
             variant="outline-danger"
             className="ms-3"
             onClick={handleLost}
@@ -95,7 +93,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
         <FormGroup>
           <FormControl
-            size="sm"
             className="mt-3"
             as={DebounceInput}
             element={TextareaAutosize as any}

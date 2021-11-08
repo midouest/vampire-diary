@@ -80,66 +80,32 @@ export function JournalCard({
     <Card>
       <Card.Header>Prompt {currentIndex + 1}</Card.Header>
       <Card.Body>
-        <Card.Text>{currentEvent?.prompt}</Card.Text>
-        <Card.Text>Create a new Experience.</Card.Text>
-
-        <FormGroup>
-          <FormControl
-            size="sm"
-            as={DebounceInput}
-            forceNotifyByEnter={false}
-            debounceTimeout={1000}
-            placeholder="Describe what happens..."
-            value={description}
-            onChange={handleDescriptionChange}
-            element={TextareaAutosize as any}
-          />
-        </FormGroup>
-
-        <ButtonGroup size="sm" className="mt-3">
-          <OverlayTrigger
-            placement="bottom"
-            delay={OVERLAY_DELAY}
-            overlay={<Tooltip>Go to the first Prompt</Tooltip>}
+        <ButtonGroup className="mb-3">
+          <Button
+            variant="outline-secondary"
+            disabled={isFirstEvent}
+            onClick={handleFirst}
           >
-            <Button
-              variant="outline-secondary"
-              disabled={isFirstEvent}
-              onClick={handleFirst}
-            >
-              First
-            </Button>
-          </OverlayTrigger>
+            First
+          </Button>
 
-          <OverlayTrigger
-            placement="bottom"
-            delay={OVERLAY_DELAY}
-            overlay={<Tooltip>Go to the last Prompt</Tooltip>}
+          <Button
+            variant="outline-secondary"
+            disabled={isLastEvent}
+            onClick={handleLast}
           >
-            <Button
-              variant="outline-secondary"
-              disabled={isLastEvent}
-              onClick={handleLast}
-            >
-              Last
-            </Button>
-          </OverlayTrigger>
+            Last
+          </Button>
         </ButtonGroup>
 
-        <ButtonGroup size="sm" className="ms-3 mt-3">
-          <OverlayTrigger
-            placement="bottom"
-            delay={OVERLAY_DELAY}
-            overlay={<Tooltip>Go to the previous Prompt</Tooltip>}
+        <ButtonGroup className="ms-3 mb-3">
+          <Button
+            variant="outline-secondary"
+            disabled={!previousEvent}
+            onClick={handlePrev}
           >
-            <Button
-              variant="outline-secondary"
-              disabled={!previousEvent}
-              onClick={handlePrev}
-            >
-              Previous
-            </Button>
-          </OverlayTrigger>
+            Previous
+          </Button>
 
           <OverlayTrigger
             placement="bottom"
@@ -169,7 +135,7 @@ export function JournalCard({
             overlay={
               <Tooltip>
                 <p>
-                  You die if Prompt forces you to check a Skill or lose a
+                  You die if a Prompt forces you to check a Skill or lose a
                   Resource but you have none.
                 </p>
                 <p>
@@ -180,15 +146,28 @@ export function JournalCard({
             }
           >
             <Button
-              size="sm"
               variant="outline-danger"
-              className="ms-3 mt-3"
+              className="ms-3 mb-3"
               onClick={handleDead}
             >
               Dead
             </Button>
           </OverlayTrigger>
         ) : null}
+        <Card.Text>{currentEvent?.prompt}</Card.Text>
+        <Card.Text>Create a new Experience.</Card.Text>
+
+        <FormGroup>
+          <FormControl
+            as={DebounceInput}
+            forceNotifyByEnter={false}
+            debounceTimeout={1000}
+            placeholder="Describe what happens..."
+            value={description}
+            onChange={handleDescriptionChange}
+            element={TextareaAutosize as any}
+          />
+        </FormGroup>
       </Card.Body>
     </Card>
   );

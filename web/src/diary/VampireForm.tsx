@@ -40,7 +40,6 @@ export function VampireForm({ vampire }: VampireFormProps) {
       <FormGroup>
         <FormLabel>Name</FormLabel>
         <FormControl
-          size="sm"
           as={DebounceInput}
           forceNotifyByEnter={false}
           debounceTimeout={1000}
@@ -53,7 +52,6 @@ export function VampireForm({ vampire }: VampireFormProps) {
       <FormGroup className="mt-3">
         <FormLabel>Description</FormLabel>
         <FormControl
-          size="sm"
           as={DebounceInput}
           forceNotifyByEnter={false}
           element={TextareaAutosize as any}

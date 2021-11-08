@@ -47,7 +47,6 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
           <span className="d-inline-block">
             <Button
               disabled={hasMaxExperiences}
-              size="sm"
               variant="outline-success"
               onClick={handleCreate}
             >
@@ -61,7 +60,6 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
           overlay={<Tooltip>Remove this Memory</Tooltip>}
         >
           <Button
-            size="sm"
             className="ms-3"
             variant="outline-danger"
             onClick={handleForget}
@@ -87,7 +85,6 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
             <Button
               disabled={diary === null || isDiaryFull}
               variant="outline-secondary"
-              size="sm"
               className="ms-3"
               onClick={handleDiary}
             >

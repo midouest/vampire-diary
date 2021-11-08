@@ -25,7 +25,6 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
   return (
     <FormGroup className="mt-3">
       <FormControl
-        size="sm"
         as={DebounceInput}
         forceNotifyByEnter={false}
         debounceTimeout={1000}

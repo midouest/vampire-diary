@@ -129,7 +129,6 @@ export function DiaryPage() {
                       disabled={hasMaxMemories}
                       variant="outline-success"
                       onClick={handleCreateMemory}
-                      size="sm"
                     >
                       Create
                     </Button>
@@ -146,11 +145,7 @@ export function DiaryPage() {
                   delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Skill</Tooltip>}
                 >
-                  <Button
-                    variant="outline-success"
-                    onClick={handleCreateSkill}
-                    size="sm"
-                  >
+                  <Button variant="outline-success" onClick={handleCreateSkill}>
                     Create
                   </Button>
                 </OverlayTrigger>
@@ -168,7 +163,6 @@ export function DiaryPage() {
                   <Button
                     variant="outline-success"
                     onClick={handleCreateResource}
-                    size="sm"
                   >
                     Create
                   </Button>
@@ -187,7 +181,6 @@ export function DiaryPage() {
                   <Button
                     variant="outline-success"
                     onClick={handleCreateCharacter}
-                    size="sm"
                   >
                     Create
                   </Button>
@@ -203,11 +196,7 @@ export function DiaryPage() {
                   delay={OVERLAY_DELAY}
                   overlay={<Tooltip>Add a new Mark</Tooltip>}
                 >
-                  <Button
-                    variant="outline-success"
-                    onClick={handleCreateMark}
-                    size="sm"
-                  >
+                  <Button variant="outline-success" onClick={handleCreateMark}>
                     Create
                   </Button>
                 </OverlayTrigger>

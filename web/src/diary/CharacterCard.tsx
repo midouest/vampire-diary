@@ -59,7 +59,6 @@ export function CharacterCard({ character }: CharacterCardProps) {
         >
           <ToggleButton
             type="checkbox"
-            size="sm"
             variant="outline-secondary"
             value="1"
             checked={isImmortal}
@@ -82,7 +81,6 @@ export function CharacterCard({ character }: CharacterCardProps) {
         >
           <span className="d-inline-block">
             <Button
-              size="sm"
               variant="outline-danger"
               value="2"
               className="ms-3"
@@ -95,7 +93,6 @@ export function CharacterCard({ character }: CharacterCardProps) {
         </OverlayTrigger>
         <FormGroup className="mt-3">
           <FormControl
-            size="sm"
             as={DebounceInput}
             forceNotifyByEnter={false}
             debounceTimeout={1000}

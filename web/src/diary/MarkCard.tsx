@@ -25,7 +25,6 @@ export function MarkCard({ mark }: MarkFormProps) {
   return (
     <FormGroup className="mt-3">
       <FormControl
-        size="sm"
         as={DebounceInput}
         element={TextareaAutosize as any}
         forceNotifyByEnter={false}
