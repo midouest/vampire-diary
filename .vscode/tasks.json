@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "web/",
+      "problemMatcher": [],
+      "label": "npm: start - web",
+      "detail": "react-scripts start",
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
