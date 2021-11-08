@@ -1,5 +1,5 @@
 import { useAppDispatch } from "app/hooks";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { eventThunk } from "./diary-thunk";
 
 export interface CreationCardProps {
@@ -71,9 +71,9 @@ export function CreationCard({ vampireId }: CreationCardProps) {
           Experience in each of their five Memories.
         </Card.Text>
 
-        <Card.Link href="#" onClick={handleStart}>
+        <Button variant="outline-success" size="sm" onClick={handleStart}>
           Start
-        </Card.Link>
+        </Button>
       </Card.Body>
     </Card>
   );

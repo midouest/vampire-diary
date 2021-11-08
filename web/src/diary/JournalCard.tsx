@@ -1,6 +1,14 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import React, { useEffect, useState } from "react";
-import { Card, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import {
+  ButtonGroup,
+  Button,
+  Card,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+} from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import { Event } from "./diary-model";
 import {
@@ -82,29 +90,40 @@ export function JournalCard({
           </FormGroup>
         </Form>
 
-        {isFirstEvent ? null : (
-          <Card.Link href="#" onClick={handleFirst}>
-            First
-          </Card.Link>
-        )}
-
-        {previousEvent ? (
-          <Card.Link href="#" onClick={handlePrev}>
+        <ButtonGroup size="sm" className="mt-3">
+          <Button
+            variant="outline-secondary"
+            disabled={!previousEvent}
+            onClick={handlePrev}
+          >
             Previous
-          </Card.Link>
-        ) : null}
+          </Button>
 
-        {isGameOver ? null : (
-          <Card.Link href="#" onClick={handleNext}>
+          <Button
+            variant={isLastEvent ? "outline-success" : "outline-secondary"}
+            disabled={isGameOver}
+            onClick={handleNext}
+          >
             Next
-          </Card.Link>
-        )}
+          </Button>
+        </ButtonGroup>
 
-        {isLastEvent ? null : (
-          <Card.Link href="#" onClick={handleLast}>
+        <ButtonGroup size="sm" className="ms-3 mt-3">
+          <Button
+            variant="outline-secondary"
+            disabled={isFirstEvent}
+            onClick={handleFirst}
+          >
+            First
+          </Button>
+          <Button
+            variant="outline-secondary"
+            disabled={isLastEvent}
+            onClick={handleLast}
+          >
             Last
-          </Card.Link>
-        )}
+          </Button>
+        </ButtonGroup>
       </Card.Body>
     </Card>
   );
