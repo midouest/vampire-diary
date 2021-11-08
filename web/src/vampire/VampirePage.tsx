@@ -51,7 +51,7 @@ export function VampirePage() {
         </Button>
       </OverlayTrigger>
       <OverlayTrigger
-        placement="bottom"
+        placement="right"
         overlay={<Tooltip>Select a Vampire to be removed</Tooltip>}
       >
         <DropdownButton
