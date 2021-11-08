@@ -2,6 +2,7 @@ export interface Vampire {
   id: number;
   name: string;
   description: string;
+  isDead: boolean;
 }
 
 export interface CreateVampireFormData {

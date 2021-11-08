@@ -1,15 +1,28 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
-import { Container, Row, Button } from "react-bootstrap";
+import {
+  Button,
+  Accordion,
+  Row,
+  Col,
+  Spinner,
+  Container,
+} from "react-bootstrap";
+import AccordionBody from "react-bootstrap/esm/AccordionBody";
+import AccordionHeader from "react-bootstrap/esm/AccordionHeader";
+import AccordionItem from "react-bootstrap/esm/AccordionItem";
 import { useParams } from "react-router";
 import { CharacterList } from "./CharacterList";
+import { CreationCard } from "./CreationCard";
 import {
   characterSelectors,
   experienceSelectors,
   markSelectors,
-  memorySelectors,
   resourceSelectors,
+  selectCurrentEvent,
+  selectCurrentEventIndex,
   selectVampire,
+  selectVampireMemories,
   skillSelectors,
 } from "./diary-slice";
 import {
@@ -20,6 +33,7 @@ import {
   retrieveDeepVampire,
   skillThunk,
 } from "./diary-thunk";
+import { JournalCard } from "./JournalCard";
 import { MarkList } from "./MarkList";
 import { MemoryList } from "./MemoryList";
 import { ResourceList } from "./ResourceList";
@@ -33,7 +47,10 @@ export function DiaryPage() {
   const dispatch = useAppDispatch();
 
   const vampire = useAppSelector(selectVampire);
-  const memories = useAppSelector(memorySelectors.selectAll);
+  const currentIndex = useAppSelector(selectCurrentEventIndex);
+  const currentEvent = useAppSelector(selectCurrentEvent);
+
+  const memories = useAppSelector(selectVampireMemories);
   const experiences = useAppSelector(experienceSelectors.selectAll);
   const skills = useAppSelector(skillSelectors.selectAll);
   const characters = useAppSelector(characterSelectors.selectAll);
@@ -73,39 +90,70 @@ export function DiaryPage() {
     dispatch(markThunk.create({ vampire: vampireId, description: "" }));
 
   if (!vampire) {
-    return <></>;
+    return <Spinner animation="border" />;
   }
 
   return (
-    <Container>
+    <Container className="mt-3">
       <Row>
-        <h2>Vampire</h2>
-        <VampireForm vampire={vampire} />
-      </Row>
-      <Row>
-        <h2>Memories</h2>
-        <Button onClick={handleCreateMemory}>Create Memory</Button>
-        <MemoryList memories={memories} experiences={experiences} />
-      </Row>
-      <Row>
-        <h2>Skills</h2>
-        <Button onClick={handleCreateSkill}>Create Skill</Button>
-        <SkillList skills={skills} />
-      </Row>
-      <Row>
-        <h2>Resources</h2>
-        <Button onClick={handleCreateResource}>Create Resource</Button>
-        <ResourceList resources={resources} />
-      </Row>
-      <Row>
-        <h2>Characters</h2>
-        <Button onClick={handleCreateCharacter}>Create Character</Button>
-        <CharacterList characters={characters} />
-      </Row>
-      <Row>
-        <h2>Marks</h2>
-        <Button onClick={handleCreateMark}>Create Mark</Button>
-        <MarkList marks={marks} />
+        <Col>
+          <Accordion defaultActiveKey="vampire">
+            <AccordionItem eventKey="vampire">
+              <AccordionHeader>Vampire</AccordionHeader>
+              <AccordionBody>
+                <VampireForm vampire={vampire} />
+              </AccordionBody>
+            </AccordionItem>
+            <AccordionItem eventKey="memories">
+              <AccordionHeader>Memories</AccordionHeader>
+              <AccordionBody>
+                <Button onClick={handleCreateMemory}>Create Memory</Button>
+                <MemoryList memories={memories} experiences={experiences} />
+              </AccordionBody>
+            </AccordionItem>
+            <AccordionItem eventKey="skills">
+              <AccordionHeader>Skills</AccordionHeader>
+              <AccordionBody>
+                <Button onClick={handleCreateSkill}>Create Skill</Button>
+                <SkillList skills={skills} />
+              </AccordionBody>
+            </AccordionItem>
+            <AccordionItem eventKey="resources">
+              <AccordionHeader>Resources</AccordionHeader>
+              <AccordionBody>
+                <Button onClick={handleCreateResource}>Create Resource</Button>
+                <ResourceList resources={resources} />
+              </AccordionBody>
+            </AccordionItem>
+            <AccordionItem eventKey="characters">
+              <AccordionHeader>Characters</AccordionHeader>
+              <AccordionBody>
+                <Button onClick={handleCreateCharacter}>
+                  Create Character
+                </Button>
+                <CharacterList characters={characters} />
+              </AccordionBody>
+            </AccordionItem>
+            <AccordionItem eventKey="marks">
+              <AccordionHeader>Marks</AccordionHeader>
+              <AccordionBody>
+                <Button onClick={handleCreateMark}>Create Mark</Button>
+                <MarkList marks={marks} />
+              </AccordionBody>
+            </AccordionItem>
+          </Accordion>
+        </Col>
+        <Col>
+          {currentEvent && currentIndex !== undefined ? (
+            <JournalCard
+              vampireId={vampireId}
+              currentIndex={currentIndex}
+              currentEvent={currentEvent}
+            />
+          ) : (
+            <CreationCard vampireId={vampireId} />
+          )}
+        </Col>
       </Row>
     </Container>
   );
