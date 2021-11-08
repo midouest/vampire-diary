@@ -13,45 +13,41 @@ import { Experience, Memory } from "./diary-model";
 import { selectDiary } from "./diary-slice";
 
 export interface MemoryCardProps {
-  index: number;
   memory: Memory;
   experiences: Experience[];
 }
 
-export function MemoryCard({ index, memory, experiences }: MemoryCardProps) {
+export function MemoryCard({ memory, experiences }: MemoryCardProps) {
   const dispatch = useAppDispatch();
   const diary = useAppSelector(selectDiary);
 
-  const createExperience = (memory: Memory) =>
+  const handleCreate = () =>
     dispatch(experienceThunk.create({ memory: memory.id, description: "" }));
 
   const handleForget = () =>
     dispatch(memoryThunk.update({ id: memory.id, isForgotten: true }));
 
-  const handleAddToDiary = () =>
+  const handleDiary = () =>
     dispatch(memoryThunk.update({ id: memory.id, diary: diary!.id }));
 
   return (
     <Card className="mt-3">
-      <Card.Header>Memory {index + 1}</Card.Header>
+      <Card.Header>Experiences</Card.Header>
       <Card.Body>
         <ButtonGroup size="sm">
-          <Button
-            variant="outline-primary"
-            onClick={() => createExperience(memory)}
-          >
-            Create Experience
+          <Button variant="outline-primary" onClick={handleCreate}>
+            Create
           </Button>
           <Button variant="outline-danger" onClick={handleForget}>
-            Forget Memory
+            Forget
           </Button>
           {diary ? (
             <OverlayTrigger
               placement="right"
               overlay={<Tooltip>{diary.description}</Tooltip>}
             >
-              <Button variant="outline-secondary" onClick={handleAddToDiary}>
-                Add to Diary
+              <Button variant="outline-secondary" onClick={handleDiary}>
+                Diary
               </Button>
             </OverlayTrigger>
           ) : null}

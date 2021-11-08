@@ -6,11 +6,10 @@ import { Experience } from "./diary-model";
 import { experienceThunk } from "./diary-thunk";
 
 export interface ExperienceFormProps {
-  index: number;
   experience: Experience;
 }
 
-export function ExperienceForm({ index, experience }: ExperienceFormProps) {
+export function ExperienceForm({ experience }: ExperienceFormProps) {
   const dispatch = useAppDispatch();
   const [description, setDescription] = useState(experience.description);
 
@@ -24,7 +23,7 @@ export function ExperienceForm({ index, experience }: ExperienceFormProps) {
 
   return (
     <FormGroup className="mt-3">
-      <FormLabel>Experience {index + 1}</FormLabel>
+      <FormLabel>Description</FormLabel>
       <FormControl
         as={DebounceInput}
         debounceTimeout={1000}

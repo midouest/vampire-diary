@@ -112,7 +112,7 @@ export function DiaryPage() {
                   onClick={handleCreateMemory}
                   size="sm"
                 >
-                  Create Memory
+                  Create
                 </Button>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>
@@ -125,7 +125,7 @@ export function DiaryPage() {
                   onClick={handleCreateSkill}
                   size="sm"
                 >
-                  Create Skill
+                  Create
                 </Button>
                 <SkillList skills={skills} />
               </AccordionBody>
@@ -138,7 +138,7 @@ export function DiaryPage() {
                   onClick={handleCreateResource}
                   size="sm"
                 >
-                  Create Resource
+                  Create
                 </Button>
                 <ResourceList resources={resources} />
               </AccordionBody>
@@ -151,7 +151,7 @@ export function DiaryPage() {
                   onClick={handleCreateCharacter}
                   size="sm"
                 >
-                  Create Character
+                  Create
                 </Button>
                 <CharacterList characters={characters} />
               </AccordionBody>
@@ -164,7 +164,7 @@ export function DiaryPage() {
                   onClick={handleCreateMark}
                   size="sm"
                 >
-                  Create Mark
+                  Create
                 </Button>
                 <MarkList marks={marks} />
               </AccordionBody>

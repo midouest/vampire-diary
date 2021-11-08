@@ -19,10 +19,9 @@ export function MemoryList({ memories, experiences }: MemoryListProps) {
 
   return (
     <>
-      {memories.map((memory, index) => (
+      {memories.map((memory) => (
         <MemoryCard
           key={memory.id}
-          index={index}
           memory={memory}
           experiences={experienceMap.get(memory.id) ?? []}
         />
