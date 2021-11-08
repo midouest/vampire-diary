@@ -1,9 +1,18 @@
 import { useAppDispatch } from "app/hooks";
+import { OVERLAY_DELAY } from "common/constants";
 import React, { useEffect, useState } from "react";
-import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import {
+  Button,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
+import { useNavigate } from "react-router";
 import TextareaAutosize from "react-textarea-autosize";
-import { updateVampire } from "vampire/vampire-slice";
+import { removeVampire, updateVampire } from "vampire/vampire-slice";
 import { Vampire } from "../vampire/vampire-model";
 
 export interface VampireFormProps {
@@ -12,6 +21,7 @@ export interface VampireFormProps {
 
 export function VampireForm({ vampire }: VampireFormProps) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [name, setName] = useState(vampire.name);
   const [description, setDescription] = useState(vampire.description);
@@ -33,6 +43,11 @@ export function VampireForm({ vampire }: VampireFormProps) {
     const value = event.target.value;
     setDescription(value);
     dispatch(updateVampire({ id: vampire.id, description: value }));
+  };
+
+  const handleDelete = async () => {
+    await dispatch(removeVampire(vampire.id));
+    navigate("/vampires");
   };
 
   return (
@@ -61,6 +76,20 @@ export function VampireForm({ vampire }: VampireFormProps) {
           onChange={handleDescriptionChange}
         />
       </FormGroup>
+
+      <OverlayTrigger
+        placement="bottom"
+        delay={OVERLAY_DELAY}
+        overlay={<Tooltip>Remove this Vampire</Tooltip>}
+      >
+        <Button
+          variant="outline-danger"
+          className="mt-3"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </OverlayTrigger>
     </>
   );
 }
