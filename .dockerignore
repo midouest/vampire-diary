@@ -1,0 +1,13 @@
+.vscode/
+.git/
+.dockerignore
+.env*
+**/.gitignore
+.nvmrc
+Dockerfile
+docker-compose*.yaml
+prompts.txt
+staticfiles/
+web/build/
+web/node_modules/
+**/__pycache__/

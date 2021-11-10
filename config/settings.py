@@ -92,12 +92,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    "default": env.dj_db_url(
-        "DATABASE_URL", "postgres://postgres:postgres@localhost:5432/vampire-diary"
-    )
-}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
 CACHES = {
     "default": {

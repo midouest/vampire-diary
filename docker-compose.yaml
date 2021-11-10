@@ -1,0 +1,30 @@
+services:
+  web:
+    build:
+      context: .
+      target: development
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    restart: always
+    environment:
+      SECRET_KEY: django-insecure-&g%g8wmipi+h651j74bkz5kozrns!!6@(!&c@lc37%wks!g4+y
+      DEBUG: true
+      ALLOWED_HOSTS: localhost
+      DATABASE_URL: postgres://postgres:postgres@db:5432/vampire-diary
+
+  db:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: vampire-diary
+
+volumes:
+  db_data:
