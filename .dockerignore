@@ -7,7 +7,5 @@
 Dockerfile
 docker-compose*.yaml
 prompts.txt
-staticfiles/
-web/build/
 web/node_modules/
 **/__pycache__/
