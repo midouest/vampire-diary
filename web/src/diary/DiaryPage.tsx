@@ -22,7 +22,6 @@ import {
   experienceSelectors,
   markSelectors,
   selectCurrentEvent,
-  selectCurrentEventIndex,
   selectSkills,
   selectVampire,
   selectMemories,
@@ -51,7 +50,6 @@ export function DiaryPage() {
   const dispatch = useAppDispatch();
 
   const vampire = useAppSelector(selectVampire);
-  const currentIndex = useAppSelector(selectCurrentEventIndex);
   const currentEvent = useAppSelector(selectCurrentEvent);
 
   const memories = useAppSelector(selectMemories);
@@ -206,12 +204,8 @@ export function DiaryPage() {
           </Accordion>
         </Col>
         <Col md>
-          {currentEvent && currentIndex !== undefined ? (
-            <JournalCard
-              vampireId={vampireId}
-              currentIndex={currentIndex}
-              currentEvent={currentEvent}
-            />
+          {currentEvent ? (
+            <JournalCard vampireId={vampireId} currentEvent={currentEvent} />
           ) : (
             <CreationCard vampireId={vampireId} />
           )}

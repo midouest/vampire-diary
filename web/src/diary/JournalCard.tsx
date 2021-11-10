@@ -29,15 +29,10 @@ import { eventThunk } from "./diary-thunk";
 
 export interface JournalCardProps {
   vampireId: number;
-  currentIndex: number;
   currentEvent: Event;
 }
 
-export function JournalCard({
-  vampireId,
-  currentIndex,
-  currentEvent,
-}: JournalCardProps) {
+export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
   const dispatch = useAppDispatch();
   const isFirstEvent = useAppSelector(selectIsFirstEvent);
   const isLastEvent = useAppSelector(selectIsLastEvent);
@@ -78,7 +73,10 @@ export function JournalCard({
 
   return (
     <Card>
-      <Card.Header>Prompt {currentIndex + 1}</Card.Header>
+      <Card.Header>
+        Prompt {currentEvent.prompt}
+        {currentEvent.visit}
+      </Card.Header>
       <Card.Body>
         <ButtonGroup className="mb-3">
           <Button
@@ -107,25 +105,13 @@ export function JournalCard({
             Previous
           </Button>
 
-          <OverlayTrigger
-            placement="bottom"
-            delay={OVERLAY_DELAY}
-            overlay={
-              <Tooltip>
-                {isLastEvent
-                  ? "Generate the next Prompt"
-                  : "Go to the next Prompt"}
-              </Tooltip>
-            }
+          <Button
+            variant={isLastEvent ? "outline-success" : "outline-secondary"}
+            disabled={isLastEvent && isGameOver}
+            onClick={handleNext}
           >
-            <Button
-              variant={isLastEvent ? "outline-success" : "outline-secondary"}
-              disabled={isGameOver}
-              onClick={handleNext}
-            >
-              Next
-            </Button>
-          </OverlayTrigger>
+            Next
+          </Button>
         </ButtonGroup>
 
         {isExhausted && !isGameOver ? (
@@ -154,7 +140,7 @@ export function JournalCard({
             </Button>
           </OverlayTrigger>
         ) : null}
-        <Card.Text>{currentEvent?.prompt}</Card.Text>
+        <Card.Text>{currentEvent?.promptDescription}</Card.Text>
 
         <FormGroup>
           <FormControl

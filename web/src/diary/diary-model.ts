@@ -16,7 +16,9 @@ export interface DeepVampire {
 export interface Event {
   id: number;
   vampire: number;
-  prompt: string;
+  prompt: number;
+  promptDescription: number;
+  visit: string;
   description: string;
 }
 
