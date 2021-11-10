@@ -9,6 +9,7 @@ build:
 release:
   image: web
   command:
+    - cd web && yarn build
     - python manage.py collectstatic --noinput
 
 run:
