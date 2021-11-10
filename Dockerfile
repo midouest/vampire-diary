@@ -9,7 +9,3 @@ COPY . .
 RUN pip install pipenv && pipenv install --system
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-FROM development as production
-
-CMD ["gunicorn", "config.wsgi", "-b", "0.0.0.0:8000"]
