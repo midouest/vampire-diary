@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-&g%g8wmipi+h651j74bkz5kozrns!!6@(!&c@lc37%wks!g4+y"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", False)
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", [])
 
 
 # Application definition
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -88,12 +93,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "vampire-diary",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-    }
+    "default": env.dj_db_url(
+        "DATABASE_URL", "postgres://postgres:postgres@localhost:5432/vampire-diary"
+    )
 }
 
 CACHES = {
@@ -141,7 +143,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "/staticfiles/"
+STATICFILES_DIRS = [
+    BASE_DIR / "web" / "build",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+WHITENOISE_ROOT = BASE_DIR / "web" / "build"
+WHITENOISE_INDEX_FILE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -194,3 +209,6 @@ REST_AUTH_SERIALIZERS = {
 REST_SESSION_LOGIN = False
 
 OLD_PASSWORD_FIELD_ENABLED = True
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
