@@ -155,7 +155,6 @@ export function JournalCard({
           </OverlayTrigger>
         ) : null}
         <Card.Text>{currentEvent?.prompt}</Card.Text>
-        <Card.Text>Create a new Experience.</Card.Text>
 
         <FormGroup>
           <FormControl
