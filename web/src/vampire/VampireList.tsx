@@ -56,8 +56,8 @@ export function VampireList() {
                 variant="outline-danger"
                 onClick={(event) => handleDelete(event, vampire.id)}
               >
-                <i className="bi bi-x-lg me-2"></i>
-                Delete
+                <i className="bi bi-x-lg"></i>
+                <span className="ms-2 d-none d-lg-inline">Delete</span>
               </Button>
             </td>
           </tr>

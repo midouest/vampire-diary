@@ -62,8 +62,8 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
                   variant="outline-success"
                   onClick={handleCreate}
                 >
-                  <i className="bi bi-plus-lg me-2"></i>
-                  Create
+                  <i className="bi bi-plus-lg"></i>
+                  <span className="ms-2 d-none d-lg-inline">Create</span>
                 </Button>
               </span>
             </OverlayTrigger>
@@ -80,8 +80,8 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
                 checked={memory.isForgotten}
                 onClick={handleForget}
               >
-                <i className="bi bi-x-lg me-2"></i>
-                Forget
+                <i className="bi bi-x-lg"></i>
+                <span className="ms-2 d-none d-lg-inline">Forget</span>
               </ToggleButton>
             </OverlayTrigger>
             <OverlayTrigger
@@ -106,8 +106,8 @@ export function MemoryCard({ memory, experiences }: MemoryCardProps) {
                   className="ms-3"
                   onClick={handleDiary}
                 >
-                  <i className="bi bi-book me-2"></i>
-                  Record
+                  <i className="bi bi-book"></i>
+                  <span className="ms-2 d-none d-lg-inline">Record</span>
                 </Button>
               </span>
             </OverlayTrigger>

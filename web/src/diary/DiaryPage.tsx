@@ -147,8 +147,8 @@ export function DiaryPage() {
                       variant="outline-success"
                       onClick={handleCreateMemory}
                     >
-                      <i className="bi bi-plus-lg me-2"></i>
-                      Create
+                      <i className="bi bi-plus-lg"></i>
+                      <span className="ms-2 d-none d-lg-inline">Create</span>
                     </Button>
                   </span>
                 </OverlayTrigger>
@@ -160,8 +160,10 @@ export function DiaryPage() {
                   checked={showAllMemories}
                   onClick={handleShowAllMemories}
                 >
-                  <i className="bi bi-eye  me-2"></i>
-                  Show Forgotten
+                  <i className="bi bi-eye"></i>
+                  <span className="ms-2 d-none d-lg-inline">
+                    Show Forgotten
+                  </span>
                 </ToggleButton>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>
@@ -175,8 +177,8 @@ export function DiaryPage() {
                   overlay={<Tooltip>Add a new Skill</Tooltip>}
                 >
                   <Button variant="outline-success" onClick={handleCreateSkill}>
-                    <i className="bi bi-plus-lg me-2"></i>
-                    Create
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="ms-2 d-none d-lg-inline">Create</span>
                   </Button>
                 </OverlayTrigger>
                 <ToggleButton
@@ -187,8 +189,8 @@ export function DiaryPage() {
                   checked={showAllSkills}
                   onClick={handleShowAllSkills}
                 >
-                  <i className="bi bi-eye me-2"></i>
-                  Show Checked
+                  <i className="bi bi-eye"></i>
+                  <span className="ms-2 d-none d-lg-inline">Show Checked</span>
                 </ToggleButton>
                 <SkillList skills={skills} />
               </AccordionBody>
@@ -205,8 +207,8 @@ export function DiaryPage() {
                     variant="outline-success"
                     onClick={handleCreateResource}
                   >
-                    <i className="bi bi-plus-lg me-2"></i>
-                    Create
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="ms-2 d-none d-lg-inline">Create</span>
                   </Button>
                 </OverlayTrigger>
                 <ToggleButton
@@ -217,8 +219,8 @@ export function DiaryPage() {
                   checked={showAllResources}
                   onClick={handleShowAllResources}
                 >
-                  <i className="bi bi-eye me-2"></i>
-                  Show Lost
+                  <i className="bi bi-eye"></i>
+                  <span className="ms-2 d-none d-lg-inline">Show Lost</span>
                 </ToggleButton>
                 <ResourceList resources={resources} />
               </AccordionBody>
@@ -235,8 +237,8 @@ export function DiaryPage() {
                     variant="outline-success"
                     onClick={handleCreateCharacter}
                   >
-                    <i className="bi bi-plus-lg me-2"></i>
-                    Create
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="ms-2 d-none d-lg-inline">Create</span>
                   </Button>
                 </OverlayTrigger>
                 <ToggleButton
@@ -247,8 +249,8 @@ export function DiaryPage() {
                   checked={showAllCharacters}
                   onClick={handleShowAllCharacters}
                 >
-                  <i className="bi bi-eye me-2"></i>
-                  Show Dead
+                  <i className="bi bi-eye"></i>
+                  <span className="ms-2 d-none d-lg-inline">Show Dead</span>
                 </ToggleButton>
                 <CharacterList characters={characters} />
               </AccordionBody>
@@ -262,8 +264,8 @@ export function DiaryPage() {
                   overlay={<Tooltip>Add a new Mark</Tooltip>}
                 >
                   <Button variant="outline-success" onClick={handleCreateMark}>
-                    <i className="bi bi-plus-lg me-2"></i>
-                    Create
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="ms-2 d-none d-lg-inline">Create</span>
                   </Button>
                 </OverlayTrigger>
                 <MarkList marks={marks} />

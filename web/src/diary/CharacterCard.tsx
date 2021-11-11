@@ -69,8 +69,8 @@ export function CharacterCard({ character }: CharacterCardProps) {
               onClick={toggleIsImmortal}
               disabled={character.isDead}
             >
-              <i className="bi bi-lock me-2"></i>
-              Immortal
+              <i className="bi bi-lock"></i>
+              <span className="ms-2 d-none d-lg-inline">Immortal</span>
             </ToggleButton>
           </span>
         </OverlayTrigger>
@@ -96,8 +96,8 @@ export function CharacterCard({ character }: CharacterCardProps) {
               checked={character.isDead}
               onClick={handleDead}
             >
-              <i className="bi bi-x-lg me-2"></i>
-              Dead
+              <i className="bi bi-x-lg"></i>
+              <span className="ms-2 d-none d-lg-inline">Dead</span>
             </ToggleButton>
           </span>
         </OverlayTrigger>

@@ -84,8 +84,8 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
             disabled={!previousEvent}
             onClick={handlePrev}
           >
-            <i className="bi bi-caret-left me-2"></i>
-            Previous
+            <i className="bi bi-caret-left"></i>
+            <span className="ms-2 d-none d-lg-inline">Previous</span>
           </Button>
 
           <Button
@@ -93,12 +93,8 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
             disabled={isLastEvent && isGameOver}
             onClick={handleNext}
           >
-            {isLastEvent ? (
-              <i className="bi bi-dice-3 me-2"></i>
-            ) : (
-              <i className="bi bi-caret-right me-2"></i>
-            )}
-            Next
+            <i className="bi bi-caret-right"></i>
+            <span className="ms-2 d-none d-lg-inline">Next</span>
           </Button>
         </ButtonGroup>
 
@@ -108,8 +104,8 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
             disabled={isFirstEvent}
             onClick={handleFirst}
           >
-            <i className="bi bi-skip-start me-2"></i>
-            First
+            <i className="bi bi-skip-start"></i>
+            <span className="ms-2 d-none d-lg-inline">First</span>
           </Button>
 
           <Button
@@ -117,8 +113,8 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
             disabled={isLastEvent}
             onClick={handleLast}
           >
-            <i className="bi bi-skip-end me-2"></i>
-            Last
+            <i className="bi bi-skip-end"></i>
+            <span className="ms-2 d-none d-lg-inline">Last</span>
           </Button>
         </ButtonGroup>
 
@@ -140,8 +136,8 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
             }
           >
             <Button variant="danger" className="ms-3 mb-3" onClick={handleDead}>
-              <i className="bi bi-x-octagon me-2"></i>
-              Dead
+              <i className="bi bi-x-octagon"></i>
+              <span className="ms-2 d-none d-lg-inline">Dead</span>
             </Button>
           </OverlayTrigger>
         ) : null}

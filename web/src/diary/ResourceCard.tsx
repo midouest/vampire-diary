@@ -90,8 +90,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
               checked={isDiary}
               onClick={toggleIsDiary}
             >
-              <i className="bi bi-book me-2"></i>
-              Diary
+              <i className="bi bi-book"></i>
+              <span className="ms-2 d-none d-lg-inline">Diary</span>
             </ToggleButton>
           </span>
         </OverlayTrigger>
@@ -109,8 +109,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             checked={resource.isLost}
             onClick={handleLost}
           >
-            <i className="bi bi-x-lg me-2"></i>
-            Lost
+            <i className="bi bi-x-lg"></i>
+            <span className="ms-2 d-none d-lg-inline">Lost</span>
           </ToggleButton>
         </OverlayTrigger>
 
@@ -128,8 +128,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
               checked={showMemories}
               onClick={handleToggleShowMemories}
             >
-              <i className="bi bi-eye me-2"></i>
-              Show Memories
+              <i className="bi bi-eye"></i>
+              <span className="ms-2 d-none d-lg-inline">Show Memories</span>
             </ToggleButton>
           </OverlayTrigger>
         ) : null}
