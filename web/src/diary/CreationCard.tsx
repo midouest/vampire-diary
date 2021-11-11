@@ -57,6 +57,7 @@ export function CreationCard({ vampireId }: CreationCardProps) {
           overlay={<Tooltip>Generate the first Prompt</Tooltip>}
         >
           <Button variant="outline-success" onClick={handleStart}>
+            <i className="bi bi-caret-right me-2"></i>
             Start
           </Button>
         </OverlayTrigger>

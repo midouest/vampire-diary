@@ -30,13 +30,14 @@ export function VampirePage() {
   };
 
   return (
-    <Container className="mt-3">
+    <Container className="mt-3" fluid>
       <OverlayTrigger
         placement="bottom"
         delay={OVERLAY_DELAY}
         overlay={<Tooltip>Create a new Vampire</Tooltip>}
       >
         <Button variant="outline-success" className="mb-3" onClick={showModal}>
+          <i className="bi bi-plus-lg me-2"></i>
           Create
         </Button>
       </OverlayTrigger>

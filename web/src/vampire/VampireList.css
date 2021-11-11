@@ -1,3 +1,4 @@
 .vampire-list-item {
   cursor: pointer;
+  vertical-align: middle;
 }

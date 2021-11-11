@@ -6,7 +6,6 @@ import {
   FormControl,
   FormGroup,
   ToggleButton,
-  Button,
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
@@ -38,7 +37,9 @@ export function CharacterCard({ character }: CharacterCardProps) {
   };
 
   const handleDead = () =>
-    dispatch(characterThunk.update({ id: character.id, isDead: true }));
+    dispatch(
+      characterThunk.update({ id: character.id, isDead: !character.isDead })
+    );
 
   const toggleIsImmortal = () => {
     const value = !isImmortal;
@@ -53,19 +54,25 @@ export function CharacterCard({ character }: CharacterCardProps) {
           delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
-              Mortal Characters die, but immortal Characters do not
+              {character.isDead
+                ? "A dead Character cannot become immortal"
+                : "Immortal Characters cannot be removed"}
             </Tooltip>
           }
         >
-          <ToggleButton
-            type="checkbox"
-            variant="outline-secondary"
-            value="1"
-            checked={isImmortal}
-            onClick={toggleIsImmortal}
-          >
-            Immortal
-          </ToggleButton>
+          <span className="d-inline-block">
+            <ToggleButton
+              type="checkbox"
+              variant="outline-secondary"
+              value="1"
+              checked={isImmortal}
+              onClick={toggleIsImmortal}
+              disabled={character.isDead}
+            >
+              <i className="bi bi-lock me-2"></i>
+              Immortal
+            </ToggleButton>
+          </span>
         </OverlayTrigger>
 
         <OverlayTrigger
@@ -80,28 +87,38 @@ export function CharacterCard({ character }: CharacterCardProps) {
           }
         >
           <span className="d-inline-block">
-            <Button
+            <ToggleButton
+              type="checkbox"
               variant="outline-danger"
               value="2"
               className="ms-3"
               disabled={isImmortal}
+              checked={character.isDead}
               onClick={handleDead}
             >
+              <i className="bi bi-x-lg me-2"></i>
               Dead
-            </Button>
+            </ToggleButton>
           </span>
         </OverlayTrigger>
-        <FormGroup className="mt-3">
-          <FormControl
-            as={DebounceInput}
-            forceNotifyByEnter={false}
-            debounceTimeout={1000}
-            placeholder="Describe the character..."
-            value={description}
-            onChange={handleDescriptionChange}
-            element={TextareaAutosize as any}
-          />
-        </FormGroup>
+
+        {character.isDead ? (
+          <Card.Text className="text-muted mt-3">
+            {character.description}
+          </Card.Text>
+        ) : (
+          <FormGroup className="mt-3">
+            <FormControl
+              as={DebounceInput}
+              forceNotifyByEnter={false}
+              debounceTimeout={1000}
+              placeholder="Describe the character..."
+              value={description}
+              onChange={handleDescriptionChange}
+              element={TextareaAutosize as any}
+            />
+          </FormGroup>
+        )}
       </Card.Body>
     </Card>
   );

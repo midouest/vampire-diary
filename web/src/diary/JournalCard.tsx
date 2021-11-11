@@ -72,7 +72,7 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
     dispatch(updateVampire({ id: vampireId, isDead: true }));
 
   return (
-    <Card>
+    <Card bg="dark" text="light">
       <Card.Header>
         Prompt {currentEvent.prompt}
         {currentEvent.visit}
@@ -80,37 +80,45 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
       <Card.Body>
         <ButtonGroup className="mb-3">
           <Button
-            variant="outline-secondary"
-            disabled={isFirstEvent}
-            onClick={handleFirst}
+            variant="secondary"
+            disabled={!previousEvent}
+            onClick={handlePrev}
           >
-            First
+            <i className="bi bi-caret-left me-2"></i>
+            Previous
           </Button>
 
           <Button
-            variant="outline-secondary"
-            disabled={isLastEvent}
-            onClick={handleLast}
+            variant={isLastEvent ? "success" : "secondary"}
+            disabled={isLastEvent && isGameOver}
+            onClick={handleNext}
           >
-            Last
+            {isLastEvent ? (
+              <i className="bi bi-dice-3 me-2"></i>
+            ) : (
+              <i className="bi bi-caret-right me-2"></i>
+            )}
+            Next
           </Button>
         </ButtonGroup>
 
         <ButtonGroup className="ms-3 mb-3">
           <Button
-            variant="outline-secondary"
-            disabled={!previousEvent}
-            onClick={handlePrev}
+            variant="secondary"
+            disabled={isFirstEvent}
+            onClick={handleFirst}
           >
-            Previous
+            <i className="bi bi-skip-start me-2"></i>
+            First
           </Button>
 
           <Button
-            variant={isLastEvent ? "outline-success" : "outline-secondary"}
-            disabled={isLastEvent && isGameOver}
-            onClick={handleNext}
+            variant="secondary"
+            disabled={isLastEvent}
+            onClick={handleLast}
           >
-            Next
+            <i className="bi bi-skip-end me-2"></i>
+            Last
           </Button>
         </ButtonGroup>
 
@@ -131,15 +139,13 @@ export function JournalCard({ vampireId, currentEvent }: JournalCardProps) {
               </Tooltip>
             }
           >
-            <Button
-              variant="outline-danger"
-              className="ms-3 mb-3"
-              onClick={handleDead}
-            >
+            <Button variant="danger" className="ms-3 mb-3" onClick={handleDead}>
+              <i className="bi bi-x-octagon me-2"></i>
               Dead
             </Button>
           </OverlayTrigger>
         ) : null}
+
         <Card.Text>{currentEvent?.promptDescription}</Card.Text>
 
         <FormGroup>

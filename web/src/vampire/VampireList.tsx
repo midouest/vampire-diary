@@ -2,8 +2,12 @@ import "./VampireList.css";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
-import { queryVampires, vampireSelectors } from "./vampire-slice";
-import { Table } from "react-bootstrap";
+import {
+  queryVampires,
+  removeVampire,
+  vampireSelectors,
+} from "./vampire-slice";
+import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 export function VampireList() {
@@ -19,13 +23,22 @@ export function VampireList() {
     );
   }, [dispatch]);
 
+  const handleDelete = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    id: number
+  ) => {
+    event.stopPropagation();
+    dispatch(removeVampire(id));
+  };
+
   return (
-    <Table striped bordered hover>
+    <Table hover>
       <thead>
         <tr>
           <th>Name</th>
           <th>Description</th>
           <th>Game Over</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +51,15 @@ export function VampireList() {
             <td>{vampire.name}</td>
             <td>{vampire.description}</td>
             <td>{vampire.isDead ? "Yes" : "No"}</td>
+            <td>
+              <Button
+                variant="outline-danger"
+                onClick={(event) => handleDelete(event, vampire.id)}
+              >
+                <i className="bi bi-x-lg me-2"></i>
+                Delete
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>

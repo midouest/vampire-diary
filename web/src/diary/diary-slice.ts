@@ -61,7 +61,15 @@ const markAdapter = createEntityAdapter<Mark>({
 
 export interface DiaryState {
   vampire: Vampire | undefined;
+
   currentEventIndex: number | undefined;
+
+  showAllMemories: boolean;
+  showAllSkills: boolean;
+  showAllResources: boolean;
+  showDiaryMemories: boolean;
+  showAllCharacters: boolean;
+
   event: EntityState<Event>;
   memory: EntityState<Memory>;
   experience: EntityState<Experience>;
@@ -74,7 +82,15 @@ export interface DiaryState {
 export function getInitialDiaryState(): DiaryState {
   return {
     vampire: undefined,
+
     currentEventIndex: undefined,
+
+    showAllMemories: false,
+    showAllSkills: false,
+    showAllResources: false,
+    showDiaryMemories: false,
+    showAllCharacters: false,
+
     event: eventAdapter.getInitialState(),
     memory: memoryAdapter.getInitialState(),
     experience: experienceAdapter.getInitialState(),
@@ -139,6 +155,21 @@ export const diarySlice = createSlice({
         return;
       }
       state.currentEventIndex++;
+    },
+    toggleShowAllMemories: (state) => {
+      state.showAllMemories = !state.showAllMemories;
+    },
+    toggleShowAllSkills: (state) => {
+      state.showAllSkills = !state.showAllSkills;
+    },
+    toggleShowAllResources: (state) => {
+      state.showAllResources = !state.showAllResources;
+    },
+    toggleShowDiaryMemories: (state) => {
+      state.showDiaryMemories = !state.showDiaryMemories;
+    },
+    toggleShowAllCharacters: (state) => {
+      state.showAllCharacters = !state.showAllCharacters;
     },
   },
   extraReducers: (builder) => {
@@ -246,8 +277,17 @@ export const diarySlice = createSlice({
   },
 });
 
-export const { eventStart, eventEnd, eventBack, eventForward } =
-  diarySlice.actions;
+export const {
+  eventStart,
+  eventEnd,
+  eventBack,
+  eventForward,
+  toggleShowAllMemories,
+  toggleShowAllSkills,
+  toggleShowAllResources,
+  toggleShowDiaryMemories,
+  toggleShowAllCharacters,
+} = diarySlice.actions;
 
 export const selectVampire = (state: RootState) => state.diary.vampire;
 
@@ -303,10 +343,27 @@ export const memorySelectors = memoryAdapter.getSelectors(
   (state: RootState) => state.diary.memory
 );
 
+export const selectShowAllMemories = (state: RootState) =>
+  state.diary.showAllMemories;
+export const selectShowAllSkills = (state: RootState) =>
+  state.diary.showAllSkills;
+export const selectShowAllResources = (state: RootState) =>
+  state.diary.showAllResources;
+export const selectShowDiaryMemories = (state: RootState) =>
+  state.diary.showDiaryMemories;
+export const selectShowAllCharacters = (state: RootState) =>
+  state.diary.showAllCharacters;
+
 export const selectMemories = (state: RootState) => {
-  return memorySelectors
-    .selectAll(state)
-    .filter((memory) => !memory.isForgotten && memory.diary === null);
+  const allMemories = memorySelectors.selectAll(state);
+
+  if (state.diary.showAllMemories) {
+    return allMemories.filter((memory) => memory.diary === null);
+  }
+
+  return allMemories.filter(
+    (memory) => !memory.isForgotten && memory.diary === null
+  );
 };
 
 export const experienceSelectors = experienceAdapter.getSelectors(
@@ -318,7 +375,13 @@ export const skillSelectors = skillAdapter.getSelectors(
 );
 
 export const selectSkills = (state: RootState) => {
-  return skillSelectors.selectAll(state).filter((skill) => !skill.isChecked);
+  const allSkills = skillSelectors.selectAll(state);
+
+  if (state.diary.showAllSkills) {
+    return allSkills;
+  }
+
+  return allSkills.filter((skill) => !skill.isChecked);
 };
 
 export const resourceSelectors = resourceAdapter.getSelectors(
@@ -326,12 +389,16 @@ export const resourceSelectors = resourceAdapter.getSelectors(
 );
 
 export const selectResources = (state: RootState) => {
-  return resourceSelectors
-    .selectAll(state)
-    .filter((resource) => !resource.isLost);
+  const allResources = resourceSelectors.selectAll(state);
+
+  if (state.diary.showAllResources) {
+    return allResources;
+  }
+
+  return allResources.filter((resource) => !resource.isLost);
 };
 
-export const selectDiary = (state: RootState) => {
+export const selectCurrentDiary = (state: RootState) => {
   return (
     resourceSelectors
       .selectAll(state)
@@ -339,8 +406,8 @@ export const selectDiary = (state: RootState) => {
   );
 };
 
-export const selectDiaryMemories = (state: RootState) => {
-  const diary = selectDiary(state);
+export const selectCurrentDiaryMemories = (state: RootState) => {
+  const diary = selectCurrentDiary(state);
   if (diary === null) {
     return [];
   }
@@ -350,8 +417,8 @@ export const selectDiaryMemories = (state: RootState) => {
     .filter((memory) => memory.diary === diary.id);
 };
 
-export const selectIsDiaryFull = (state: RootState) => {
-  return selectDiaryMemories(state).length >= DIARY_MEMORY_CAPACITY;
+export const selectCurrentDiaryIsFull = (state: RootState) => {
+  return selectCurrentDiaryMemories(state).length >= DIARY_MEMORY_CAPACITY;
 };
 
 export const characterSelectors = characterAdapter.getSelectors(
@@ -359,9 +426,13 @@ export const characterSelectors = characterAdapter.getSelectors(
 );
 
 export const selectCharacters = (state: RootState) => {
-  return characterSelectors
-    .selectAll(state)
-    .filter((character) => !character.isDead);
+  const allCharacters = characterSelectors.selectAll(state);
+
+  if (state.diary.showAllCharacters) {
+    return allCharacters;
+  }
+
+  return allCharacters.filter((character) => !character.isDead);
 };
 
 export const markSelectors = markAdapter.getSelectors(

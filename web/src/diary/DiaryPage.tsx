@@ -10,6 +10,7 @@ import {
   Container,
   OverlayTrigger,
   Tooltip,
+  ToggleButton,
 } from "react-bootstrap";
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
 import AccordionHeader from "react-bootstrap/esm/AccordionHeader";
@@ -27,6 +28,14 @@ import {
   selectMemories,
   selectResources,
   selectCharacters,
+  selectShowAllMemories,
+  selectShowAllSkills,
+  selectShowAllResources,
+  selectShowAllCharacters,
+  toggleShowAllSkills,
+  toggleShowAllResources,
+  toggleShowAllCharacters,
+  toggleShowAllMemories,
 } from "./diary-slice";
 import {
   characterThunk,
@@ -61,6 +70,11 @@ export function DiaryPage() {
   const resources = useAppSelector(selectResources);
   const marks = useAppSelector(markSelectors.selectAll);
 
+  const showAllMemories = useAppSelector(selectShowAllMemories);
+  const showAllSkills = useAppSelector(selectShowAllSkills);
+  const showAllResources = useAppSelector(selectShowAllResources);
+  const showAllCharacters = useAppSelector(selectShowAllCharacters);
+
   useEffect(() => {
     dispatch(retrieveDeepVampire(vampireId));
   }, [vampireId, dispatch]);
@@ -93,12 +107,17 @@ export function DiaryPage() {
   const handleCreateMark = () =>
     dispatch(markThunk.create({ vampire: vampireId, description: "" }));
 
+  const handleShowAllMemories = () => dispatch(toggleShowAllMemories());
+  const handleShowAllSkills = () => dispatch(toggleShowAllSkills());
+  const handleShowAllResources = () => dispatch(toggleShowAllResources());
+  const handleShowAllCharacters = () => dispatch(toggleShowAllCharacters());
+
   if (!vampire) {
     return <Spinner animation="border" />;
   }
 
   return (
-    <Container className="my-3">
+    <Container className="my-3" fluid>
       <Row>
         <Col md className="mb-3">
           <Accordion defaultActiveKey="vampire">
@@ -128,10 +147,22 @@ export function DiaryPage() {
                       variant="outline-success"
                       onClick={handleCreateMemory}
                     >
+                      <i className="bi bi-plus-lg me-2"></i>
                       Create
                     </Button>
                   </span>
                 </OverlayTrigger>
+                <ToggleButton
+                  type="checkbox"
+                  value="1"
+                  variant="outline-primary"
+                  className="ms-3"
+                  checked={showAllMemories}
+                  onClick={handleShowAllMemories}
+                >
+                  <i className="bi bi-eye  me-2"></i>
+                  Show Forgotten
+                </ToggleButton>
                 <MemoryList memories={memories} experiences={experiences} />
               </AccordionBody>
             </AccordionItem>
@@ -144,9 +175,21 @@ export function DiaryPage() {
                   overlay={<Tooltip>Add a new Skill</Tooltip>}
                 >
                   <Button variant="outline-success" onClick={handleCreateSkill}>
+                    <i className="bi bi-plus-lg me-2"></i>
                     Create
                   </Button>
                 </OverlayTrigger>
+                <ToggleButton
+                  type="checkbox"
+                  value="2"
+                  variant="outline-primary"
+                  className="ms-3"
+                  checked={showAllSkills}
+                  onClick={handleShowAllSkills}
+                >
+                  <i className="bi bi-eye me-2"></i>
+                  Show Checked
+                </ToggleButton>
                 <SkillList skills={skills} />
               </AccordionBody>
             </AccordionItem>
@@ -162,9 +205,21 @@ export function DiaryPage() {
                     variant="outline-success"
                     onClick={handleCreateResource}
                   >
+                    <i className="bi bi-plus-lg me-2"></i>
                     Create
                   </Button>
                 </OverlayTrigger>
+                <ToggleButton
+                  type="checkbox"
+                  value="3"
+                  variant="outline-primary"
+                  className="ms-3"
+                  checked={showAllResources}
+                  onClick={handleShowAllResources}
+                >
+                  <i className="bi bi-eye me-2"></i>
+                  Show Lost
+                </ToggleButton>
                 <ResourceList resources={resources} />
               </AccordionBody>
             </AccordionItem>
@@ -180,9 +235,21 @@ export function DiaryPage() {
                     variant="outline-success"
                     onClick={handleCreateCharacter}
                   >
+                    <i className="bi bi-plus-lg me-2"></i>
                     Create
                   </Button>
                 </OverlayTrigger>
+                <ToggleButton
+                  type="checkbox"
+                  value="4"
+                  variant="outline-primary"
+                  className="ms-3"
+                  checked={showAllCharacters}
+                  onClick={handleShowAllCharacters}
+                >
+                  <i className="bi bi-eye me-2"></i>
+                  Show Dead
+                </ToggleButton>
                 <CharacterList characters={characters} />
               </AccordionBody>
             </AccordionItem>
@@ -195,6 +262,7 @@ export function DiaryPage() {
                   overlay={<Tooltip>Add a new Mark</Tooltip>}
                 >
                   <Button variant="outline-success" onClick={handleCreateMark}>
+                    <i className="bi bi-plus-lg me-2"></i>
                     Create
                   </Button>
                 </OverlayTrigger>

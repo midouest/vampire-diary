@@ -73,6 +73,7 @@ export function CreateVampireForm({
         overlay={<Tooltip>Discard changes</Tooltip>}
       >
         <Button variant="outline-danger" className="mt-3" onClick={onCancel}>
+          <i className="bi bi-x-lg me-2"></i>
           Cancel
         </Button>
       </OverlayTrigger>
@@ -95,6 +96,7 @@ export function CreateVampireForm({
               });
           }}
         >
+          <i className="bi bi-plus-lg me-2"></i>
           Create
         </Button>
       </OverlayTrigger>

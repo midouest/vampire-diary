@@ -2,7 +2,6 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { OVERLAY_DELAY } from "common/constants";
 import { useEffect, useState } from "react";
 import {
-  Button,
   Card,
   FormControl,
   FormGroup,
@@ -13,8 +12,15 @@ import {
 import { DebounceInput } from "react-debounce-input";
 import TextareaAutosize from "react-textarea-autosize";
 import { Resource } from "./diary-model";
-import { selectDiary } from "./diary-slice";
+import {
+  experienceSelectors,
+  selectCurrentDiary,
+  selectCurrentDiaryMemories,
+  selectShowDiaryMemories,
+  toggleShowDiaryMemories,
+} from "./diary-slice";
 import { resourceThunk } from "./diary-thunk";
+import { MemoryList } from "./MemoryList";
 
 export interface ResourceCardProps {
   resource: Resource;
@@ -26,8 +32,12 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   const [description, setDescription] = useState(resource.description);
   const [isDiary, setIsDiary] = useState(resource.isDiary);
 
-  const diary = useAppSelector(selectDiary);
+  const diary = useAppSelector(selectCurrentDiary);
   const hasOtherDiary = diary !== null && !isDiary;
+
+  const showMemories = useAppSelector(selectShowDiaryMemories);
+  const memories = useAppSelector(selectCurrentDiaryMemories);
+  const experiences = useAppSelector(experienceSelectors.selectAll);
 
   useEffect(() => {
     setIsDiary(resource.isDiary);
@@ -42,11 +52,17 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   };
 
   const handleLost = () =>
-    dispatch(resourceThunk.update({ id: resource.id, isLost: true }));
+    dispatch(
+      resourceThunk.update({ id: resource.id, isLost: !resource.isLost })
+    );
 
   const toggleIsDiary = () => {
     const value = !isDiary;
     dispatch(resourceThunk.update({ id: resource.id, isDiary: value }));
+  };
+
+  const handleToggleShowMemories = () => {
+    dispatch(toggleShowDiaryMemories());
   };
 
   return (
@@ -57,7 +73,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           delay={OVERLAY_DELAY}
           overlay={
             <Tooltip>
-              {hasOtherDiary
+              {resource.isLost
+                ? "A lost Resource cannot become a Diary"
+                : hasOtherDiary
                 ? "A Vampire can only hold one Diary"
                 : "A Diary can hold up to four Memories"}
             </Tooltip>
@@ -68,10 +86,11 @@ export function ResourceCard({ resource }: ResourceCardProps) {
               type="checkbox"
               variant="outline-secondary"
               value="1"
-              disabled={hasOtherDiary}
+              disabled={hasOtherDiary || resource.isLost}
               checked={isDiary}
               onClick={toggleIsDiary}
             >
+              <i className="bi bi-book me-2"></i>
               Diary
             </ToggleButton>
           </span>
@@ -82,27 +101,61 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           delay={OVERLAY_DELAY}
           overlay={<Tooltip>Remove this Resource</Tooltip>}
         >
-          <Button
+          <ToggleButton
+            type="checkbox"
+            value="1"
             variant="outline-danger"
             className="ms-3"
+            checked={resource.isLost}
             onClick={handleLost}
           >
+            <i className="bi bi-x-lg me-2"></i>
             Lost
-          </Button>
+          </ToggleButton>
         </OverlayTrigger>
 
-        <FormGroup>
-          <FormControl
-            className="mt-3"
-            as={DebounceInput}
-            element={TextareaAutosize as any}
-            forceNotifyByEnter={false}
-            debounceTimeout={1000}
-            placeholder="Describe the resource..."
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-        </FormGroup>
+        {isDiary && !resource.isLost ? (
+          <OverlayTrigger
+            placement="bottom"
+            delay={OVERLAY_DELAY}
+            overlay={<Tooltip>Show Memories recorded in this Diary</Tooltip>}
+          >
+            <ToggleButton
+              type="checkbox"
+              value="2"
+              variant="outline-primary"
+              className="ms-3"
+              checked={showMemories}
+              onClick={handleToggleShowMemories}
+            >
+              <i className="bi bi-eye me-2"></i>
+              Show Memories
+            </ToggleButton>
+          </OverlayTrigger>
+        ) : null}
+
+        {resource.isLost ? (
+          <Card.Text className="text-muted mt-3">
+            {resource.description}
+          </Card.Text>
+        ) : (
+          <FormGroup>
+            <FormControl
+              className="mt-3"
+              as={DebounceInput}
+              element={TextareaAutosize as any}
+              forceNotifyByEnter={false}
+              debounceTimeout={1000}
+              placeholder="Describe the resource..."
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </FormGroup>
+        )}
+
+        {showMemories ? (
+          <MemoryList memories={memories} experiences={experiences} />
+        ) : null}
       </Card.Body>
     </Card>
   );
